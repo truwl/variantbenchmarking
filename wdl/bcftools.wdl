@@ -8,14 +8,14 @@ task  splittingAnnotatedVCF_CodingExons
 	 output {
 		File codingExons_annotated_TPonly_vcf_gz
        source:
-         filename: "{{outputFile_commonPrefix}}{{codingExonsPrefix}}_TPonly.vcf.gz"
+         filename: "~{outputFile_commonPrefix}~{codingExonsPrefix}_TPonly.vcf.gz"
 		File codingExons_annotated_FPonly_vcf_gz
        source:
-         filename: "{{outputFile_commonPrefix}}{{codingExonsPrefix}}_FPonly.vcf.gz"
+         filename: "~{outputFile_commonPrefix}~{codingExonsPrefix}_FPonly.vcf.gz"
 		File codingExons_annotated_FNonly_vcf_gz
        source:
-         filename: "{{outputFile_commonPrefix}}{{codingExonsPrefix}}_FNonly.vcf.gz"
- 		command { bcftools view -O z -V snps -i 'FMT/BVT="INDEL" & FMT/BD="TP"' {{codingExons_annotated_vcf_gz}} > {{codingExons_annotated_TPonly_vcf_gz}}; bcftools view -O z -V snps -i 'FMT/BVT="INDEL" & FMT/BD="FP"' {{codingExons_annotated_vcf_gz}} > {{codingExons_annotated_FPonly_vcf_gz}}; bcftools view -O z -V snps -i 'FMT/BVT="INDEL" & FMT/BD="FN"' {{codingExons_annotated_vcf_gz}} > {{codingExons_annotated_FNonly_vcf_gz}}
+         filename: "~{outputFile_commonPrefix}~{codingExonsPrefix}_FNonly.vcf.gz"
+ 		command { bcftools view -O z -V snps -i 'FMT/BVT="INDEL" & FMT/BD="TP"' ~{codingExons_annotated_vcf_gz} > ~{codingExons_annotated_TPonly_vcf_gz}; bcftools view -O z -V snps -i 'FMT/BVT="INDEL" & FMT/BD="FP"' ~{codingExons_annotated_vcf_gz} > ~{codingExons_annotated_FPonly_vcf_gz}; bcftools view -O z -V snps -i 'FMT/BVT="INDEL" & FMT/BD="FN"' ~{codingExons_annotated_vcf_gz} > ~{codingExons_annotated_FNonly_vcf_gz}
     runtime {
            docker_image: vandhanak/bcftools:1.3.1
 					memory: "8"
@@ -32,14 +32,14 @@ task  splittingAnnotatedVCF_WholeExome
 	 output {
 		File WholeExome_annotated_TPonly_vcf_gz
        source:
-         filename: "{{outputFile_commonPrefix}}{{WholeExomePrefix}}_TPonly.vcf.gz"
+         filename: "~{outputFile_commonPrefix}~{WholeExomePrefix}_TPonly.vcf.gz"
 		File WholeExome_annotated_FPonly_vcf_gz
        source:
-         filename: "{{outputFile_commonPrefix}}{{WholeExomePrefix}}_FPonly.vcf.gz"
+         filename: "~{outputFile_commonPrefix}~{WholeExomePrefix}_FPonly.vcf.gz"
 		File WholeExome_annotated_FNonly_vcf_gz
        source:
-         filename: "{{outputFile_commonPrefix}}{{WholeExomePrefix}}_FNonly.vcf.gz"
- 		command { bcftools view -O z -V snps -i 'FMT/BVT="INDEL" & FMT/BD="TP"' {{WholeExome_annotated_vcf_gz}} > {{WholeExome_annotated_TPonly_vcf_gz}}; bcftools view -O z -V snps -i 'FMT/BVT="INDEL" & FMT/BD="FP"' {{WholeExome_annotated_vcf_gz}} > {{WholeExome_annotated_FPonly_vcf_gz}}; bcftools view -O z -V snps -i 'FMT/BVT="INDEL" & FMT/BD="FN"' {{WholeExome_annotated_vcf_gz}} > {{WholeExome_annotated_FNonly_vcf_gz}}
+         filename: "~{outputFile_commonPrefix}~{WholeExomePrefix}_FNonly.vcf.gz"
+ 		command { bcftools view -O z -V snps -i 'FMT/BVT="INDEL" & FMT/BD="TP"' ~{WholeExome_annotated_vcf_gz} > ~{WholeExome_annotated_TPonly_vcf_gz}; bcftools view -O z -V snps -i 'FMT/BVT="INDEL" & FMT/BD="FP"' ~{WholeExome_annotated_vcf_gz} > ~{WholeExome_annotated_FPonly_vcf_gz}; bcftools view -O z -V snps -i 'FMT/BVT="INDEL" & FMT/BD="FN"' ~{WholeExome_annotated_vcf_gz} > ~{WholeExome_annotated_FNonly_vcf_gz}
     runtime {
            docker_image: vandhanak/bcftools:1.3.1
 					memory: "8"
