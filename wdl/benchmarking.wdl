@@ -6,7 +6,7 @@ import "happy.wdl" as happy
 # WORKFLOW DEFINITION
 workflow BenchmarkingWorkFlow_hg19_IndelsizeDistributionWith_TPFPFN_usingHappy {
 
-  inputs {
+  input {
     File queryVCF
     File outputFile_commonPrefix
     File truthCodingExonsVCF
@@ -27,81 +27,87 @@ workflow BenchmarkingWorkFlow_hg19_IndelsizeDistributionWith_TPFPFN_usingHappy {
 
   call happy.vcfComparison_by_Happy_CodingExons {
     input:
-      File queryVCF = queryVCF
-      String outputFile_commonPrefix =  outputFile_commonPrefix
-      File truthCodingExonsVCF = truthCodingExonsVCF
-      File truthCodingExonsBED = truthCodingExonsBED
-      File referenceFasta = referenceFasta
-      File referenceFasta_indexed = referenceFasta_indexed
-      String codingExonsPrefix = codingExonsPrefix
-      String consoleOutputPartialFilename = consoleOutputPartialFilename
+       queryVCF = queryVCF,
+       outputFile_commonPrefix = outputFile_commonPrefix,
+       truthCodingExonsVCF = truthCodingExonsVCF,
+       truthCodingExonsBED = truthCodingExonsBED,
+       referenceFasta = referenceFasta,
+       referenceFasta_indexed = referenceFasta_indexed,
+       codingExonsPrefix = codingExonsPrefix,
+       consoleOutputPartialFilename = consoleOutputPartialFilename
   }
 
   call happy.vcfComparison_by_Happy_WholeExome as happyexome {
     input:
-      File queryVCF = queryVCF
-      String outputFile_commonPrefix = outputFile_commonPrefix
-      File truthWholeExomeVCF = truthWholeExomeVCF
-      File truthWholeExomeBED = truthWholeExomeBED
-      File referenceFasta = referenceFasta
-      File referenceFasta_indexed = referenceFasta_indexed
-      String WholeExomePrefix =  WholeExomePrefix
-      String consoleOutputPartialFilename = consoleOutputPartialFilename
+       queryVCF = queryVCF,
+       outputFile_commonPrefix = outputFile_commonPrefix,
+       truthWholeExomeVCF = truthWholeExomeVCF,
+       truthWholeExomeBED = truthWholeExomeBED,
+       referenceFasta = referenceFasta,
+       referenceFasta_indexed = referenceFasta_indexed,
+       WholeExomePrefix =  WholeExomePrefix,
+       consoleOutputPartialFilename = consoleOutputPartialFilename
   }
 
   call bcftools.splittingAnnotatedVCF_CodingExons as splitcds {
-    String outputFile_commonPrefix = outputFile_commonPrefix
-    String codingExonsPrefix = codingExonsPrefix
-    File codingExons_annotated_vcf_gz = happyexome.codingExons_annotated_vcf_gz
+    input:
+     outputFile_commonPrefix = outputFile_commonPrefix,
+     codingExonsPrefix = codingExonsPrefix,
+     codingExons_annotated_vcf_gz = happyexome.codingExons_annotated_vcf_gz
   }
 
   call bcftools.splittingAnnotatedVCF_WholeExome as splitwes {
-    String outputFile_commonPrefix = outputFile_commonPrefix
-    String WholeExomePrefix = WholeExomePrefix
-    File WholeExome_annotated_vcf_gz = happyexome.WholeExome_annotated_vcf_gz
+    input:
+     outputFile_commonPrefix = outputFile_commonPrefix,
+     WholeExomePrefix = WholeExomePrefix,
+     WholeExome_annotated_vcf_gz = happyexome.WholeExome_annotated_vcf_gz
   }
 
   call indel.indelDistribution_CodingExons_HappyResults as cdsresults{
-    String outputFile_commonPrefix = outputFile_commonPrefix
-    String codingExonsPrefix = outputFile_commonPrefix
-    File truthCodingExonsVCF = truthCodingExonsVCF
-    String indelDistributionSuffix = indelDistributionSuffix
+    input:
+     outputFile_commonPrefix = outputFile_commonPrefix,
+     codingExonsPrefix = outputFile_commonPrefix,
+     truthCodingExonsVCF = truthCodingExonsVCF,
+    indelDistributionSuffix = indelDistributionSuffix
   }
 
   call indel.indelDistribution_WholeExome_HappyResults  as wesresults {
-    String outputFile_commonPrefix = outputFile_commonPrefix
-    String WholeExomePrefix = WholeExomePrefix
-    File truthWholeExomeVCF = truthWholeExomeVCF
-    String indelDistributionSuffix = indelDistributionSuffix
+    input:
+    outputFile_commonPrefix = outputFile_commonPrefix,
+    WholeExomePrefix = WholeExomePrefix,
+     truthWholeExomeVCF = truthWholeExomeVCF,
+    indelDistributionSuffix = indelDistributionSuffix
     }
 
   call indel.indelSizeDistribution_CodingExons_HappyResults as cdssize{
-    String outputFile_commonPrefix = outputFile_commonPrefix
-    String codingExonsPrefix = codingExonsPrefix
-    File indelDistribution_CodingExons = indelDistribution_CodingExons
-    String indelSizeDistributionSuffix = indelSizeDistributionSuffix
-    String indelSizeDistributionPlotSuffix = indelSizeDistributionPlotSuffix
-    File codingExons_annotated_TPonly_vcf_gz = codingExons_annotated_TPonly_vcf_gz
-    File codingExons_annotated_FPonly_vcf_gz = codingExons_annotated_FPonly_vcf_gz
-    File codingExons_annotated_FNonly_vcf_gz = codingExons_annotated_FNonly_vcf_gz
-    File Rscript_indelSize = Rscript_indelSize
+    input:
+   outputFile_commonPrefix = outputFile_commonPrefix,
+   codingExonsPrefix = codingExonsPrefix,
+     indelDistribution_CodingExons = indelDistribution_CodingExons,
+   indelSizeDistributionSuffix = indelSizeDistributionSuffix,
+   indelSizeDistributionPlotSuffix = indelSizeDistributionPlotSuffix,
+     codingExons_annotated_TPonly_vcf_gz = codingExons_annotated_TPonly_vcf_gz,
+     codingExons_annotated_FPonly_vcf_gz = codingExons_annotated_FPonly_vcf_gz,
+     codingExons_annotated_FNonly_vcf_gz = codingExons_annotated_FNonly_vcf_gz,
+     Rscript_indelSize = Rscript_indelSize
   }
 
   call indel.indelSizeDistribution_WholeExome_HappyResults as wessize {
-    String outputFile_commonPrefix = outputFile_commonPrefix
-    String WholeExomePrefix = WholeExomePrefix
-    File indelDistribution_WholeExome = indelDistribution_WholeExome
-    String indelSizeDistributionSuffix = indelSizeDistributionSuffix
-    String indelSizeDistributionPlotSuffix = indelSizeDistributionPlotSuffix
-    File WholeExome_annotated_TPonly_vcf_gz = WholeExome_annotated_TPonly_vcf_gz
-    File WholeExome_annotated_FPonly_vcf_gz = WholeExome_annotated_FPonly_vcf_gz
-    File WholeExome_annotated_FNonly_vcf_gz = WholeExome_annotated_FNonly_vcf_gz
-    File Rscript_indelSize = Rscript_indelSize
+    input:
+   outputFile_commonPrefix = outputFile_commonPrefix,
+   WholeExomePrefix = WholeExomePrefix,
+     indelDistribution_WholeExome = indelDistribution_WholeExome,
+   indelSizeDistributionSuffix = indelSizeDistributionSuffix,
+   indelSizeDistributionPlotSuffix = indelSizeDistributionPlotSuffix,
+     WholeExome_annotated_TPonly_vcf_gz = WholeExome_annotated_TPonly_vcf_gz,
+     WholeExome_annotated_FPonly_vcf_gz = WholeExome_annotated_FPonly_vcf_gz,
+     WholeExome_annotated_FNonly_vcf_gz = WholeExome_annotated_FNonly_vcf_gz,
+     Rscript_indelSize = Rscript_indelSize
   }
 
   output {
-    File codingExons_annotated_vcf_gz
-    File codingExons_annotated_vcf_gz_tbi
+    File codingExons_annotated_vcf_gz = happyexome.codingExons_annotated_vcf_gz
+    File codingExons_annotated_vcf_gz_tbi = happyexome.codingExons_annotated_vcf_gz_tbi
     File codingExons_counts_csv
     File codingExons_counts_json
     File codingExons_extended_csv
