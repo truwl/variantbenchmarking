@@ -1,3 +1,5 @@
+version 1.0
+
 import "bcftools.wdl" as bcftools
 import "indel.wdl" as indel
 import "happy.wdl" as happy
@@ -9,7 +11,6 @@ workflow BenchmarkingWorkFlow_hg19_IndelsizeDistributionWith_TPFPFN_usingHappy {
 
   input {
     File queryVCF
-    File outputFile_commonPrefix
     File truthCodingExonsVCF
     File truthWholeExomeVCF
     File truthCodingExonsBED
@@ -17,7 +18,8 @@ workflow BenchmarkingWorkFlow_hg19_IndelsizeDistributionWith_TPFPFN_usingHappy {
     File Rscript_indelSize ## Specify the R script indelSizeDistribution_Detailed.R
     File referenceFasta  ## provide md5 hash values for the file in contents
     File referenceFasta_indexed  ## *.fai
-    File chrRemovedVCF_fileSuffix
+    String chrRemovedVCF_fileSuffix
+    String outputFile_commonPrefix
     String codingExonsPrefix
     String WholeExomePrefix
     String consoleOutputPartialFilename
@@ -85,11 +87,11 @@ workflow BenchmarkingWorkFlow_hg19_IndelsizeDistributionWith_TPFPFN_usingHappy {
       outputFile_commonPrefix = outputFile_commonPrefix,
       codingExonsPrefix = codingExonsPrefix,
       indelDistribution_CodingExons = cdsresults.indelDistribution_CodingExons,
-      indelSizeDistributionSuffix = cdsresults.indelSizeDistributionSuffix,
-      indelSizeDistributionPlotSuffix = cdsresults.indelSizeDistributionPlotSuffix,
-      codingExons_annotated_TPonly_vcf_gz = cdsresults.codingExons_annotated_TPonly_vcf_gz,
-      codingExons_annotated_FPonly_vcf_gz = cdsresults.codingExons_annotated_FPonly_vcf_gz,
-      codingExons_annotated_FNonly_vcf_gz = cdsresults.codingExons_annotated_FNonly_vcf_gz,
+      indelSizeDistributionSuffix = indelSizeDistributionSuffix,
+      indelSizeDistributionPlotSuffix = indelSizeDistributionPlotSuffix,
+      codingExons_annotated_TPonly_vcf_gz = splitcds.codingExons_annotated_TPonly_vcf_gz,
+      codingExons_annotated_FPonly_vcf_gz = splitcds.codingExons_annotated_FPonly_vcf_gz,
+      codingExons_annotated_FNonly_vcf_gz = splitcds.codingExons_annotated_FNonly_vcf_gz,
       Rscript_indelSize = Rscript_indelSize
   }
 
@@ -97,12 +99,12 @@ workflow BenchmarkingWorkFlow_hg19_IndelsizeDistributionWith_TPFPFN_usingHappy {
     input:
       outputFile_commonPrefix = outputFile_commonPrefix,
       WholeExomePrefix = WholeExomePrefix,
-      indelDistribution_WholeExome = indelDistribution_WholeExome,
+      indelDistribution_WholeExome = wesresults.indelDistribution_WholeExome,
       indelSizeDistributionSuffix = indelSizeDistributionSuffix,
       indelSizeDistributionPlotSuffix = indelSizeDistributionPlotSuffix,
-      WholeExome_annotated_TPonly_vcf_gz = WholeExome_annotated_TPonly_vcf_gz,
-      WholeExome_annotated_FPonly_vcf_gz = WholeExome_annotated_FPonly_vcf_gz,
-      WholeExome_annotated_FNonly_vcf_gz = WholeExome_annotated_FNonly_vcf_gz,
+      WholeExome_annotated_TPonly_vcf_gz = splitwes.WholeExome_annotated_TPonly_vcf_gz,
+      WholeExome_annotated_FPonly_vcf_gz = splitwes.WholeExome_annotated_FPonly_vcf_gz,
+      WholeExome_annotated_FNonly_vcf_gz = splitwes.WholeExome_annotated_FNonly_vcf_gz,
       Rscript_indelSize = Rscript_indelSize
   }
 
@@ -123,17 +125,17 @@ workflow BenchmarkingWorkFlow_hg19_IndelsizeDistributionWith_TPFPFN_usingHappy {
     File  WholeExome_metrics_json = happyexome.WholeExome_metrics_json
     File  WholeExome_summary_csv = happyexome.WholeExome_summary_csv
     File  WholeExome_console_output_txt = happyexome.WholeExome_console_output_txt
-    File  codingExons_annotated_TPonly_vcf_gz = happyexons.codingExons_annotated_TPonly_vcf_gz
-    File  codingExons_annotated_FPonly_vcf_gz = happyexons.codingExons_annotated_FPonly_vcf_gz
-    File  codingExons_annotated_FNonly_vcf_gz = happyexons.codingExons_annotated_FNonly_vcf_gz
-    File  WholeExome_annotated_TPonly_vcf_gz = happyexome.WholeExome_annotated_TPonly_vcf_gz
-    File  WholeExome_annotated_FPonly_vcf_gz = happyexome.WholeExome_annotated_FPonly_vcf_gz
-    File  WholeExome_annotated_FNonly_vcf_gz = happyexome.WholeExome_annotated_FNonly_vcf_gz
+    File  codingExons_annotated_TPonly_vcf_gz = splitcds.codingExons_annotated_TPonly_vcf_gz
+    File  codingExons_annotated_FPonly_vcf_gz = splitcds.codingExons_annotated_FPonly_vcf_gz
+    File  codingExons_annotated_FNonly_vcf_gz = splitcds.codingExons_annotated_FNonly_vcf_gz
+    File  WholeExome_annotated_TPonly_vcf_gz = splitwes.WholeExome_annotated_TPonly_vcf_gz
+    File  WholeExome_annotated_FPonly_vcf_gz = splitwes.WholeExome_annotated_FPonly_vcf_gz
+    File  WholeExome_annotated_FNonly_vcf_gz = splitwes.WholeExome_annotated_FNonly_vcf_gz
     File indelDistribution_CodingExons = cdsresults.indelDistribution_CodingExons
     File indelDistribution_WholeExome = wesresults.indelDistribution_WholeExome
     File indelSizeDistribution_CodingExons = cdssize.indelSizeDistribution_CodingExons
     File indelSizeDistribution_WholeExome = wessize.indelSizeDistribution_WholeExome
     File indelSizeDistributionPlot_CodingExons = cdssize.indelSizeDistributionPlot_CodingExons
-    File indelSizeDistributionPlot_WholeExome = cdssize.indelSizeDistributionPlot_WholeExome
+    File indelSizeDistributionPlot_WholeExome = wessize.indelSizeDistributionPlot_WholeExome
   }
 }
