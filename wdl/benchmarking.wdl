@@ -1,5 +1,5 @@
 import "bcftools.wdl" as bcftools
-import "indelSizeDistribution.wdl" as indelSizeDistribution
+import "indel.wdl" as indel
 import "happy.wdl" as happy
 
 
@@ -50,7 +50,7 @@ workflow BenchmarkingWorkFlow_hg19_IndelsizeDistributionWith_TPFPFN_usingHappy {
   }
 
   call bcftools.splittingAnnotatedVCF_CodingExons as splitcds {
-    String outputFile_commonPrefix = outputFile_commonPrefix =
+    String outputFile_commonPrefix = outputFile_commonPrefix
     String codingExonsPrefix = codingExonsPrefix
     File codingExons_annotated_vcf_gz = happyexome.codingExons_annotated_vcf_gz
   }
@@ -61,6 +61,43 @@ workflow BenchmarkingWorkFlow_hg19_IndelsizeDistributionWith_TPFPFN_usingHappy {
     File WholeExome_annotated_vcf_gz = happyexome.WholeExome_annotated_vcf_gz
   }
 
+  call indel.indelDistribution_CodingExons_HappyResults as cdsresults{
+    String outputFile_commonPrefix = outputFile_commonPrefix
+    String codingExonsPrefix = outputFile_commonPrefix
+    File truthCodingExonsVCF = truthCodingExonsVCF
+    String indelDistributionSuffix = indelDistributionSuffix
+  }
+
+  call indel.indelDistribution_WholeExome_HappyResults  as wesresults {
+    String outputFile_commonPrefix = outputFile_commonPrefix
+    String WholeExomePrefix = WholeExomePrefix
+    File truthWholeExomeVCF = truthWholeExomeVCF
+    String indelDistributionSuffix = indelDistributionSuffix
+    }
+
+  call indel.indelSizeDistribution_CodingExons_HappyResults as cdssize{
+    String outputFile_commonPrefix = outputFile_commonPrefix
+    String codingExonsPrefix = codingExonsPrefix
+    File indelDistribution_CodingExons = indelDistribution_CodingExons
+    String indelSizeDistributionSuffix = indelSizeDistributionSuffix
+    String indelSizeDistributionPlotSuffix = indelSizeDistributionPlotSuffix
+    File codingExons_annotated_TPonly_vcf_gz = codingExons_annotated_TPonly_vcf_gz
+    File codingExons_annotated_FPonly_vcf_gz = codingExons_annotated_FPonly_vcf_gz
+    File codingExons_annotated_FNonly_vcf_gz = codingExons_annotated_FNonly_vcf_gz
+    File Rscript_indelSize = Rscript_indelSize
+  }
+
+  call indel.indelSizeDistribution_WholeExome_HappyResults as wessize {
+    String outputFile_commonPrefix = outputFile_commonPrefix
+    String WholeExomePrefix = WholeExomePrefix
+    File indelDistribution_WholeExome = indelDistribution_WholeExome
+    String indelSizeDistributionSuffix = indelSizeDistributionSuffix
+    String indelSizeDistributionPlotSuffix = indelSizeDistributionPlotSuffix
+    File WholeExome_annotated_TPonly_vcf_gz = WholeExome_annotated_TPonly_vcf_gz
+    File WholeExome_annotated_FPonly_vcf_gz = WholeExome_annotated_FPonly_vcf_gz
+    File WholeExome_annotated_FNonly_vcf_gz = WholeExome_annotated_FNonly_vcf_gz
+    File Rscript_indelSize = Rscript_indelSize
+  }
 
   output {
     File codingExons_annotated_vcf_gz

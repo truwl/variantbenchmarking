@@ -1,6 +1,28 @@
 version 1.0
 
 ## Generating the Indel distribution for WholeExome using bcftools, USE TRUTH VCF ! (not Happy's annotated VCF)
+task indelDistribution_CodingExons_HappyResults {
+  input {
+    String outputFile_commonPrefix
+    String codingExonsPrefix
+    File truthCodingExonsVCF
+    String indelDistributionSuffix
+  }
+  output {
+    File indelDistribution_CodingExons = "~{outputFile_commonPrefix}~{codingExonsPrefix}~{indelDistributionSuffix}"
+  }
+  command <<<
+    start=`bcftools stats ~{truthCodingExonsVCF}| awk '/InDel distribution/ {{print FNR}}'`;
+    end=`bcftools stats ~{truthCodingExonsVCF}| awk '/Substitution types/ {{print FNR}}'`;
+    end=$((end - 1)); bcftools stats ~{truthCodingExonsVCF}| sed -n "$start,$end p" > ~{outputFile_commonPrefix}~{codingExonsPrefix}~{indelDistributionSuffix}
+  >>>
+
+  runtime {
+    docker: "vandhanak/bcftools:1.3.1"
+    memory: "8 GB"
+    cpu: 8
+  }
+}
 
 task indelDistribution_WholeExome_HappyResults {
   input {
