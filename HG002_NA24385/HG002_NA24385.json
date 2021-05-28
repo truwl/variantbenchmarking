@@ -11,9 +11,9 @@
 ###Prefixes and suffixes to be used in different output files
 ###Outputs:
 {
-  "BenchmarkingWorkFlow_hg19_IndelsizeDistributionWith_TPFPFN_usingHappy.chrRemovedVCF_fileSuffix": "nochr.vcf",
-  "BenchmarkingWorkFlow_hg19_IndelsizeDistributionWith_TPFPFN_usingHappy.indelSizeDistributionSuffix": "indelSizeDist.txt",
-  "BenchmarkingWorkFlow_hg19_IndelsizeDistributionWith_TPFPFN_usingHappy.indelSizeDistributionPlotSuffix": "indelSizePlot.txt",
+  "BenchmarkingWorkFlow_hg19_IndelsizeDistributionWith_TPFPFN_usingHappy.chrRemovedVCF_fileSuffix": "_chrRemoved.vcf.gz",
+  "BenchmarkingWorkFlow_hg19_IndelsizeDistributionWith_TPFPFN_usingHappy.indelSizeDistributionSuffix": "_indelSizeDistribution.txt",
+  "BenchmarkingWorkFlow_hg19_IndelsizeDistributionWith_TPFPFN_usingHappy.indelSizeDistributionPlotSuffix": "_indelSizeDistributionPlot.pdf",
   "BenchmarkingWorkFlow_hg19_IndelsizeDistributionWith_TPFPFN_usingHappy.truthWholeExomeVCF": "Truth.highconf.WholeExome.vcf.gz",
   "BenchmarkingWorkFlow_hg19_IndelsizeDistributionWith_TPFPFN_usingHappy.truthWholeExomeBED": "HG002_GIAB_highconf_CG-IllFB-IllGATKHC-Ion-Solid-10X_CHROM1-22_v3.3_highconf.bed",
   "BenchmarkingWorkFlow_hg19_IndelsizeDistributionWith_TPFPFN_usingHappy.truthCodingExonsVCF": " Truth.highconf.CodingExons.vcf.gz",
@@ -21,10 +21,10 @@
   "BenchmarkingWorkFlow_hg19_IndelsizeDistributionWith_TPFPFN_usingHappy.WholeExomePrefix": "WholeExomePrefix",
   "BenchmarkingWorkFlow_hg19_IndelsizeDistributionWith_TPFPFN_usingHappy.referenceFasta": "GRCh37.p13.genome.fa",
   "BenchmarkingWorkFlow_hg19_IndelsizeDistributionWith_TPFPFN_usingHappy.referenceFasta_indexed": "GRCh37.p13.genome.fa.fai",
-  "BenchmarkingWorkFlow_hg19_IndelsizeDistributionWith_TPFPFN_usingHappy.queryVCF": "File",
-  "BenchmarkingWorkFlow_hg19_IndelsizeDistributionWith_TPFPFN_usingHappy.outputFile_commonPrefix": "File",
-  "BenchmarkingWorkFlow_hg19_IndelsizeDistributionWith_TPFPFN_usingHappy.indelDistributionSuffix": ".indeldist.txt",
-  "BenchmarkingWorkFlow_hg19_IndelsizeDistributionWith_TPFPFN_usingHappy.consoleOutputPartialFilename": "cnsout",
+  "BenchmarkingWorkFlow_hg19_IndelsizeDistributionWith_TPFPFN_usingHappy.queryVCF": "query.vcf",
+  "BenchmarkingWorkFlow_hg19_IndelsizeDistributionWith_TPFPFN_usingHappy.outputFile_commonPrefix": "happyResults_NA24385_NISTv3.3",
+  "BenchmarkingWorkFlow_hg19_IndelsizeDistributionWith_TPFPFN_usingHappy.indelDistributionSuffix": "_indelDistribution_Frombcftools.txt",
+  "BenchmarkingWorkFlow_hg19_IndelsizeDistributionWith_TPFPFN_usingHappy.consoleOutputPartialFilename": "_ConsoleOutput.txt",
   "BenchmarkingWorkFlow_hg19_IndelsizeDistributionWith_TPFPFN_usingHappy.codingExonsPrefix": "cds",
   "BenchmarkingWorkFlow_hg19_IndelsizeDistributionWith_TPFPFN_usingHappy.Rscript_indelSize": "indelSizeDistribution_Detailed.R"
 }
