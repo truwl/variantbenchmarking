@@ -1,8 +1,8 @@
 version 1.0
 
-import "bcftools.wdl" as bcftools
-import "indel.wdl" as indel
-import "happy.wdl" as happy
+import "./bcftools.wdl" as bcftools
+import "./indel.wdl" as indel
+import "./happy.wdl" as happy
 
 
 # WORKFLOW DEFINITION
