@@ -15,7 +15,7 @@ task vcfComparison_by_Happy_CodingExons {
     File codingExons_annotated_vcf_gz = "~{outputFile_commonPrefix}~{codingExonsPrefix}.vcf.gz" ##Need this later if doing indel size distribution
     File codingExons_annotated_vcf_gz_tbi = "~{outputFile_commonPrefix}~{codingExonsPrefix}.vcf.gz.tbi"
     File codingExons_counts_csv = "~{outputFile_commonPrefix}~{codingExonsPrefix}.counts.csv"
-    File codingExons_counts_json = "{outputFile_commonPrefix}~{codingExonsPrefix}.counts.json"
+    File codingExons_counts_json = "~{outputFile_commonPrefix}~{codingExonsPrefix}.counts.json"
     File codingExons_extended_csv = "~{outputFile_commonPrefix}~{codingExonsPrefix}.extended.csv"
     File codingExons_metrics_json = "~{outputFile_commonPrefix}~{codingExonsPrefix}.metrics.json"
     File codingExons_summary_csv = "~{outputFile_commonPrefix}~{codingExonsPrefix}.summary.csv"
