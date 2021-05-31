@@ -22,12 +22,12 @@ Truth.highconf.CodingExons.vcf.gz: codingexons.nochr.bed
 #this was mentioned in https://www.nature.com/articles/sdata201625#Sec43
 query.vcf:
 	wget -O HG002run1_S1.genome.vcf.gz ftp://ftp-trace.ncbi.nlm.nih.gov/giab/ftp/data/AshkenazimTrio/HG002_NA24385_son/NIST_HiSeq_HG002_Homogeneity-10953946//HG002Run01-11419412/HG002run1_S1.genome.vcf.gz
-	gunzip -c HG002run1_S1.genome.vcf.gz  | sed -e 's/chr//' > query.vcf
+	gunzip -c HG002run1_S1.genome.vcf.gz  | sed -e 's/chr//' > HG002run1_S1.genome.vcf
 
-GRCh37-lite.fa.fai:GRCh37.p13.genome.fa
-	samtools faidx GRCh37.p13.genome.nochr.fa
+GRCh37.p13.genome.fai:GRCh37-lite.fa
+	samtools faidx $<
 
-GRCh37.p13.genome.fa:
+GRCh37-lite.fa:
 	gsutil cp gs://genomics-public-data/references/GRCh37lite/GRCh37-lite.fa.gz .
 	gunzip GRCh37-lite.fa.gz
 # see also  https://www.biorxiv.org/content/10.1101/2020.07.24.212712v1.full.pdf

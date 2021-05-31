@@ -7,7 +7,7 @@ import "./happy.wdl" as happy
 
 # WORKFLOW DEFINITION
 
-workflow BenchmarkingWorkFlow_hg19_IndelsizeDistributionWith_TPFPFN_usingHappy {
+workflow GermlineVariantCallBenchmark {
 
   input {
     File queryVCF

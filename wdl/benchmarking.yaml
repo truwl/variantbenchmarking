@@ -1,15 +1,15 @@
 meta:
   name: Stanford Benchmarking Pipeline
-  identifier: WF_83307c.db
+  identifier: WF_b1de66.e6
   description: >
     This repository contains the benchmarking workflow that can be used to assess performance of germline variant calling pipelines based on testing with GIAB samples
-  softwareVersion: 1.0
+  softwareVersion: 0.1
   metadataStatus: Released
   workflowStatus: Released
   cytoscapeStatus: Incomplete
   runit_filename: benchmarking.wdl
   runit_pipeline_name: stanfordbenchmarking
-  runit_git_hash: v1.0.11
+  runit_git_hash: v0.1
   inputs_file: inputs.json
   executable: true
   current: true

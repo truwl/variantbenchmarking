@@ -1,0 +1,11 @@
+workflowIdentifier: WF_b1de66.e6
+identifier: WF_b1de66.e6.a5d2
+name: Testing GIAB-based run on HG002_NA24385
+version: 0.1
+softwareVersion: v0.1
+jobStatus: Released
+freeze: true
+status: published
+description: HG002run1_S1.genome.vcf.gz from ftp://ftp-trace.ncbi.nlm.nih.gov/giab/ftp/data/AshkenazimTrio/HG002_NA24385_son/NIST_HiSeq_HG002_Homogeneity-10953946//HG002Run01-11419412/HG002run1_S1.genome.vcf.gz
+inputObjects:
+outputObjects:
