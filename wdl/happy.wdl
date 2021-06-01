@@ -60,7 +60,7 @@ task vcfComparison_by_Happy_WholeExome {
     File WholeExome_roc_snp = "~{outputFile_commonPrefix}~{WholeExomePrefix}.roc.Locations.SNP.csv.gz"
     File WholeExome_roc_all = "~{outputFile_commonPrefix}~{WholeExomePrefix}.roc.all.csv.gz"
     File WholeExome_extended_csv = "~{outputFile_commonPrefix}~{WholeExomePrefix}.extended.csv"
-    File WholeExome_metrics_json = "~{outputFile_commonPrefix}~{WholeExomePrefix}.metrics.json"
+    File WholeExome_metrics_json = "~{outputFile_commonPrefix}~{WholeExomePrefix}.metrics.json.gz"
     File WholeExome_summary_csv = "~{outputFile_commonPrefix}~{WholeExomePrefix}.summary.csv"
     File WholeExome_console_output_txt = "~{outputFile_commonPrefix}~{WholeExomePrefix}~{consoleOutputPartialFilename}"
   }
