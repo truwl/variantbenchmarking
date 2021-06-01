@@ -17,7 +17,6 @@ task vcfComparison_by_Happy_CodingExons {
 #    File codingExons_counts_csv = "~{outputFile_commonPrefix}~{codingExonsPrefix}.counts.csv" i don't think these are really a thing
 #    File codingExons_counts_json = "~{outputFile_commonPrefix}~{codingExonsPrefix}.counts.json"
     File codingExons_runinfo_json = "~{outputFile_commonPrefix}~{codingExonsPrefix}.runinfo.json"
-    File codingExons_roc_all = "~{outputFile_commonPrefix}~{codingExonsPrefix}.roc.all.csv.gz"
     File codingExons_roc_indel_pass = "~{outputFile_commonPrefix}~{codingExonsPrefix}.roc.Locations.INDEL.PASS.csv.gz"
     File codingExons_roc_indel = "~{outputFile_commonPrefix}~{codingExonsPrefix}.roc.Locations.INDEL.csv.gz"
     File codingExons_roc_snp_pass = "~{outputFile_commonPrefix}~{codingExonsPrefix}.roc.Locations.SNP.PASS.csv.gz"
@@ -55,7 +54,6 @@ task vcfComparison_by_Happy_WholeExome {
 #    File WholeExome_counts_csv = "~{outputFile_commonPrefix}~{WholeExomePrefix}.counts.csv"
 #    File WholeExome_counts_json = "~{outputFile_commonPrefix}~{WholeExomePrefix}.counts.json"
     File WholeExome_runinfo_json = "~{outputFile_commonPrefix}~{WholeExomePrefix}.runinfo.json"
-    File WholeExome_roc_all = "~{outputFile_commonPrefix}~{WholeExomePrefix}.roc.all.csv.gz"
     File WholeExome_roc_indel_pass = "~{outputFile_commonPrefix}~{WholeExomePrefix}.roc.Locations.INDEL.PASS.csv.gz"
     File WholeExome_roc_indel = "~{outputFile_commonPrefix}~{WholeExomePrefix}.roc.Locations.INDEL.csv.gz"
     File WholeExome_roc_snp_pass = "~{outputFile_commonPrefix}~{WholeExomePrefix}.roc.Locations.SNP.PASS.csv.gz"
