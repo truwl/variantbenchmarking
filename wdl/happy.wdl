@@ -57,7 +57,8 @@ task vcfComparison_by_Happy_WholeExome {
   >>>
   runtime {
     docker: "paramost/hap.py"
-    memory: "8 GB"
+    memory: "16 GB"
     cpu: 1
+    disks: "local-disk 100 HDD"
   }
 }
