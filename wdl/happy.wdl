@@ -25,7 +25,7 @@ task vcfComparison_by_Happy_CodingExons {
     /opt/hap.py/bin/hap.py -V ~{truthCodingExonsVCF} ~{queryVCF} -f ~{truthCodingExonsBED} -T ~{truthCodingExonsBED} -r ~{referenceFasta} -o ~{outputFile_commonPrefix}~{codingExonsPrefix} > ~{outputFile_commonPrefix}~{codingExonsPrefix}~{consoleOutputPartialFilename}
   >>>
   runtime {
-    docker: "sowmiu/happy"
+    docker: "paramost/hap.py"
     memory: "8 GB"
     cpu: 1
   }
@@ -56,7 +56,7 @@ task vcfComparison_by_Happy_WholeExome {
     /opt/hap.py/bin/hap.py -V ~{truthWholeExomeVCF} ~{queryVCF} -f ~{truthWholeExomeBED} -T ~{truthWholeExomeBED} -r ~{referenceFasta} -o ~{outputFile_commonPrefix}~{WholeExomePrefix} > ~{outputFile_commonPrefix}~{WholeExomePrefix}~{consoleOutputPartialFilename}
   >>>
   runtime {
-    docker: "sowmiu/happy"
+    docker: "paramost/hap.py"
     memory: "8 GB"
     cpu: 1
   }
