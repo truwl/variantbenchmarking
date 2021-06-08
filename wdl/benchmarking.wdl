@@ -26,6 +26,9 @@ workflow GermlineVariantCallBenchmark {
     String indelDistributionSuffix
     String indelSizeDistributionSuffix
     String indelSizeDistributionPlotSuffix
+    String job_id
+    String workflow_instance_identifier
+    String workflow_identifier
   }
 
   call happy.vcfComparison_by_Happy_CodingExons as happyexons {
@@ -108,6 +111,15 @@ workflow GermlineVariantCallBenchmark {
       Rscript_indelSize = Rscript_indelSize
   }
 
+  call aggregate.melt as aggmelt {
+    input:
+      job_id = job_id,
+      workflow_instance_identifier = workflow_instance_identifier,
+      workflow_identifier = workflow_identifier,
+      codingExons_summary_csv = happyexons.codingExons_summary_csv,
+      WholeExome_summary_csv = happyexome.WholeExome_summary_csv
+  }
+
   output {
     File codingExons_annotated_vcf_gz = happyexons.codingExons_annotated_vcf_gz
     File codingExons_annotated_vcf_gz_tbi = happyexons.codingExons_annotated_vcf_gz_tbi
@@ -151,5 +163,6 @@ workflow GermlineVariantCallBenchmark {
     File indelSizeDistribution_WholeExome = wessize.indelSizeDistribution_WholeExome
     File indelSizeDistributionPlot_CodingExons = cdssize.indelSizeDistributionPlot_CodingExons
     File indelSizeDistributionPlot_WholeExome = wessize.indelSizeDistributionPlot_WholeExome
+    File talltable = aggmelt.talltable
   }
 }
