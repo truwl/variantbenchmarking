@@ -3,7 +3,7 @@ version 1.0
 import "./bcftools.wdl" as bcftools
 import "./indel.wdl" as indel
 import "./happy.wdl" as happy
-
+import "./aggregate.wdl" as aggregate
 
 # WORKFLOW DEFINITION
 
@@ -16,6 +16,7 @@ workflow GermlineVariantCallBenchmark {
     File truthCodingExonsBED
     File truthWholeExomeBED
     File Rscript_indelSize ## Specify the R script indelSizeDistribution_Detailed.R
+    File Rscript_aggregate
     File referenceFasta  ## provide md5 hash values for the file in contents
     File referenceFasta_indexed  ## *.fai
     String chrRemovedVCF_fileSuffix
@@ -117,7 +118,8 @@ workflow GermlineVariantCallBenchmark {
       workflow_instance_identifier = workflow_instance_identifier,
       workflow_identifier = workflow_identifier,
       codingExons_summary_csv = happyexons.codingExons_summary_csv,
-      WholeExome_summary_csv = happyexome.WholeExome_summary_csv
+      WholeExome_summary_csv = happyexome.WholeExome_summary_csv,
+      Rscript_aggregate = Rscript_aggregate
   }
 
   output {
