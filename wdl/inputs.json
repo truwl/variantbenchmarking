@@ -15,8 +15,5 @@
   "GermlineVariantCallBenchmark.consoleOutputPartialFilename": "String",
   "GermlineVariantCallBenchmark.codingExonsPrefix": "String",
   "GermlineVariantCallBenchmark.Rscript_indelSize": "File",
-  "GermlineVariantCallBenchmark.Rscript_aggregate": "File",
-  "job_id": "String",
-  "workflow_instance_identifier": "String",
-  "workflow_identifier": "String"
+  "GermlineVariantCallBenchmark.Rscript_aggregate": "File"
 }
