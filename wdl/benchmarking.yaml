@@ -1,6 +1,6 @@
 meta:
-  name: Stanford Benchmarking Pipeline Agg Exp
-  identifier: WF_b1de68.e6
+  name: Stanford Benchmarking Pipeline Agg Exp Dotless
+  identifier: WF_b1de69.e6
   description: >
     This repository contains the benchmarking workflow that can be used to assess performance of germline variant calling pipelines based on testing with GIAB samples
   softwareVersion: 0.1
