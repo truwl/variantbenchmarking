@@ -27,9 +27,9 @@ workflow GermlineVariantCallBenchmark {
     String indelDistributionSuffix
     String indelSizeDistributionSuffix
     String indelSizeDistributionPlotSuffix
-    String truwl.job_id
-    String truwl.workflow_instance_identifier
-    String truwl.workflow_identifier
+    String job_id
+    String workflow_instance_identifier
+    String workflow_identifier
   }
 
   call happy.vcfComparison_by_Happy_CodingExons as happyexons {
