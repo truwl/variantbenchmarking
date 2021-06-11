@@ -13,7 +13,7 @@ task melt {
     File talltable = "truwlbenchmarks.txt"
   }
   command <<<
-    Rscript ~{Rscript_aggregate} ~{job_id} ~{workflow_instance_identifier} ~{workflow_identifier} ~{WholeExome_summary_csv} ~{codingExons_summary_csv} > truwlbenchmarks.txt
+    Rscript ~{Rscript_aggregate} ~{job_id} ~{workflow_instance_identifier} ~{workflow_identifier} ~{WholeExome_summary_csv} ~{codingExons_summary_csv} truwlbenchmarks.txt
   >>>
   runtime {
     docker: "rocker/tidyverse:4.1.0"
