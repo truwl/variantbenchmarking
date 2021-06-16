@@ -33,12 +33,12 @@ workflow GermlineVariantCallBenchmark {
     String workflow_identifier
   }
 
-  call bcftools.bcfstats as bcfstats {
+  call bcftools.bcfstats as bcfstatstask {
     input:
       queryVCF = queryVCF
   }
 
-  Array[File] qualityReports = [bcfstats.bcfstatsoutput]
+  Array[File] qualityReports = [bcfstatstask.bcfstatsoutput]
 
   call multiqc.MultiQC as multiqcTask {
     input:
@@ -180,7 +180,7 @@ workflow GermlineVariantCallBenchmark {
     File indelSizeDistributionPlot_CodingExons = cdssize.indelSizeDistributionPlot_CodingExons
     File indelSizeDistributionPlot_WholeExome = wessize.indelSizeDistributionPlot_WholeExome
     File talltable = aggmelt.talltable
-    File bcfstats = bcfstats.bcfstatsoutput
+    File bcfstatsoutput = bcfstatstask.bcfstatsoutput
     File multiqcReport = multiqcTask.multiqcReport
   }
 }
