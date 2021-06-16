@@ -180,6 +180,7 @@ workflow GermlineVariantCallBenchmark {
     File indelSizeDistributionPlot_CodingExons = cdssize.indelSizeDistributionPlot_CodingExons
     File indelSizeDistributionPlot_WholeExome = wessize.indelSizeDistributionPlot_WholeExome
     File talltable = aggmelt.talltable
+    File bcfstats = bcfstats.bcfstatsoutput
     File multiqcReport = multiqcTask.multiqcReport
   }
 }
