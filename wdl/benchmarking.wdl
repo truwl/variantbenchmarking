@@ -4,6 +4,7 @@ import "./bcftools.wdl" as bcftools
 import "./indel.wdl" as indel
 import "./happy.wdl" as happy
 import "./aggregate.wdl" as aggregate
+import "./multiqc.wdl" as multiqc
 
 # WORKFLOW DEFINITION
 
@@ -30,6 +31,19 @@ workflow GermlineVariantCallBenchmark {
     String job_id
     String workflow_instance_identifier
     String workflow_identifier
+  }
+
+  call bcftools.bcfstats as bcfstats {
+    input:
+      queryVCF = queryVCF
+  }
+
+  Array[File] qualityReports = [bcfstats.bcfstatsoutput]
+
+  call multiqc.MultiQC as multiqcTask {
+    input:
+        reports = qualityReports,
+        outDir = "multiqc"
   }
 
   call happy.vcfComparison_by_Happy_CodingExons as happyexons {
@@ -166,5 +180,6 @@ workflow GermlineVariantCallBenchmark {
     File indelSizeDistributionPlot_CodingExons = cdssize.indelSizeDistributionPlot_CodingExons
     File indelSizeDistributionPlot_WholeExome = wessize.indelSizeDistributionPlot_WholeExome
     File talltable = aggmelt.talltable
+    File multiqcReport = multiqcTask.multiqcReport
   }
 }
