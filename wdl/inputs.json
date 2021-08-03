@@ -15,5 +15,6 @@
   "GermlineVariantCallBenchmark.consoleOutputPartialFilename": "String",
   "GermlineVariantCallBenchmark.codingExonsPrefix": "String",
   "GermlineVariantCallBenchmark.Rscript_indelSize": "File",
-  "GermlineVariantCallBenchmark.Rscript_aggregate": "File"
+  "GermlineVariantCallBenchmark.Rscript_aggregate": "File",
+  "GermlineVariantCallBenchmark.JupyterNotebook": "File"
 }

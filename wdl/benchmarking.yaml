@@ -1,6 +1,6 @@
 meta:
-  name: Stanford Benchmarking Pipeline Agg Not in Inputs
-  identifier: WF_b1de70.e6
+  name: Variant Benchmarking
+  identifier: WF_b1de71.e6
   description: >
     This repository contains the benchmarking workflow that can be used to assess performance of germline variant calling pipelines based on testing with GIAB samples
   softwareVersion: 0.1

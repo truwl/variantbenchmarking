@@ -18,5 +18,6 @@
     "GermlineVariantCallBenchmark.indelSizeDistributionSuffix": "_indelSizeDistribution.txt",
     "GermlineVariantCallBenchmark.consoleOutputPartialFilename": "_ConsoleOutput.txt",
     "GermlineVariantCallBenchmark.workflow_instance_identifier": "WF_b1de70.e6.5e6b",
-    "GermlineVariantCallBenchmark.indelSizeDistributionPlotSuffix": "_indelSizeDistributionPlot.pdf"
+    "GermlineVariantCallBenchmark.indelSizeDistributionPlotSuffix": "_indelSizeDistributionPlot.pdf",
+    "GermlineVariantCallBenchmark.JupyterNotebook": "gs://benchmarking-datasets/simple_notebook.ipynb"
 }

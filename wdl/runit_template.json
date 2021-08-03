@@ -1,0 +1,58 @@
+{
+	"title": "Stanford Benchmarking",
+	"groups": [
+		{
+			"help": null,
+			"title": "Query",
+			"fields": [
+				"GermlineVariantCallBenchmark.queryVCF"
+			],
+			"description": null
+		},
+		{
+			"help": null,
+			"title": "Truth sets",
+			"fields": [
+				"GermlineVariantCallBenchmark.truthWholeExomeBED",
+				"GermlineVariantCallBenchmark.truthCodingExonsVCF",
+				"GermlineVariantCallBenchmark.truthCodingExonsBED",
+				"GermlineVariantCallBenchmark.truthWholeExomeVCF"
+			],
+			"description": null
+		},
+		{
+			"help": null,
+			"title": "Prefixes/Suffixes",
+			"fields": [
+				"GermlineVariantCallBenchmark.chrRemovedVCF_fileSuffix",
+				"GermlineVariantCallBenchmark.indelSizeDistributionSuffix",
+				"GermlineVariantCallBenchmark.indelSizeDistributionPlotSuffix",
+				"GermlineVariantCallBenchmark.WholeExomePrefix",
+				"GermlineVariantCallBenchmark.outputFile_commonPrefix",
+				"GermlineVariantCallBenchmark.indelDistributionSuffix",
+				"GermlineVariantCallBenchmark.consoleOutputPartialFilename",
+				"GermlineVariantCallBenchmark.codingExonsPrefix"
+			],
+			"description": null
+		},
+		{
+			"help": null,
+			"title": "Scripts",
+			"fields": [
+				"GermlineVariantCallBenchmark.Rscript_indelSize",
+				"GermlineVariantCallBenchmark.Rscript_aggregate"
+			],
+			"description": null
+		},
+		{
+			"help": null,
+			"title": "References",
+			"fields": [
+				"GermlineVariantCallBenchmark.referenceFasta",
+				"GermlineVariantCallBenchmark.referenceFasta_indexed"
+			],
+			"description": null
+		}
+	],
+	"description": "This repository contains the benchmarking workflow that can be used to assess performance of germline variant calling pipelines based on testing with GIAB samples"
+}

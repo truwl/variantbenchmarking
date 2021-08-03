@@ -80,7 +80,7 @@ task precRecall {
        String job_id
        String outputFile_commonPrefix
        String WholeExomePrefix
-       File Jupyter_parsehappy
+       File JupyterNotebook
 	   File benchmarkVCF
 	   File queryVCF
      }
@@ -94,6 +94,6 @@ task precRecall {
    }
    #-p happy_prefix ~{happy_prefix} -p group_id ~{group_id} -p replicate_id ~{replicate_id}
    command <<<
-     papermill ~{Jupyter_parsehappy}   --stdout-file ~{outputFile_commonPrefix}~{WholeExomePrefix}.ipynb
+     papermill ~{JupyterNotebook}   --stdout-file ~{outputFile_commonPrefix}~{WholeExomePrefix}.ipynb
    >>>
 }
