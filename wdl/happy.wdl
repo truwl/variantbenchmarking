@@ -75,25 +75,26 @@ task vcfComparison_by_Happy_WholeExome {
   }
 }
 
-task precRecall {
+task jupyterNotebook {
     input {
-       String job_id
+       String message
        String outputFile_commonPrefix
        String WholeExomePrefix
        File JupyterNotebook
-	   File benchmarkVCF
-	   File queryVCF
+       #File benchmarkVCF
+       #File queryVCF
      }
    output {
        File annoreport = "~{outputFile_commonPrefix}~{WholeExomePrefix}.ipynb"
+       File annohtml = "~{outputFile_commonPrefix}~{WholeExomePrefix}.html"
    }
    runtime {
        docker: "truwl/happyrpapermill"
        memory: "1 GB"
        cpu: 1
    }
-   #-p happy_prefix ~{happy_prefix} -p group_id ~{group_id} -p replicate_id ~{replicate_id}
    command <<<
-     papermill ~{JupyterNotebook}   --stdout-file ~{outputFile_commonPrefix}~{WholeExomePrefix}.ipynb
+     papermill ~{JupyterNotebook} -p msg ~{message}  --stdout-file ~{outputFile_commonPrefix}~{WholeExomePrefix}.ipynb
+     jupyter nbconvert ~{outputFile_commonPrefix}~{WholeExomePrefix}.ipynb --to html --output ~{outputFile_commonPrefix}~{WholeExomePrefix}.html
    >>>
 }

@@ -1,5 +1,5 @@
 {
-	"title": "Stanford Benchmarking",
+	"title": "Variant Call Benchmarking",
 	"groups": [
 		{
 			"help": null,
@@ -17,30 +17,6 @@
 				"GermlineVariantCallBenchmark.truthCodingExonsVCF",
 				"GermlineVariantCallBenchmark.truthCodingExonsBED",
 				"GermlineVariantCallBenchmark.truthWholeExomeVCF"
-			],
-			"description": null
-		},
-		{
-			"help": null,
-			"title": "Prefixes/Suffixes",
-			"fields": [
-				"GermlineVariantCallBenchmark.chrRemovedVCF_fileSuffix",
-				"GermlineVariantCallBenchmark.indelSizeDistributionSuffix",
-				"GermlineVariantCallBenchmark.indelSizeDistributionPlotSuffix",
-				"GermlineVariantCallBenchmark.WholeExomePrefix",
-				"GermlineVariantCallBenchmark.outputFile_commonPrefix",
-				"GermlineVariantCallBenchmark.indelDistributionSuffix",
-				"GermlineVariantCallBenchmark.consoleOutputPartialFilename",
-				"GermlineVariantCallBenchmark.codingExonsPrefix"
-			],
-			"description": null
-		},
-		{
-			"help": null,
-			"title": "Scripts",
-			"fields": [
-				"GermlineVariantCallBenchmark.Rscript_indelSize",
-				"GermlineVariantCallBenchmark.Rscript_aggregate"
 			],
 			"description": null
 		},

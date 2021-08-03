@@ -18,6 +18,7 @@ workflow GermlineVariantCallBenchmark {
     File truthWholeExomeBED
     File Rscript_indelSize ## Specify the R script indelSizeDistribution_Detailed.R
     File Rscript_aggregate
+	File JupyterNotebook
     File referenceFasta  ## provide md5 hash values for the file in contents
     File referenceFasta_indexed  ## *.fai
     String chrRemovedVCF_fileSuffix
@@ -69,6 +70,8 @@ workflow GermlineVariantCallBenchmark {
       WholeExomePrefix =  WholeExomePrefix,
       consoleOutputPartialFilename = consoleOutputPartialFilename
   }
+
+
 
   call bcftools.splittingAnnotatedVCF_CodingExons as splitcds {
     input:
@@ -136,6 +139,14 @@ workflow GermlineVariantCallBenchmark {
       Rscript_aggregate = Rscript_aggregate
   }
 
+  call happy.jupyterNotebook as papermillTask {
+    input:
+        message = "hello jerm",
+        outputFile_commonPrefix = outputFile_commonPrefix,
+        WholeExomePrefix = WholeExomePrefix,
+        JupyterNotebook = JupyterNotebook
+  }
+
   output {
     File codingExons_annotated_vcf_gz = happyexons.codingExons_annotated_vcf_gz
     File codingExons_annotated_vcf_gz_tbi = happyexons.codingExons_annotated_vcf_gz_tbi
@@ -182,5 +193,6 @@ workflow GermlineVariantCallBenchmark {
     File talltable = aggmelt.talltable
     File bcfstatsoutput = bcfstatstask.bcfstatsoutput
     File multiqcReport = multiqcTask.multiqcReport
+	File annoreport = papermillTask.annoreport
   }
 }

@@ -1,17 +1,17 @@
 {
     "GermlineVariantCallBenchmark.job_id": "4969524c-4a66-4ae2-958a-416db48051ad",
-    "GermlineVariantCallBenchmark.queryVCF": "gs://benchmarking-datasets/ISAAC_HG002-NA24385_all_passed_variants.vcf.gz",
-    "GermlineVariantCallBenchmark.referenceFasta": "gs://benchmarking-datasets/GRCh37-lite.fa",
+    "GermlineVariantCallBenchmark.queryVCF": "ISAAC_HG002-NA24385_all_passed_variants.vcf.gz",
+    "GermlineVariantCallBenchmark.referenceFasta": "HG002_NA24385/GRCh37-lite.fa",
     "GermlineVariantCallBenchmark.WholeExomePrefix": "wes",
-    "GermlineVariantCallBenchmark.Rscript_aggregate": "gs://benchmarking-datasets/aggregateResults.R",
-    "GermlineVariantCallBenchmark.Rscript_indelSize": "gs://benchmarking-datasets/indelSizeDistribution_Detailed.R",
+    "GermlineVariantCallBenchmark.Rscript_aggregate": "aggregateResults.R",
+    "GermlineVariantCallBenchmark.Rscript_indelSize": "indelSizeDistribution_Detailed.R",
     "GermlineVariantCallBenchmark.codingExonsPrefix": "cds",
-    "GermlineVariantCallBenchmark.truthWholeExomeBED": "gs://benchmarking-datasets/HG002_GIAB_highconf_CG-IllFB-IllGATKHC-Ion-Solid-10X_CHROM1-22_v3.3_highconf.bed",
-    "GermlineVariantCallBenchmark.truthWholeExomeVCF": "gs://benchmarking-datasets/Truth.highconf.WholeExome.vcf.gz",
-    "GermlineVariantCallBenchmark.truthCodingExonsBED": "gs://benchmarking-datasets/codingexons.nochr.bed",
-    "GermlineVariantCallBenchmark.truthCodingExonsVCF": "gs://benchmarking-datasets/Truth.highconf.CodingExons.vcf.gz",
+    "GermlineVariantCallBenchmark.truthWholeExomeBED": "HG002_NA24385/HG002_GIAB_highconf_CG-IllFB-IllGATKHC-Ion-Solid-10X_CHROM1-22_v3.3_highconf.bed",
+    "GermlineVariantCallBenchmark.truthWholeExomeVCF": "HG002_NA24385/Truth.highconf.WholeExome.vcf.gz",
+    "GermlineVariantCallBenchmark.truthCodingExonsBED": "HG002_NA24385/codingexons.nochr.bed",
+    "GermlineVariantCallBenchmark.truthCodingExonsVCF": "HG002_NA24385/Truth.highconf.CodingExons.vcf.gz",
     "GermlineVariantCallBenchmark.workflow_identifier": "WF_b1de70.e6",
-    "GermlineVariantCallBenchmark.referenceFasta_indexed": "gs://benchmarking-datasets/GRCh37-lite.fa.fai",
+    "GermlineVariantCallBenchmark.referenceFasta_indexed": "HG002_NA24385/GRCh37-lite.fa.fai",
     "GermlineVariantCallBenchmark.indelDistributionSuffix": "_indelDistribution_Frombcftools.txt",
     "GermlineVariantCallBenchmark.outputFile_commonPrefix": "happyResults_NA24385_NISTv3.3",
     "GermlineVariantCallBenchmark.chrRemovedVCF_fileSuffix": "_chrRemoved.vcf.gz",
@@ -19,5 +19,5 @@
     "GermlineVariantCallBenchmark.consoleOutputPartialFilename": "_ConsoleOutput.txt",
     "GermlineVariantCallBenchmark.workflow_instance_identifier": "WF_b1de70.e6.5e6b",
     "GermlineVariantCallBenchmark.indelSizeDistributionPlotSuffix": "_indelSizeDistributionPlot.pdf",
-    "GermlineVariantCallBenchmark.JupyterNotebook": "gs://benchmarking-datasets/simple_notebook.ipynb"
+    "GermlineVariantCallBenchmark.JupyterNotebook": "simple_notebook.ipynb"
 }
