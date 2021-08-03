@@ -81,6 +81,8 @@ task precRecall {
        String outputFile_commonPrefix
        String WholeExomePrefix
        File Jupyter_parsehappy
+	   File benchmarkVCF
+	   File queryVCF
      }
    output {
        File annoreport = "~{outputFile_commonPrefix}~{WholeExomePrefix}.ipynb"
@@ -90,7 +92,8 @@ task precRecall {
        memory: "1 GB"
        cpu: 1
    }
+   #-p happy_prefix ~{happy_prefix} -p group_id ~{group_id} -p replicate_id ~{replicate_id}
    command <<<
-     papermill ~{Jupyter_parsehappy} -p group_id ~{group_id} -p replicate_id ~{replicate_id} -p happy_prefix ~{happy_prefix) --stdout-file ~{outputFile_commonPrefix}~{WholeExomePrefix}.ipynb
+     papermill ~{Jupyter_parsehappy}   --stdout-file ~{outputFile_commonPrefix}~{WholeExomePrefix}.ipynb
    >>>
 }
