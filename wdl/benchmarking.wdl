@@ -141,7 +141,7 @@ workflow GermlineVariantCallBenchmark {
 
   call happy.jupyterNotebook as papermillTask {
     input:
-        message = "hello jerm",
+        message = "hello",
         outputFile_commonPrefix = outputFile_commonPrefix,
         WholeExomePrefix = WholeExomePrefix,
         JupyterNotebook = JupyterNotebook
