@@ -4,35 +4,79 @@ task run_intervene {
   input {
   
     #hardcoding this until we can get a system
-    Boolean includeDragen
-    Boolean includeGatk
-    Boolean includeLabcorp
-    Boolean includeSentieon
-    Boolean includeVQSR
-    Boolean includeIsaac
-    File dragen
-    File gatk
-    File labcorp
-    File sentieon
-    File vqsr
-    File isaac
+    
+    # Technology    challenge_cat    ID    Participant    Submission_Name
+    # PACBIO    All Benchmark Regions    B1S5A    The Genomics Team in Google Health    DeepVariant PacBio
+    # ILLUMINAPACBIOONT    "All Benchmark Regions, MHC"    WX8VK    Sentieon    "Combination of Illumina, PacBio HIFI, and Oxford Nanopore submission"
+    # ILLUMINAPACBIOONT    MHC    CZA1Y    Sentieon    "Combination of Illumina, PacBio HIFI, and Oxford Nanopore submission Model2"
+    # PACBIO    "MHC, Difficult-to-Map Regions"    EIUT6    Sentieon    PacBio HIFI only submission
+    # ONT    "All Benchmark Regions, Difficult-to-Map Regions"    XC97E    The UCSC CGL and Google Health    PEPPER-DeepVariant (ONT_9to6)
+    # ONT        XC97E    The UCSC CGL and Google Health    PEPPER-DeepVariant (ONT_9to6)
+    # ONT    MHC    XV7ZN    Wang Genomics Lab    ONT NanoCaller Clair Medaka Ensemble
+    # ILLUMINAPACBIOONT    Difficult-to-Map Regions    IA789    Roche Sequencing Solutions    RN-Illumina-PacBio-ONT
+    # ILLUMINA    MHC    4HL0B    Seven Bridges Genomics    Seven Bridges GRAF - Illumina
+    # ILLUMINA    "All Benchmark Regions, Difficult-to-Map Regions"    W607K    DRAG
+    
+    Boolean includeB1S5A
+    Boolean includeWX8VK
+    Boolean includeCZA1Y
+    Boolean includeEIUT6
+    Boolean includeXC97E
+    Boolean includeXV7ZN
+    Boolean includeIA789
+    Boolean includeW607K
+
+    #HG002 (child), HG003 (dad), HG004 (mom)
+    String genome 
   }
 
+
+
   command <<<
-    if ~{includeDragen}; then
-     optdragen="~{dragen}"
-    else
-     optdragen=""
+    downloadList=("")
+    optvcfs=""
+    if ~{includeB1S5A}; then
+     optvcfs="${optvcfs} B1S5A_~{genome}.vcf.gz"
+     downloadList+=("gs://truwl-giab/submission_vcfs/B1S5A/B1S5A_~{genome}.vcf.gz")
     fi
-    if ~{includeGatk}; then
-     optgatk="~{gatk}"
-    else
-     optgatk=""
+    if ~{includeWX8VK}; then
+     optvcfs="${optvcfs} WX8VK_~{genome}.vcf.gz"
+     downloadList+=("gs://truwl-giab/submission_vcfs/WX8VK/WX8VK_~{genome}.vcf.gz")
     fi
+    if ~{includeCZA1Y}; then
+     optvcfs="${optvcfs} CZA1Y_~{genome}.vcf.gz"
+     downloadList+=("gs://truwl-giab/submission_vcfs/CZA1Y/CZA1Y_~{genome}.vcf.gz")
+    fi
+    if ~{includeEIUT6}; then
+     optvcfs="${optvcfs} EIUT6_~{genome}.vcf.gz"
+     downloadList+=("gs://truwl-giab/submission_vcfs/EIUT6/EIUT6_~{genome}.vcf.gz")
+    fi
+    if ~{includeXC97E}; then
+     optvcfs="${optvcfs} XC97E_~{genome}.vcf.gz"
+     downloadList+=("gs://truwl-giab/submission_vcfs/XC97E/XC97E_~{genome}.vcf.gz")
+    fi
+    if ~{includeXV7ZN}; then
+     optvcfs="${optvcfs} XV7ZN_~{genome}.vcf.gz"
+     downloadList+=("gs://truwl-giab/submission_vcfs/XV7ZN/XV7ZN_~{genome}.vcf.gz")
+    fi
+    if ~{includeIA789}; then
+     optvcfs="${optvcfs} IA789_~{genome}.vcf.gz"
+     downloadList+=("gs://truwl-giab/submission_vcfs/IA789/IA789_~{genome}.vcf.gz")
+    fi
+    if ~{includeW607K}; then
+     optvcfs="${optvcfs} W607K_~{genome}.vcf.gz"
+     downloadList+=("gs://truwl-giab/submission_vcfs/W607K/W607K_~{genome}.vcf.gz")
+    fi
+    
+    for value in "${downloadList[@]}"
+    do
+         gsutil cp $value .
+    done
+    
     mkdir -p Intervene_results
     mkdir -p Intervene_results/sets
-    echo "intervene upset --figtype png --type reentrant -i $optdragen $optgatk --save-overlaps --filenames --bedtools-options header"
-    intervene upset --figtype png --type genomic -i $optdragen $optgatk --save-overlaps --filenames --bedtools-options header
+    echo "intervene upset --figtype png --type reentrant -i $optvcfs --save-overlaps --filenames --bedtools-options header"
+    intervene upset --figtype png --type genomic -i $optvcfs --save-overlaps --filenames --bedtools-options header
   >>>
   
   runtime {
@@ -44,35 +88,3 @@ task run_intervene {
     File upsetplot = "Intervene_results/Intervene_upset.png"
   }
 }
-#
-# gs://benchmarking-datasets/DRAGEN_HG002-NA24385-50x.vcf.gz
-# gs://benchmarking-datasets/GATK_HG002-NA24385.Filtered.Variants.vcf.gz
-# gs://benchmarking-datasets/GENALICE_HG002-NA24385.vcf.gz
-# gs://benchmarking-datasets/GIAB-HG002-AJSon-CallsIn2Technologies.vcf.gz
-# gs://benchmarking-datasets/GRCh37-lite.fa
-# gs://benchmarking-datasets/GRCh37-lite.fa.fai
-# gs://benchmarking-datasets/HG002-NA24385-pFDA.vcf.gz
-# gs://benchmarking-datasets/HG002-multiall-fullcombine.vcf.gz
-# gs://benchmarking-datasets/HG002-multiall-fullcombine.vcf.gz.tbi
-# gs://benchmarking-datasets/HG002.fermikit.raw.vcf.gz
-# gs://benchmarking-datasets/HG002_GIAB_highconf_CG-IllFB-IllGATKHC-Ion-Solid-10X_CHROM1-22_v3.3_highconf.bed
-# gs://benchmarking-datasets/HG002_GIAB_highconf_CG-IllFB-IllGATKHC-Ion-Solid-10X_CHROM1-22_v3.3_highconf.vcf.gz
-# gs://benchmarking-datasets/HG002run1_S1.genome.vcf
-# gs://benchmarking-datasets/HG002run1_S1.genome.vcf.gz
-# gs://benchmarking-datasets/ISAAC_HG002-NA24385_all_passed_variants.vcf.gz
-# gs://benchmarking-datasets/LabCorp.fixed.vcf.gz
-# gs://benchmarking-datasets/LabCorp.newheader.vcf.gz
-# gs://benchmarking-datasets/LabCorp.reheader.vcf.gz
-# gs://benchmarking-datasets/LabCorp_HG002.vcf.gz
-# gs://benchmarking-datasets/NA12878_GIAB_highconf_CG-IllFB-IllGATKHC-Ion-Solid-10X_CHROM1-X_v3.3_highconf.bed
-# gs://benchmarking-datasets/SIB-HG002.vcf.gz
-# gs://benchmarking-datasets/SIB-MT.vcf.gz
-# gs://benchmarking-datasets/Sentieon.fixed.vcf
-# gs://benchmarking-datasets/Truth.highconf.CodingExons.vcf.gz
-# gs://benchmarking-datasets/Truth.highconf.WholeExome.vcf.gz
-# gs://benchmarking-datasets/VQSR_HG002-NA24385.recalibrated_variants.vcf.gz
-# gs://benchmarking-datasets/aggregateResults.R
-# gs://benchmarking-datasets/codingexons.bed
-# gs://benchmarking-datasets/codingexons.nochr.bed
-# gs://benchmarking-datasets/indelSizeDistribution_Detailed.R
-# gs://benchmarking-datasets/simple_notebook.ipynb
