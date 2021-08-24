@@ -3,7 +3,7 @@ version 1.0
 import "./bcftools.wdl" as bcftools
 import "./indel.wdl" as indel
 import "./happy.wdl" as happy
-
+import "./intervene.wdl" as intervene
 
 # WORKFLOW DEFINITION
 
@@ -16,7 +16,7 @@ workflow GermlineVariantCallBenchmark {
     File truthCodingExonsBED
     File truthWholeExomeBED
     File Rscript_indelSize ## Specify the R script indelSizeDistribution_Detailed.R
-    File referenceFasta  ## provide md5 hash values for the file in contents
+    File referenceFasta = "gs://benchmarking-datasets/GRCh37-lite.fa" ## provide md5 hash values for the file in contents
     File referenceFasta_indexed  ## *.fai
     String chrRemovedVCF_fileSuffix
     String outputFile_commonPrefix
@@ -26,6 +26,18 @@ workflow GermlineVariantCallBenchmark {
     String indelDistributionSuffix
     String indelSizeDistributionSuffix
     String indelSizeDistributionPlotSuffix
+    
+    Boolean includeB1S5A
+    Boolean includeWX8VK
+    Boolean includeCZA1Y
+    Boolean includeEIUT6
+    Boolean includeXC97E
+    Boolean includeXV7ZN
+    Boolean includeIA789
+    Boolean includeW607K
+
+    #HG002 (child), HG003 (dad), HG004 (mom)
+    String genome
   }
 
   call happy.vcfComparison_by_Happy_CodingExons as happyexons {
@@ -108,6 +120,19 @@ workflow GermlineVariantCallBenchmark {
       Rscript_indelSize = Rscript_indelSize
   }
 
+  call intervene.run_intervene as myintervene {
+      input:
+          includeB1S5A = includeB1S5A,
+          includeWX8VK = includeWX8VK,
+          includeCZA1Y = includeCZA1Y,
+          includeEIUT6 = includeEIUT6,
+          includeXC97E = includeXC97E,
+          includeXV7ZN = includeXV7ZN,
+          includeIA789 = includeIA789,
+          includeW607K = includeW607K,
+          genome = genome
+  }
+
   output {
     File codingExons_annotated_vcf_gz = happyexons.codingExons_annotated_vcf_gz
     File codingExons_annotated_vcf_gz_tbi = happyexons.codingExons_annotated_vcf_gz_tbi
@@ -151,5 +176,8 @@ workflow GermlineVariantCallBenchmark {
     File indelSizeDistribution_WholeExome = wessize.indelSizeDistribution_WholeExome
     File indelSizeDistributionPlot_CodingExons = cdssize.indelSizeDistributionPlot_CodingExons
     File indelSizeDistributionPlot_WholeExome = wessize.indelSizeDistributionPlot_WholeExome
+    
+    
+    File upsetPlot = myintervene.upsetplot
   }
 }
