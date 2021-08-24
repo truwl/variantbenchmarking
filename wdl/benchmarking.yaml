@@ -9,7 +9,7 @@ softwareVersion:
 metadataStatus: Released
 workflowStatus: Released
 workflowLanguage: wdl
-workflowFile: benchmarking.wdl
+workflowFile: wdl/benchmarking.wdl
 repoName: stanfordbenchmarking
 gitTag: intervene
 inputsTemplate: inputs.json
