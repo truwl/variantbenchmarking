@@ -37,23 +37,22 @@ workflow GermlineVariantCallBenchmark {
 
   input {
     File queryVCF
-    File truthCodingExonsVCF
-    File truthWholeExomeVCF
-    File truthCodingExonsBED
-    File truthWholeExomeBED
+    File truthCodingExonsVCF = "gs://benchmarking-datasets/Truth.highconf.CodingExons.vcf.gz"
+    File truthWholeExomeVCF = "gs://benchmarking-datasets/Truth.highconf.WholeExome.vcf.gz"
+    File truthCodingExonsBED = "gs://benchmarking-datasets/codingexons.nochr.bed"
+    File truthWholeExomeBED = "gs://benchmarking-datasets/HG002_GIAB_highconf_CG-IllFB-IllGATKHC-Ion-Solid-10X_CHROM1-22_v3.3_highconf.bed"
     File Rscript_indelSize ## Specify the R script indelSizeDistribution_Detailed.R
+    File Rscript_aggregate = "gs://benchmarking-datasets/aggregateResults.R"
     File referenceFasta = "gs://benchmarking-datasets/GRCh37-lite.fa" ## provide md5 hash values for the file in contents
-    File Rscript_aggregate
-    File referenceFasta  ## provide md5 hash values for the file in contents
-    File referenceFasta_indexed  ## *.fai
-    String chrRemovedVCF_fileSuffix
-    String outputFile_commonPrefix
-    String codingExonsPrefix
+    File referenceFasta_indexed = "gs://benchmarking-datasets/GRCh37-lite.fa.fai" ## *.fai
+    String chrRemovedVCF_fileSuffix = "_chrRemoved.vcf.gz"
+    String outputFile_commonPrefix = "happyResults_NA24385_NISTv3.3"
+    String codingExonsPrefix = "cds"
     String WholeExomePrefix = "wes"
-    String consoleOutputPartialFilename
-    String indelDistributionSuffix
-    String indelSizeDistributionSuffix
-    String indelSizeDistributionPlotSuffix
+    String consoleOutputPartialFilename = "_ConsoleOutput.txt"
+    String indelDistributionSuffix = "_indelDistribution_Frombcftools.txt"
+    String indelSizeDistributionSuffix = "_indelSizeDistribution.txt"
+    String indelSizeDistributionPlotSuffix = "_indelSizeDistributionPlot.pdf"
 
     Boolean includeB1S5A
     Boolean includeWX8VK
@@ -65,7 +64,7 @@ workflow GermlineVariantCallBenchmark {
     Boolean includeW607K
 
     #HG002 (child), HG003 (dad), HG004 (mom)
-    String genome
+    String subject
 
     String job_id
     String workflow_instance_identifier
@@ -176,7 +175,7 @@ workflow GermlineVariantCallBenchmark {
           includeXV7ZN = includeXV7ZN,
           includeIA789 = includeIA789,
           includeW607K = includeW607K,
-          genome = genome
+          subject = subject
 
   call aggregate.melt as aggmelt {
     input:

@@ -27,7 +27,7 @@ task run_intervene {
     Boolean includeW607K
 
     #HG002 (child), HG003 (dad), HG004 (mom)
-    String genome 
+    String subject 
   }
 
 
@@ -36,36 +36,36 @@ task run_intervene {
     downloadList=("")
     optvcfs=""
     if ~{includeB1S5A}; then
-     optvcfs="${optvcfs} B1S5A_~{genome}.vcf.gz"
-     downloadList+=("gs://truwl-giab/submission_vcfs/B1S5A/B1S5A_~{genome}.vcf.gz")
+     optvcfs="${optvcfs} B1S5A_~{subject}.vcf.gz"
+     downloadList+=("gs://truwl-giab/submission_vcfs/B1S5A/B1S5A_~{subject}.vcf.gz")
     fi
     if ~{includeWX8VK}; then
-     optvcfs="${optvcfs} WX8VK_~{genome}.vcf.gz"
-     downloadList+=("gs://truwl-giab/submission_vcfs/WX8VK/WX8VK_~{genome}.vcf.gz")
+     optvcfs="${optvcfs} WX8VK_~{subject}.vcf.gz"
+     downloadList+=("gs://truwl-giab/submission_vcfs/WX8VK/WX8VK_~{subject}.vcf.gz")
     fi
     if ~{includeCZA1Y}; then
-     optvcfs="${optvcfs} CZA1Y_~{genome}.vcf.gz"
-     downloadList+=("gs://truwl-giab/submission_vcfs/CZA1Y/CZA1Y_~{genome}.vcf.gz")
+     optvcfs="${optvcfs} CZA1Y_~{subject}.vcf.gz"
+     downloadList+=("gs://truwl-giab/submission_vcfs/CZA1Y/CZA1Y_~{subject}.vcf.gz")
     fi
     if ~{includeEIUT6}; then
-     optvcfs="${optvcfs} EIUT6_~{genome}.vcf.gz"
-     downloadList+=("gs://truwl-giab/submission_vcfs/EIUT6/EIUT6_~{genome}.vcf.gz")
+     optvcfs="${optvcfs} EIUT6_~{subject}.vcf.gz"
+     downloadList+=("gs://truwl-giab/submission_vcfs/EIUT6/EIUT6_~{subject}.vcf.gz")
     fi
     if ~{includeXC97E}; then
-     optvcfs="${optvcfs} XC97E_~{genome}.vcf.gz"
-     downloadList+=("gs://truwl-giab/submission_vcfs/XC97E/XC97E_~{genome}.vcf.gz")
+     optvcfs="${optvcfs} XC97E_~{subject}.vcf.gz"
+     downloadList+=("gs://truwl-giab/submission_vcfs/XC97E/XC97E_~{subject}.vcf.gz")
     fi
     if ~{includeXV7ZN}; then
-     optvcfs="${optvcfs} XV7ZN_~{genome}.vcf.gz"
-     downloadList+=("gs://truwl-giab/submission_vcfs/XV7ZN/XV7ZN_~{genome}.vcf.gz")
+     optvcfs="${optvcfs} XV7ZN_~{subject}.vcf.gz"
+     downloadList+=("gs://truwl-giab/submission_vcfs/XV7ZN/XV7ZN_~{subject}.vcf.gz")
     fi
     if ~{includeIA789}; then
-     optvcfs="${optvcfs} IA789_~{genome}.vcf.gz"
-     downloadList+=("gs://truwl-giab/submission_vcfs/IA789/IA789_~{genome}.vcf.gz")
+     optvcfs="${optvcfs} IA789_~{subject}.vcf.gz"
+     downloadList+=("gs://truwl-giab/submission_vcfs/IA789/IA789_~{subject}.vcf.gz")
     fi
     if ~{includeW607K}; then
-     optvcfs="${optvcfs} W607K_~{genome}.vcf.gz"
-     downloadList+=("gs://truwl-giab/submission_vcfs/W607K/W607K_~{genome}.vcf.gz")
+     optvcfs="${optvcfs} W607K_~{subject}.vcf.gz"
+     downloadList+=("gs://truwl-giab/submission_vcfs/W607K/W607K_~{subject}.vcf.gz")
     fi
     
     for value in "${downloadList[@]}"
