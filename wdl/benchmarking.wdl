@@ -31,14 +31,14 @@ workflow GermlineVariantCallBenchmark {
     String indelSizeDistributionSuffix = "_indelSizeDistribution.txt"
     String indelSizeDistributionPlotSuffix = "_indelSizeDistributionPlot.pdf"
 
-    Boolean includeB1S5A
-    Boolean includeWX8VK
-    Boolean includeCZA1Y
-    Boolean includeEIUT6
-    Boolean includeXC97E
-    Boolean includeXV7ZN
-    Boolean includeIA789
-    Boolean includeW607K
+    Boolean includeB1S5A = False
+    Boolean includeWX8VK = False
+    Boolean includeCZA1Y = False
+    Boolean includeEIUT6 = False
+    Boolean includeXC97E = False
+    Boolean includeXV7ZN = False
+    Boolean includeIA789 = False
+    Boolean includeW607K = False
 
     #HG002 (child), HG003 (dad), HG004 (mom)
     String subject
