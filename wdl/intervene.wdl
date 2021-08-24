@@ -5,18 +5,6 @@ task run_intervene {
   
     #hardcoding this until we can get a system
     
-    # Technology    challenge_cat    ID    Participant    Submission_Name
-    # PACBIO    All Benchmark Regions    B1S5A    The Genomics Team in Google Health    DeepVariant PacBio
-    # ILLUMINAPACBIOONT    "All Benchmark Regions, MHC"    WX8VK    Sentieon    "Combination of Illumina, PacBio HIFI, and Oxford Nanopore submission"
-    # ILLUMINAPACBIOONT    MHC    CZA1Y    Sentieon    "Combination of Illumina, PacBio HIFI, and Oxford Nanopore submission Model2"
-    # PACBIO    "MHC, Difficult-to-Map Regions"    EIUT6    Sentieon    PacBio HIFI only submission
-    # ONT    "All Benchmark Regions, Difficult-to-Map Regions"    XC97E    The UCSC CGL and Google Health    PEPPER-DeepVariant (ONT_9to6)
-    # ONT        XC97E    The UCSC CGL and Google Health    PEPPER-DeepVariant (ONT_9to6)
-    # ONT    MHC    XV7ZN    Wang Genomics Lab    ONT NanoCaller Clair Medaka Ensemble
-    # ILLUMINAPACBIOONT    Difficult-to-Map Regions    IA789    Roche Sequencing Solutions    RN-Illumina-PacBio-ONT
-    # ILLUMINA    MHC    4HL0B    Seven Bridges Genomics    Seven Bridges GRAF - Illumina
-    # ILLUMINA    "All Benchmark Regions, Difficult-to-Map Regions"    W607K    DRAG
-    
     Boolean includeB1S5A
     Boolean includeWX8VK
     Boolean includeCZA1Y
@@ -25,8 +13,6 @@ task run_intervene {
     Boolean includeXV7ZN
     Boolean includeIA789
     Boolean includeW607K
-
-    #HG002 (child), HG003 (dad), HG004 (mom)
     String subject 
   }
 
