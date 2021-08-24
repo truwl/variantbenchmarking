@@ -1,0 +1,174 @@
+[
+  {
+    "id": "GermlineVariantCallBenchmark.chrRemovedVCF_fileSuffix",
+    "name": "GermlineVariantCallBenchmark.chrRemovedVCF_fileSuffix",
+    "group": "Affixes",
+    "example": "_chrRemoved.vcf.gz",
+    "param_type": {
+      "optional": false,
+      "param_type": "String"
+    }
+  },
+  {
+    "id": "GermlineVariantCallBenchmark.indelSizeDistributionSuffix",
+    "name": "GermlineVariantCallBenchmark.indelSizeDistributionSuffix",
+    "group": "Affixes",
+    "example": "_indelSizeDistribution.txt",
+    "param_type": {
+      "optional": false,
+      "param_type": "String"
+    }
+  },
+  {
+    "id": "GermlineVariantCallBenchmark.indelSizeDistributionPlotSuffix",
+    "name": "GermlineVariantCallBenchmark.indelSizeDistributionPlotSuffix",
+    "group": "Affixes",
+    "example": "_indelSizeDistributionPlot.pdf",
+    "param_type": {
+      "optional": false,
+      "param_type": "String"
+    }
+  },
+  {
+    "id": "GermlineVariantCallBenchmark.truthWholeExomeBED",
+    "name": "GermlineVariantCallBenchmark.truthWholeExomeBED",
+    "group": "Truth",
+    "example": "gs://benchmarking-datasets/HG002_GIAB_highconf_CG-IllFB-IllGATKHC-Ion-Solid-10X_CHROM1-22_v3.3_highconf.bed",
+    "param_type": {
+      "optional": false,
+      "param_type": "File"
+    }
+  },
+  {
+    "id": "GermlineVariantCallBenchmark.truthCodingExonsVCF",
+    "name": "GermlineVariantCallBenchmark.truthCodingExonsVCF",
+    "group": "Truth",
+    "example": "gs://benchmarking-datasets/Truth.highconf.CodingExons.vcf.gz",
+    "param_type": {
+      "optional": false,
+      "param_type": "File"
+    }
+  },
+  {
+    "id": "GermlineVariantCallBenchmark.truthCodingExonsBED",
+    "name": "GermlineVariantCallBenchmark.truthCodingExonsBED",
+    "group": "Truth",
+    "example": "gs://benchmarking-datasets/codingexons.nochr.bed",
+    "param_type": {
+      "optional": false,
+      "param_type": "File"
+    },
+    "description": "Exons BED from UCSC"
+  },
+  {
+    "id": "GermlineVariantCallBenchmark.WholeExomePrefix",
+    "name": "GermlineVariantCallBenchmark.WholeExomePrefix",
+    "group": "Affixes",
+    "example": "wes",
+    "param_type": {
+      "optional": false,
+      "param_type": "String"
+    }
+  },
+  {
+    "id": "GermlineVariantCallBenchmark.referenceFasta",
+    "name": "GermlineVariantCallBenchmark.referenceFasta",
+    "group": "References",
+    "example": "gs://benchmarking-datasets/GRCh37-lite.fa",
+    "param_type": {
+      "optional": false,
+      "param_type": "File"
+    }
+  },
+  {
+    "id": "GermlineVariantCallBenchmark.queryVCF",
+    "name": "GermlineVariantCallBenchmark.queryVCF",
+    "group": "Query",
+    "example": "gs://benchmarking-datasets/HG002run1_S1.genome.vcf",
+    "param_type": {
+      "optional": false,
+      "param_type": "File"
+    }
+  },
+  {
+    "id": "GermlineVariantCallBenchmark.outputFile_commonPrefix",
+    "name": "GermlineVariantCallBenchmark.outputFile_commonPrefix",
+    "group": "Affixes",
+    "example": "happyResults_NA24385_NISTv3.3",
+    "param_type": {
+      "optional": false,
+      "param_type": "String"
+    }
+  },
+  {
+    "id": "GermlineVariantCallBenchmark.indelDistributionSuffix",
+    "name": "GermlineVariantCallBenchmark.indelDistributionSuffix",
+    "group": "Affixes",
+    "example": "_indelDistribution_Frombcftools.txt",
+    "param_type": {
+      "optional": false,
+      "param_type": "String"
+    }
+  },
+  {
+    "id": "GermlineVariantCallBenchmark.truthWholeExomeVCF",
+    "name": "GermlineVariantCallBenchmark.truthWholeExomeVCF",
+    "group": "Truth",
+    "example": "gs://benchmarking-datasets/Truth.highconf.WholeExome.vcf.gz",
+    "param_type": {
+      "optional": false,
+      "param_type": "File"
+    },
+    "description": "bedtool intersect of the high confidence bed"
+  },
+  {
+    "id": "GermlineVariantCallBenchmark.referenceFasta_indexed",
+    "name": "GermlineVariantCallBenchmark.referenceFasta_indexed",
+    "group": "References",
+    "example": "GRCh37-lite.fa.fai",
+    "param_type": {
+      "optional": false,
+      "param_type": "File"
+    }
+  },
+  {
+    "id": "GermlineVariantCallBenchmark.consoleOutputPartialFilename",
+    "name": "GermlineVariantCallBenchmark.consoleOutputPartialFilename",
+    "group": "Affixes",
+    "example": "_ConsoleOutput.txt",
+    "param_type": {
+      "optional": false,
+      "param_type": "String"
+    }
+  },
+  {
+    "id": "GermlineVariantCallBenchmark.codingExonsPrefix",
+    "name": "GermlineVariantCallBenchmark.codingExonsPrefix",
+    "group": "Affixes",
+    "example": "cds",
+    "param_type": {
+      "optional": false,
+      "param_type": "String"
+    }
+  },
+  {
+    "id": "GermlineVariantCallBenchmark.Rscript_indelSize",
+    "name": "GermlineVariantCallBenchmark.Rscript_indelSize",
+    "group": "Scripts",
+    "example": "indelSizeDistribution_Detailed.R",
+    "param_type": {
+      "optional": false,
+      "param_type": "File"
+    }
+  },
+  {
+    "id": "GermlineVariantCallBenchmark.Rscript_aggregate",
+    "name": "GermlineVariantCallBenchmark.Rscript_aggregate",
+    "group": "Scripts",
+    "example": "aggregateResults.R",
+    "param_type": {
+      "optional": false,
+      "param_type": "File"
+    }
+  }
+]
