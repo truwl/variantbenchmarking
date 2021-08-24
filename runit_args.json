@@ -1,4 +1,8 @@
 [
+<<<<<<< HEAD
+=======
+  runit_auto_fields = ["truwl.job_id", "truwl.workflow_instance.identifier", "truwl.workflow.identifier"]
+>>>>>>> truwlinputs
   {
     "id": "GermlineVariantCallBenchmark.chrRemovedVCF_fileSuffix",
     "name": "GermlineVariantCallBenchmark.chrRemovedVCF_fileSuffix",
@@ -32,7 +36,11 @@
   {
     "id": "GermlineVariantCallBenchmark.truthWholeExomeBED",
     "name": "GermlineVariantCallBenchmark.truthWholeExomeBED",
+<<<<<<< HEAD
     "group": "Truth",
+=======
+    "group": "General",
+>>>>>>> truwlinputs
     "example": "gs://benchmarking-datasets/HG002_GIAB_highconf_CG-IllFB-IllGATKHC-Ion-Solid-10X_CHROM1-22_v3.3_highconf.bed",
     "param_type": {
       "optional": false,
@@ -42,7 +50,11 @@
   {
     "id": "GermlineVariantCallBenchmark.truthCodingExonsVCF",
     "name": "GermlineVariantCallBenchmark.truthCodingExonsVCF",
+<<<<<<< HEAD
     "group": "Truth",
+=======
+    "group": "General",
+>>>>>>> truwlinputs
     "example": "gs://benchmarking-datasets/Truth.highconf.CodingExons.vcf.gz",
     "param_type": {
       "optional": false,
@@ -52,7 +64,11 @@
   {
     "id": "GermlineVariantCallBenchmark.truthCodingExonsBED",
     "name": "GermlineVariantCallBenchmark.truthCodingExonsBED",
+<<<<<<< HEAD
     "group": "Truth",
+=======
+    "group": "General",
+>>>>>>> truwlinputs
     "example": "gs://benchmarking-datasets/codingexons.nochr.bed",
     "param_type": {
       "optional": false,
@@ -73,7 +89,11 @@
   {
     "id": "GermlineVariantCallBenchmark.referenceFasta",
     "name": "GermlineVariantCallBenchmark.referenceFasta",
+<<<<<<< HEAD
     "group": "References",
+=======
+    "group": "General",
+>>>>>>> truwlinputs
     "example": "gs://benchmarking-datasets/GRCh37-lite.fa",
     "param_type": {
       "optional": false,
@@ -83,7 +103,11 @@
   {
     "id": "GermlineVariantCallBenchmark.queryVCF",
     "name": "GermlineVariantCallBenchmark.queryVCF",
+<<<<<<< HEAD
     "group": "Query",
+=======
+    "group": "General",
+>>>>>>> truwlinputs
     "example": "gs://benchmarking-datasets/HG002run1_S1.genome.vcf",
     "param_type": {
       "optional": false,
@@ -113,7 +137,11 @@
   {
     "id": "GermlineVariantCallBenchmark.truthWholeExomeVCF",
     "name": "GermlineVariantCallBenchmark.truthWholeExomeVCF",
+<<<<<<< HEAD
     "group": "Truth",
+=======
+    "group": "General",
+>>>>>>> truwlinputs
     "example": "gs://benchmarking-datasets/Truth.highconf.WholeExome.vcf.gz",
     "param_type": {
       "optional": false,
@@ -124,7 +152,11 @@
   {
     "id": "GermlineVariantCallBenchmark.referenceFasta_indexed",
     "name": "GermlineVariantCallBenchmark.referenceFasta_indexed",
+<<<<<<< HEAD
     "group": "References",
+=======
+    "group": "General",
+>>>>>>> truwlinputs
     "example": "GRCh37-lite.fa.fai",
     "param_type": {
       "optional": false,
@@ -154,12 +186,17 @@
   {
     "id": "GermlineVariantCallBenchmark.Rscript_indelSize",
     "name": "GermlineVariantCallBenchmark.Rscript_indelSize",
+<<<<<<< HEAD
     "group": "Scripts",
+=======
+    "group": "General",
+>>>>>>> truwlinputs
     "example": "indelSizeDistribution_Detailed.R",
     "param_type": {
       "optional": false,
       "param_type": "File"
     }
+<<<<<<< HEAD
   },
   {
     "id": "GermlineVariantCallBenchmark.Rscript_aggregate",
@@ -170,5 +207,7 @@
       "optional": false,
       "param_type": "File"
     }
+=======
+>>>>>>> truwlinputs
   }
 ]

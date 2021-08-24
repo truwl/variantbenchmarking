@@ -23,6 +23,8 @@
   "GermlineVariantCallBenchmark.indelSizeDistributionPlotSuffix": "String",
   "GermlineVariantCallBenchmark.outputFile_commonPrefix": "String",
   "GermlineVariantCallBenchmark.includeEIUT6": "Boolean",
-  "GermlineVariantCallBenchmark.truthCodingExonsVCF": "File"
+  "GermlineVariantCallBenchmark.truthCodingExonsVCF": "File",
+  "GermlineVariantCallBenchmark.Rscript_indelSize": "File",
+  "GermlineVariantCallBenchmark.Rscript_aggregate": "File"
 }
 

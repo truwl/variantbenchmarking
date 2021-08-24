@@ -4,9 +4,35 @@ import "./bcftools.wdl" as bcftools
 import "./indel.wdl" as indel
 import "./happy.wdl" as happy
 import "./intervene.wdl" as intervene
+import "./aggregate.wdl" as aggregate
+import "./multiqc.wdl" as multiqc
 
 # WORKFLOW DEFINITION
 
+
+
+    "GermlineVariantCallBenchmark.job_id": "4969524c-4a66-4ae2-958a-416db48051ad",
+    "GermlineVariantCallBenchmark.queryVCF": "gs://benchmarking-datasets/ISAAC_HG002-NA24385_all_passed_variants.vcf.gz",
+    "GermlineVariantCallBenchmark.referenceFasta": "gs://benchmarking-datasets/GRCh37-lite.fa",
+    "GermlineVariantCallBenchmark.WholeExomePrefix": "wes",
+    "GermlineVariantCallBenchmark.Rscript_aggregate": "gs://benchmarking-datasets/aggregateResults.R",
+    "GermlineVariantCallBenchmark.Rscript_indelSize": "gs://benchmarking-datasets/indelSizeDistribution_Detailed.R",
+    "GermlineVariantCallBenchmark.codingExonsPrefix": "cds",
+    "GermlineVariantCallBenchmark.truthWholeExomeBED": "gs://benchmarking-datasets/HG002_GIAB_highconf_CG-IllFB-IllGATKHC-Ion-Solid-10X_CHROM1-22_v3.3_highconf.bed",
+    "GermlineVariantCallBenchmark.truthWholeExomeVCF": "gs://benchmarking-datasets/Truth.highconf.WholeExome.vcf.gz",
+    "GermlineVariantCallBenchmark.truthCodingExonsBED": "gs://benchmarking-datasets/codingexons.nochr.bed",
+    "GermlineVariantCallBenchmark.truthCodingExonsVCF": "gs://benchmarking-datasets/Truth.highconf.CodingExons.vcf.gz",
+    "GermlineVariantCallBenchmark.workflow_identifier": "WF_b1de70.e6",
+    "GermlineVariantCallBenchmark.referenceFasta_indexed": "gs://benchmarking-datasets/GRCh37-lite.fa.fai",
+    "GermlineVariantCallBenchmark.indelDistributionSuffix": "_indelDistribution_Frombcftools.txt",
+    "GermlineVariantCallBenchmark.outputFile_commonPrefix": "happyResults_NA24385_NISTv3.3",
+    "GermlineVariantCallBenchmark.chrRemovedVCF_fileSuffix": "_chrRemoved.vcf.gz",
+    "GermlineVariantCallBenchmark.indelSizeDistributionSuffix": "_indelSizeDistribution.txt",
+    "GermlineVariantCallBenchmark.consoleOutputPartialFilename": "_ConsoleOutput.txt",
+    "GermlineVariantCallBenchmark.workflow_instance_identifier": "WF_b1de70.e6.5e6b",
+    "GermlineVariantCallBenchmark.indelSizeDistributionPlotSuffix": "_indelSizeDistributionPlot.pdf"
+    
+    
 workflow GermlineVariantCallBenchmark {
 
   input {
@@ -17,16 +43,18 @@ workflow GermlineVariantCallBenchmark {
     File truthWholeExomeBED
     File Rscript_indelSize ## Specify the R script indelSizeDistribution_Detailed.R
     File referenceFasta = "gs://benchmarking-datasets/GRCh37-lite.fa" ## provide md5 hash values for the file in contents
+    File Rscript_aggregate
+    File referenceFasta  ## provide md5 hash values for the file in contents
     File referenceFasta_indexed  ## *.fai
     String chrRemovedVCF_fileSuffix
     String outputFile_commonPrefix
     String codingExonsPrefix
-    String WholeExomePrefix
+    String WholeExomePrefix = "wes"
     String consoleOutputPartialFilename
     String indelDistributionSuffix
     String indelSizeDistributionSuffix
     String indelSizeDistributionPlotSuffix
-    
+
     Boolean includeB1S5A
     Boolean includeWX8VK
     Boolean includeCZA1Y
@@ -38,6 +66,23 @@ workflow GermlineVariantCallBenchmark {
 
     #HG002 (child), HG003 (dad), HG004 (mom)
     String genome
+
+    String job_id
+    String workflow_instance_identifier
+    String workflow_identifier
+  }
+
+  call bcftools.bcfstats as bcfstatstask {
+    input:
+      queryVCF = queryVCF
+  }
+
+  Array[File] qualityReports = [bcfstatstask.bcfstatsoutput]
+
+  call multiqc.MultiQC as multiqcTask {
+    input:
+        reports = qualityReports,
+        outDir = "multiqc"
   }
 
   call happy.vcfComparison_by_Happy_CodingExons as happyexons {
@@ -120,6 +165,7 @@ workflow GermlineVariantCallBenchmark {
       Rscript_indelSize = Rscript_indelSize
   }
 
+
   call intervene.run_intervene as myintervene {
       input:
           includeB1S5A = includeB1S5A,
@@ -131,6 +177,15 @@ workflow GermlineVariantCallBenchmark {
           includeIA789 = includeIA789,
           includeW607K = includeW607K,
           genome = genome
+
+  call aggregate.melt as aggmelt {
+    input:
+      job_id = job_id,
+      workflow_instance_identifier = workflow_instance_identifier,
+      workflow_identifier = workflow_identifier,
+      codingExons_summary_csv = happyexons.codingExons_summary_csv,
+      WholeExome_summary_csv = happyexome.WholeExome_summary_csv,
+      Rscript_aggregate = Rscript_aggregate
   }
 
   output {
@@ -176,8 +231,11 @@ workflow GermlineVariantCallBenchmark {
     File indelSizeDistribution_WholeExome = wessize.indelSizeDistribution_WholeExome
     File indelSizeDistributionPlot_CodingExons = cdssize.indelSizeDistributionPlot_CodingExons
     File indelSizeDistributionPlot_WholeExome = wessize.indelSizeDistributionPlot_WholeExome
-    
+
     
     File upsetPlot = myintervene.upsetplot
+    File talltable = aggmelt.talltable
+    File bcfstatsoutput = bcfstatstask.bcfstatsoutput
+    File multiqcReport = multiqcTask.multiqcReport
   }
 }

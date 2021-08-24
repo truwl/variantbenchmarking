@@ -1,0 +1,3 @@
+  "GermlineVariantCallBenchmark.job_id": "String",
+  "GermlineVariantCallBenchmark.workflow_instance_identifier": "String",
+  "GermlineVariantCallBenchmark.workflow_identifier": "String"

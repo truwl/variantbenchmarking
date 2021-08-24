@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 name: Variant Benchmarking Pipeline Intervene
 identifier: WF_b1de71.e6
 description: >
@@ -18,6 +19,29 @@ current: true
 WebSite:
   - URL: https://github.com/truwl/stanford_benchmarking
     name: Stanford benchmarking
+=======
+meta:
+  name: Stanford Benchmarking Pipeline Agg Not in Inputs
+  identifier: WF_b1de70.e6
+  description: >
+    This repository contains the benchmarking workflow that can be used to assess performance of germline variant calling pipelines based on testing with GIAB samples
+  softwareVersion: 0.1
+  metadataStatus: Released
+  workflowStatus: Released
+  cytoscapeStatus: Incomplete
+  runit_filename: wdl/benchmarking.wdl
+  runit_pipeline_name: stanford-benchmarking-workflows
+  runit_git_hash: v0.1
+  inputs_file: inputs.json
+  executable: true
+  current: true
+  codeRepository:
+    URL: https://github.com/truwl/stanford_benchmarking
+  websites:
+    0:
+      url: https://github.com/truwl/stanford_benchmarking
+      name: Stanford benchmarking
+>>>>>>> truwlinputs
 
 # name: Variant Benchmarking Pipeline Intervene
 # softwareVersion:

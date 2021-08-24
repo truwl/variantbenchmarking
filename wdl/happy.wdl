@@ -74,3 +74,23 @@ task vcfComparison_by_Happy_WholeExome {
     disks: "local-disk 100 HDD"
   }
 }
+
+task precRecall {
+    input {
+       String job_id
+       String outputFile_commonPrefix
+       String WholeExomePrefix
+       File Jupyter_parsehappy
+     }
+   output {
+       File annoreport = "~{outputFile_commonPrefix}~{WholeExomePrefix}.ipynb"
+   }
+   runtime {
+       docker: "truwl/happyrpapermill"
+       memory: "1 GB"
+       cpu: 1
+   }
+   command <<<
+     papermill ~{Jupyter_parsehappy} -p group_id ~{group_id} -p replicate_id ~{replicate_id} -p happy_prefix ~{happy_prefix) --stdout-file ~{outputFile_commonPrefix}~{WholeExomePrefix}.ipynb
+   >>>
+}

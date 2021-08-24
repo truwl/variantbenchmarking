@@ -14,5 +14,6 @@
   "GermlineVariantCallBenchmark.indelDistributionSuffix": "_indelDistribution_Frombcftools.txt",
   "GermlineVariantCallBenchmark.consoleOutputPartialFilename": "_ConsoleOutput.txt",
   "GermlineVariantCallBenchmark.codingExonsPrefix": "cds",
-  "GermlineVariantCallBenchmark.Rscript_indelSize": "gs://benchmarking-datasets/indelSizeDistribution_Detailed.R"
+  "GermlineVariantCallBenchmark.Rscript_indelSize": "gs://benchmarking-datasets/indelSizeDistribution_Detailed.R",
+  "GermlineVariantCallBenchmark.Rscript_aggregate": "gs://benchmarking-datasets/aggregateResults.R"
 }
