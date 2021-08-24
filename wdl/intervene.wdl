@@ -70,6 +70,7 @@ task run_intervene {
     
     for value in "${downloadList[@]}"
     do
+         echo $value
          gsutil cp $value .
     done
     
