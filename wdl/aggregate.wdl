@@ -21,3 +21,24 @@ task melt {
     cpu: 1
   }
 }
+
+task precRecall {
+    input {
+        File Rscript_precrecall
+        File staticcompetitors
+        File truwlbenchmarks
+        String samplename
+        String outputplotname
+    }
+    output {
+        File precrecallplot = "~{outputplotname}"
+    }
+    command <<<
+      Rscript ~{Rscript_precrecall} ~{samplename} ~{truwlbenchmarks} ~{staticcompetitors} ~{outputplotname}
+    >>>
+    runtime {
+        docker: "rocker/tidyverse:4.1.0"
+        memory: "1 GB"
+        cpu: 1
+    }
+}
