@@ -13,7 +13,8 @@ task run_intervene {
     Boolean includeXV7ZN
     Boolean includeIA789
     Boolean includeW607K
-    String subject 
+    String subject
+    File queryVCF
   }
 
 
@@ -62,8 +63,8 @@ task run_intervene {
     
     mkdir -p Intervene_results
     mkdir -p Intervene_results/sets
-    echo "intervene upset --figtype png --type reentrant -i $optvcfs --save-overlaps --filenames --bedtools-options header"
-    intervene upset --figtype png --type genomic -i $optvcfs --save-overlaps --filenames --bedtools-options header
+    echo "intervene upset --figtype png --type reentrant -i ~{queryVCF} $optvcfs --save-overlaps --filenames --bedtools-options header"
+    intervene upset --figtype png --type genomic -i ~{queryVCF} $optvcfs --save-overlaps --filenames --bedtools-options header
   >>>
   
   runtime {
