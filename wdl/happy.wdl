@@ -75,7 +75,7 @@ task vcfComparison_by_Happy_WholeExome {
   }
 }
 
-task precRecall {
+task finalReport {
     input {
        String job_id
        String group_id
@@ -83,7 +83,7 @@ task precRecall {
        String outputFile_commonPrefix
        String WholeExomePrefix
        String happy_prefix
-       File Jupyter_parsehappy
+       File jupyter_notebook
      }
    output {
        File annoreport = "~{outputFile_commonPrefix}~{WholeExomePrefix}.ipynb"
@@ -94,6 +94,6 @@ task precRecall {
        cpu: 1
    }
    command <<<
-     papermill ~{Jupyter_parsehappy} -p group_id ~{group_id} -p replicate_id ~{replicate_id} -p happy_prefix ~{happy_prefix} --stdout-file ~{outputFile_commonPrefix}~{WholeExomePrefix}.ipynb
+     papermill ~{jupyter_notebook} -p group_id ~{group_id} -p replicate_id ~{replicate_id} -p happy_prefix ~{happy_prefix} --stdout-file ~{outputFile_commonPrefix}~{WholeExomePrefix}.ipynb
    >>>
 }
