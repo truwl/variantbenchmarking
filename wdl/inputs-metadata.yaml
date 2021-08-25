@@ -41,34 +41,35 @@ parameter_meta:
     group: Query
     description:
     example: "gs://benchmarking-datasets/HG002run1_S1.genome.vcf"
+    name: queryVCF
   GermlineVariantCallBenchmark.subject:
     group: Query
     description: Member of Ashkenazi trio used in the query VCF (HG002, HG003, or HG004)
     choices: ['HG002', 'HG003', 'HG004']
     example: 'HG002'
   GermlineVariantCallBenchmark.includeB1S5A:
-    group: Query 
+    group: Competitors 
     description: Include B1S5A All Benchmark Regions B1S5A The Genomics Team in Google Health DeepVariant PacBio
   GermlineVariantCallBenchmark.includeCZA1Y:
-    group: Query
+    group: Competitors
     description: MHC CZA1Y Sentieon "Combination of Illumina, PacBio HIFI, and Oxford Nanopore submission Model2"
   GermlineVariantCallBenchmark.includeEIUT6:
-    group: Query
+    group: Competitors
     description: MHC, Difficult-to-Map Regions" EIUT6 Sentieon PacBio HIFI only submission
   GermlineVariantCallBenchmark.includeIA789:
-    group: Query
+    group: Competitors
     description: Include B1S5A PACBIO All Benchmark Regions B1S5A The Genomics Team in Google Health DeepVariant PacBio
   GermlineVariantCallBenchmark.includeW607K:
-    group: Query
+    group: Competitors
     description: Include B1S5A PACBIO All Benchmark Regions B1S5A The Genomics Team in Google Health DeepVariant PacBio
   GermlineVariantCallBenchmark.includeWX8VK:
-    group: Query
+    group: Competitors
     description: All Benchmark Regions, MHC WX8VK Sentieon Combination of Illumina, PacBio HIFI, and Oxford Nanopore submission
   GermlineVariantCallBenchmark.includeXC97E:
-    group: Query
+    group: Competitors
     description: Include B1S5A PACBIO All Benchmark Regions B1S5A The Genomics Team in Google Health DeepVariant PacBio
   GermlineVariantCallBenchmark.includeXV7ZN:
-    group: Query
+    group: Competitors
     description: Include B1S5A PACBIO All Benchmark Regions B1S5A The Genomics Team in Google Health DeepVariant PacBio
   GermlineVariantCallBenchmark.outputFile_commonPrefix:
     group: Affixes

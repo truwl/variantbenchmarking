@@ -14,16 +14,21 @@ workflow GermlineVariantCallBenchmark {
 
   input {
     File queryVCF
+    String freeze
+    #HG002 (child), HG003 (dad), HG004 (mom)
+    String subject
+    
     File truthCodingExonsVCF = "gs://benchmarking-datasets/Truth.highconf.CodingExons.vcf.gz"
     File truthWholeExomeVCF = "gs://benchmarking-datasets/Truth.highconf.WholeExome.vcf.gz"
     File truthCodingExonsBED = "gs://benchmarking-datasets/codingexons.nochr.bed"
     File truthWholeExomeBED = "gs://benchmarking-datasets/HG002_GIAB_highconf_CG-IllFB-IllGATKHC-Ion-Solid-10X_CHROM1-22_v3.3_highconf.bed"
     File Rscript_indelSize = "gs://benchmarking-datasets/indelSizeDistribution_Detailed.R"  ## Specify the R script indelSizeDistribution_Detailed.R
     File Rscript_aggregate = "gs://benchmarking-datasets/aggregateResults.R"
-    File referenceFasta = "gs://benchmarking-datasets/GRCh37-lite.fa" ## provide md5 hash values for the file in contents
-    File referenceFasta_indexed = "gs://benchmarking-datasets/GRCh37-lite.fa.fai" ## *.fai
+    
+    Map[String,File] referenceFasta = {"hg37":"gs://truwl-giab/references/GRCh37-lite.fa", "hg38":"gs://truwl-giab/references/GRCh38.fa"}
+    Map[String,File] referenceFasta_indexed = {"hg37":"gs://truwl-giab/GRCh37-lite.fa.fai", "hg38":"gs://truwl-giab/references/GRCh38.fa.fai"}
     String chrRemovedVCF_fileSuffix = "_chrRemoved.vcf.gz"
-    String outputFile_commonPrefix = "happyResults_NA24385_NISTv3.3"
+    String outputFile_commonPrefix = "results"
     String codingExonsPrefix = "cds"
     String WholeExomePrefix = "wes"
     String consoleOutputPartialFilename = "_ConsoleOutput.txt"
@@ -40,8 +45,7 @@ workflow GermlineVariantCallBenchmark {
     Boolean includeIA789 = false
     Boolean includeW607K = false
 
-    #HG002 (child), HG003 (dad), HG004 (mom)
-    String subject
+    
 
     String job_id
     String workflow_instance_identifier
@@ -53,6 +57,12 @@ workflow GermlineVariantCallBenchmark {
                 description: 'Member of Ashkenazi trio used in the query VCF',
                 group: 'query',
                 choices: ['HG002', 'HG003', 'HG004'],
+                example: 'HG002'
+            }
+    freeze: {
+                description: 'Genome freeze. hg37 is no-chr',
+                group: 'query',
+                choices: ['hg37', 'hg38'],
                 example: 'HG002'
             }
   }
@@ -76,8 +86,8 @@ workflow GermlineVariantCallBenchmark {
       outputFile_commonPrefix = outputFile_commonPrefix,
       truthCodingExonsVCF = truthCodingExonsVCF,
       truthCodingExonsBED = truthCodingExonsBED,
-      referenceFasta = referenceFasta,
-      referenceFasta_indexed = referenceFasta_indexed,
+      referenceFasta = referenceFasta[freeze],
+      referenceFasta_indexed = referenceFasta_indexed[freeze],
       codingExonsPrefix = codingExonsPrefix,
       consoleOutputPartialFilename = consoleOutputPartialFilename
   }
@@ -88,8 +98,8 @@ workflow GermlineVariantCallBenchmark {
       outputFile_commonPrefix = outputFile_commonPrefix,
       truthWholeExomeVCF = truthWholeExomeVCF,
       truthWholeExomeBED = truthWholeExomeBED,
-      referenceFasta = referenceFasta,
-      referenceFasta_indexed = referenceFasta_indexed,
+      referenceFasta = referenceFasta[freeze],
+      referenceFasta_indexed = referenceFasta_indexed[freeze],
       WholeExomePrefix =  WholeExomePrefix,
       consoleOutputPartialFilename = consoleOutputPartialFilename
   }
