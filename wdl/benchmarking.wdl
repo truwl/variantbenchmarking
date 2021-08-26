@@ -18,15 +18,32 @@ workflow GermlineVariantCallBenchmark {
     #HG002 (child), HG003 (dad), HG004 (mom)
     String subject
     
-    File truthCodingExonsVCF = "gs://benchmarking-datasets/Truth.highconf.CodingExons.vcf.gz"
-    File truthWholeExomeVCF = "gs://benchmarking-datasets/Truth.highconf.WholeExome.vcf.gz"
-    File truthCodingExonsBED = "gs://benchmarking-datasets/codingexons.nochr.bed"
-    File truthWholeExomeBED = "gs://benchmarking-datasets/HG002_GIAB_highconf_CG-IllFB-IllGATKHC-Ion-Solid-10X_CHROM1-22_v3.3_highconf.bed"
+    Map[String,Map[String,File]] truthVCF = {
+      "HG002": {
+        "hg37": "gs://truwl-giab/AshkenazimTrio/HG002_NA24385_son/latest/GRCh37/HG002_GRCh37_1_22_v4.2.1_benchmark.vcf.gz",
+        "hg38": "gs://truwl-giab/AshkenazimTrio/HG002_NA24385_son/latest/GRCh38/HG002_GRCh38_1_22_v4.2.1_benchmark.vcf.gz"
+      },
+      "HG003": {
+        "hg37": "gs://truwl-giab/AshkenazimTrio/HG003_NA24159_father/latest/GRCh37/HG003_GRCh37_1_22_v4.2.1_benchmark.vcf.gz",
+        "hg38": "gs://truwl-giab/AshkenazimTrio/HG003_NA24159_father/latest/GRCh38/HG003_GRCh38_1_22_v4.2.1_benchmark.vcf.gz"
+      },
+      "HG004": {
+        "hg37": "gs://truwl-giab/AshkenazimTrio/HG004_NA24143_mother/latest/GRCh37/HG004_GRCh37_1_22_v4.2.1_benchmark.vcf.gz",
+        "hg38": "gs://truwl-giab/AshkenazimTrio/HG004_NA24143_mother/latest/GRCh37/HG004_GRCh37_1_22_v4.2.1_benchmark.vcf.gz"
+      }
+    }
+    
+    Map[String,File] truthCodingExonsBED = {"hg37":"gs://benchmarking-datasets/codingexons.nochr.bed","hg38":"truwl-giab/genome-stratifications/v2.0/GRCh38/FunctionalRegions/GRCh38_refseq_cds.bed.gz"}
+    Map[String,File] truthWholeExomeBED = {"hg37":"gs://benchmarking-datasets/HG002_GIAB_highconf_CG-IllFB-IllGATKHC-Ion-Solid-10X_CHROM1-22_v3.3_highconf.bed","hg38":"gs://truwl-giab/genome-stratifications/v2.0/GRCh38/exome/Twist_Exome_Target_hg38.bed"}
+    
+    
     File Rscript_indelSize = "gs://benchmarking-datasets/indelSizeDistribution_Detailed.R"  ## Specify the R script indelSizeDistribution_Detailed.R
     File Rscript_aggregate = "gs://benchmarking-datasets/aggregateResults.R"
-    
+    File Rscript_precrecall = "gs://benchmarking-datasets/precRecallPlot.R"
+
     Map[String,File] referenceFasta = {"hg37":"gs://truwl-giab/references/GRCh37-lite.fa", "hg38":"gs://truwl-giab/references/GRCh38.fa"}
     Map[String,File] referenceFasta_indexed = {"hg37":"gs://truwl-giab/GRCh37-lite.fa.fai", "hg38":"gs://truwl-giab/references/GRCh38.fa.fai"}
+
     String chrRemovedVCF_fileSuffix = "_chrRemoved.vcf.gz"
     String outputFile_commonPrefix = "results"
     String codingExonsPrefix = "cds"
@@ -36,16 +53,14 @@ workflow GermlineVariantCallBenchmark {
     String indelSizeDistributionSuffix = "_indelSizeDistribution.txt"
     String indelSizeDistributionPlotSuffix = "_indelSizeDistributionPlot.pdf"
 
-    Boolean includeB1S5A = false
-    Boolean includeWX8VK = false
-    Boolean includeCZA1Y = false
-    Boolean includeEIUT6 = false
-    Boolean includeXC97E = false
-    Boolean includeXV7ZN = false
-    Boolean includeIA789 = false
-    Boolean includeW607K = false
-
-    
+    Boolean includeB1S5A = true
+    Boolean includeWX8VK = true
+    Boolean includeCZA1Y = true
+    Boolean includeEIUT6 = true
+    Boolean includeXC97E = true
+    Boolean includeXV7ZN = true
+    Boolean includeIA789 = true
+    Boolean includeW607K = true
 
     String job_id
     String workflow_instance_identifier
@@ -84,8 +99,8 @@ workflow GermlineVariantCallBenchmark {
     input:
       queryVCF = queryVCF,
       outputFile_commonPrefix = outputFile_commonPrefix,
-      truthCodingExonsVCF = truthCodingExonsVCF,
-      truthCodingExonsBED = truthCodingExonsBED,
+      truthCodingExonsVCF = truthVCF[subject][freeze],
+      truthCodingExonsBED = truthVCF[subject][freeze],
       referenceFasta = referenceFasta[freeze],
       referenceFasta_indexed = referenceFasta_indexed[freeze],
       codingExonsPrefix = codingExonsPrefix,
@@ -96,8 +111,8 @@ workflow GermlineVariantCallBenchmark {
     input:
       queryVCF = queryVCF,
       outputFile_commonPrefix = outputFile_commonPrefix,
-      truthWholeExomeVCF = truthWholeExomeVCF,
-      truthWholeExomeBED = truthWholeExomeBED,
+      truthWholeExomeVCF = truthVCF[subject][freeze],
+      truthWholeExomeBED = truthVCF[subject][freeze],
       referenceFasta = referenceFasta[freeze],
       referenceFasta_indexed = referenceFasta_indexed[freeze],
       WholeExomePrefix =  WholeExomePrefix,
@@ -122,7 +137,7 @@ workflow GermlineVariantCallBenchmark {
     input:
       outputFile_commonPrefix = outputFile_commonPrefix,
       codingExonsPrefix = outputFile_commonPrefix,
-      truthCodingExonsVCF = truthCodingExonsVCF,
+      truthCodingExonsVCF = truthVCF[subject][freeze],
       indelDistributionSuffix = indelDistributionSuffix
   }
 
@@ -130,7 +145,7 @@ workflow GermlineVariantCallBenchmark {
     input:
       outputFile_commonPrefix = outputFile_commonPrefix,
       WholeExomePrefix = WholeExomePrefix,
-      truthWholeExomeVCF = truthWholeExomeVCF,
+      truthWholeExomeVCF = truthVCF[subject][freeze],
       indelDistributionSuffix = indelDistributionSuffix
   }
 
@@ -183,6 +198,15 @@ workflow GermlineVariantCallBenchmark {
       codingExons_summary_csv = happyexons.codingExons_summary_csv,
       WholeExome_summary_csv = happyexome.WholeExome_summary_csv,
       Rscript_aggregate = Rscript_aggregate
+  }
+  
+  call aggregate.precRecall as aggprecRecall {
+    input:
+     Rscript_precrecall = Rscript_precrecall,
+     staticcompetitors = "gs://benchmarking-datasets/competitors.csv",
+     truwlbenchmarks = aggmelt.talltable,
+     samplename = job_id,
+     outputplotname = "precRecall.png"
   }
 
   output {

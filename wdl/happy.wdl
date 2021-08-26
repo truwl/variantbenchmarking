@@ -75,7 +75,9 @@ task vcfComparison_by_Happy_WholeExome {
   }
 }
 
+
 task finalReport {
+
     input {
        String job_id
        String group_id
