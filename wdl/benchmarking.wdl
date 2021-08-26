@@ -187,7 +187,8 @@ workflow GermlineVariantCallBenchmark {
           includeIA789 = includeIA789,
           includeW607K = includeW607K,
           subject = subject,
-          queryVCF = queryVCF
+          queryVCF = queryVCF,
+          freeze = freeze
   }
 
   call aggregate.melt as aggmelt {
