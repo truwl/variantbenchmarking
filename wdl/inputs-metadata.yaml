@@ -47,6 +47,11 @@ parameter_meta:
     description: Member of Ashkenazi trio used in the query VCF (HG002, HG003, or HG004)
     choices: ['HG002', 'HG003', 'HG004']
     example: 'HG002'
+  GermlineVariantCallBenchmark.freeze:
+    group: Query
+    description: Genome freeze
+    choices: ['hg38', 'hg37']
+    example: 'Genome freeze. hg37 is no-chr'
   GermlineVariantCallBenchmark.includeB1S5A:
     group: Competitors 
     description: Include B1S5A All Benchmark Regions B1S5A The Genomics Team in Google Health DeepVariant PacBio
