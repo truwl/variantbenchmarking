@@ -259,5 +259,7 @@ workflow GermlineVariantCallBenchmark {
     File talltable = aggmelt.talltable
     File bcfstatsoutput = bcfstatstask.bcfstatsoutput
     File multiqcReport = multiqcTask.multiqcReport
+    
+    File precrecallplot = aggprecRecall.precrecallplot
   }
 }
