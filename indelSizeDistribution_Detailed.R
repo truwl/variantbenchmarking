@@ -141,7 +141,7 @@ colnames(indelPlot) <- c("1", "2-5","6-10","11-20","21-50","51 or greater")
 rownames(indelPlot) <- c("TP","FP","FN")
 
 ##Generate plot and store as png
-png(args[6],width=10,height=10)
+png(args[6],width=500,height=500)
 barplot(indelPlot,col=c("darkblue","orange","black"),main="Indel size distribution", xlab="Indel size", ylab= "Frequency",names.arg=colnames(indelPlot),legend=c("True Positives","False Positives", "False Negatives"),beside=TRUE)
 dev.off()
 
