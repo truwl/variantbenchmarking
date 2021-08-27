@@ -218,7 +218,8 @@ workflow GermlineVariantCallBenchmark {
       queryVCF = queryVCF,
       freeze = freeze,
       subject = subject,
-      jupyter_notebook = Jupyter_report
+      jupyter_notebook = Jupyter_report,
+      upset_plot = myintervene.upsetplot
   }
   
   output {
