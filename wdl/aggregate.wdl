@@ -51,6 +51,7 @@ task finalReport {
         String outputFile_commonPrefix
         String WholeExomePrefix
         File upset_plot
+        File prec_recall_plot
         File jupyter_notebook
      }
    output {
@@ -63,7 +64,7 @@ task finalReport {
        cpu: 1
    }
    command <<<
-     papermill ~{jupyter_notebook} -p queryVCF ~{queryVCF} -p freeze ~{freeze} -p subject ~{subject} -p upset_plot ~{upset_plot} ~{outputFile_commonPrefix}~{WholeExomePrefix}.ipynb
+     papermill ~{jupyter_notebook} -p queryVCF ~{queryVCF} -p freeze ~{freeze} -p subject ~{subject} -p upset_plot ~{upset_plot} p ~{prec_recall_plot} ~{outputFile_commonPrefix}~{WholeExomePrefix}.ipynb
      jupyter nbconvert ~{outputFile_commonPrefix}~{WholeExomePrefix}.ipynb --to html --output ~{outputFile_commonPrefix}~{WholeExomePrefix}.html
    >>>
 }

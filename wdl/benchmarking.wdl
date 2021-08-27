@@ -219,7 +219,8 @@ workflow GermlineVariantCallBenchmark {
       freeze = freeze,
       subject = subject,
       jupyter_notebook = Jupyter_report,
-      upset_plot = myintervene.upsetplot
+      upset_plot = myintervene.upsetplot,
+      prec_recall_plot = aggprecRecall.precrecallplot
   }
   
   output {
@@ -275,5 +276,6 @@ workflow GermlineVariantCallBenchmark {
     File multiqcReport = multiqcTask.multiqcReport
     
     File precrecallplot = aggprecRecall.precrecallplot
+    File finalreport = aggfinal.annohtml
   }
 }
