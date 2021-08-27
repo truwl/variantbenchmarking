@@ -72,7 +72,7 @@ task finalReport {
        cpu: 1
    }
    command <<<
-     papermill ~{jupyter_notebook} -p queryVCF ~{queryVCF} -p freeze ~{freeze} -p subject ~{subject} -p upset_plot ~{upset_plot} p ~{prec_recall_plot} ~{outputFile_commonPrefix}~{WholeExomePrefix}.ipynb
+     papermill ~{jupyter_notebook} -p queryVCF ~{queryVCF} -p freeze ~{freeze} -p subject ~{subject} -p upset_plot ~{upset_plot} -p ~{prec_recall_plot} -p {indelSizeDistributionPlot_CodingExons} -p {indelSizeDistributionPlot_WholeExome} ~{outputFile_commonPrefix}~{WholeExomePrefix}.ipynb
      jupyter nbconvert ~{outputFile_commonPrefix}~{WholeExomePrefix}.ipynb --to html --output ~{outputFile_commonPrefix}~{WholeExomePrefix}.html
    >>>
 }
