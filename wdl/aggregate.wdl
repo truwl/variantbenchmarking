@@ -42,3 +42,27 @@ task precRecall {
         cpu: 1
     }
 }
+
+task finalReport {
+
+    input {
+       String job_id
+       String group_id
+       String replicate_id
+       String outputFile_commonPrefix
+       String WholeExomePrefix
+       String happy_prefix
+       File jupyter_notebook
+     }
+   output {
+       File annoreport = "~{outputFile_commonPrefix}~{WholeExomePrefix}.ipynb"
+   }
+   runtime {
+       docker: "truwl/happyrpapermill"
+       memory: "1 GB"
+       cpu: 1
+   }
+   command <<<
+     papermill ~{jupyter_notebook} -p group_id ~{group_id} -p replicate_id ~{replicate_id} -p happy_prefix ~{happy_prefix} --stdout-file ~{outputFile_commonPrefix}~{WholeExomePrefix}.ipynb
+   >>>
+}

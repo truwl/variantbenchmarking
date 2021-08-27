@@ -40,6 +40,7 @@ workflow GermlineVariantCallBenchmark {
     File Rscript_indelSize = "gs://benchmarking-datasets/indelSizeDistribution_Detailed.R"  ## Specify the R script indelSizeDistribution_Detailed.R
     File Rscript_aggregate = "gs://benchmarking-datasets/aggregateResults.R"
     File Rscript_precrecall = "gs://benchmarking-datasets/precRecallPlot.R"
+    File Jupyter_report = "gs://benchmarking-datasets/report.ipynb"
 
     Map[String,File] referenceFasta = {"hg37":"gs://truwl-giab/references/GRCh37-lite.fa", "hg38":"gs://truwl-giab/references/GRCh38/GCA_000001405.15_GRCh38_no_alt_analysis_set_maskedGRC_exclusions.fasta.gz"}
     Map[String,File] referenceFasta_indexed = {"hg37":"gs://truwl-giab/GRCh37-lite.fa.fai", "hg38":"gs://truwl-giab/references/GRCh38/GCA_000001405.15_GRCh38_no_alt_analysis_set_maskedGRC_exclusions.fasta.gz.fai"}
@@ -210,6 +211,13 @@ workflow GermlineVariantCallBenchmark {
      outputplotname = "precRecall.png"
   }
 
+  call aggregate.finalReport as aggfinal {
+      queryVCF = queryVCF,
+      freeze = freeze,
+      subject = subject,
+      jupyter_notebook = 
+  }
+  
   output {
     File codingExons_annotated_vcf_gz = happyexons.codingExons_annotated_vcf_gz
     File codingExons_annotated_vcf_gz_tbi = happyexons.codingExons_annotated_vcf_gz_tbi
@@ -247,12 +255,14 @@ workflow GermlineVariantCallBenchmark {
     File  WholeExome_annotated_TPonly_vcf_gz = splitwes.WholeExome_annotated_TPonly_vcf_gz
     File  WholeExome_annotated_FPonly_vcf_gz = splitwes.WholeExome_annotated_FPonly_vcf_gz
     File  WholeExome_annotated_FNonly_vcf_gz = splitwes.WholeExome_annotated_FNonly_vcf_gz
-    File indelDistribution_CodingExons = cdsresults.indelDistribution_CodingExons
-    File indelDistribution_WholeExome = wesresults.indelDistribution_WholeExome
-    File indelSizeDistribution_CodingExons = cdssize.indelSizeDistribution_CodingExons
-    File indelSizeDistribution_WholeExome = wessize.indelSizeDistribution_WholeExome
-    File indelSizeDistributionPlot_CodingExons = cdssize.indelSizeDistributionPlot_CodingExons
-    File indelSizeDistributionPlot_WholeExome = wessize.indelSizeDistributionPlot_WholeExome
+    
+    
+    # File indelDistribution_CodingExons = cdsresults.indelDistribution_CodingExons
+    # File indelDistribution_WholeExome = wesresults.indelDistribution_WholeExome
+    # File indelSizeDistribution_CodingExons = cdssize.indelSizeDistribution_CodingExons
+    # File indelSizeDistribution_WholeExome = wessize.indelSizeDistribution_WholeExome
+    # File indelSizeDistributionPlot_CodingExons = cdssize.indelSizeDistributionPlot_CodingExons
+    # File indelSizeDistributionPlot_WholeExome = wessize.indelSizeDistributionPlot_WholeExome
 
     
     File upsetPlot = myintervene.upsetplot

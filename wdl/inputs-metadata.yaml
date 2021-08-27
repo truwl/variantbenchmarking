@@ -126,4 +126,4 @@ parameter_group:
     display: false
   Competitors:
     title: Competitors
-    display: false
+    display: true
