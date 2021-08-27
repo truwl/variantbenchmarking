@@ -44,18 +44,17 @@ task precRecall {
 }
 
 task finalReport {
-
     input {
-       String job_id
-       String group_id
-       String replicate_id
-       String outputFile_commonPrefix
-       String WholeExomePrefix
-       String happy_prefix
-       File jupyter_notebook
+        File queryVCF
+        String freeze
+        String subject
+        String outputFile_commonPrefix
+        String WholeExomePrefix
+        File jupyter_notebook
      }
    output {
        File annoreport = "~{outputFile_commonPrefix}~{WholeExomePrefix}.ipynb"
+       File annohtml = "~{outputFile_commonPrefix}~{WholeExomePrefix}.html"
    }
    runtime {
        docker: "truwl/happyrpapermill"
@@ -63,6 +62,7 @@ task finalReport {
        cpu: 1
    }
    command <<<
-     papermill ~{jupyter_notebook} -p group_id ~{group_id} -p replicate_id ~{replicate_id} -p happy_prefix ~{happy_prefix} --stdout-file ~{outputFile_commonPrefix}~{WholeExomePrefix}.ipynb
+     papermill ~{jupyter_notebook} -p queryVCF ~{queryVCF} freeze ~{freeze} subject ~{subject} --stdout-file ~{outputFile_commonPrefix}~{WholeExomePrefix}.ipynb
+     jupyter nbconvert ~{outputFile_commonPrefix}~{WholeExomePrefix}.ipynb --to html --output ~{outputFile_commonPrefix}~{WholeExomePrefix}.html
    >>>
 }

@@ -22,6 +22,7 @@
   "GermlineVariantCallBenchmark.includeB1S5A": "Boolean (optional, default = true)",
   "GermlineVariantCallBenchmark.truthWholeExomeBED": "Map[String, File] (optional, default = { \"hg37\": \"gs://benchmarking-datasets/HG002_GIAB_highconf_CG-IllFB-IllGATKHC-Ion-Solid-10X_CHROM1-22_v3.3_highconf.bed\", \"hg38\": \"gs://truwl-giab/genome-stratifications/v2.0/GRCh38/exome/Twist_Exome_Target_hg38.bed\" })",
   "GermlineVariantCallBenchmark.includeWX8VK": "Boolean (optional, default = true)",
+  "GermlineVariantCallBenchmark.Jupyter_report": "File (optional, default = \"gs://benchmarking-datasets/report.ipynb\")",
   "GermlineVariantCallBenchmark.WholeExomePrefix": "String (optional, default = \"wes\")",
   "GermlineVariantCallBenchmark.includeXV7ZN": "Boolean (optional, default = true)",
   "GermlineVariantCallBenchmark.indelSizeDistributionSuffix": "String (optional, default = \"_indelSizeDistribution.txt\")",

@@ -212,10 +212,13 @@ workflow GermlineVariantCallBenchmark {
   }
 
   call aggregate.finalReport as aggfinal {
+    input:
+      outputFile_commonPrefix = outputFile_commonPrefix,
+      WholeExomePrefix = WholeExomePrefix,
       queryVCF = queryVCF,
       freeze = freeze,
       subject = subject,
-      jupyter_notebook = 
+      jupyter_notebook = Jupyter_report
   }
   
   output {
