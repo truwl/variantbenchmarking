@@ -26,7 +26,7 @@
   "GermlineVariantCallBenchmark.WholeExomePrefix": "String (optional, default = \"wes\")",
   "GermlineVariantCallBenchmark.includeXV7ZN": "Boolean (optional, default = true)",
   "GermlineVariantCallBenchmark.indelSizeDistributionSuffix": "String (optional, default = \"_indelSizeDistribution.txt\")",
-  "GermlineVariantCallBenchmark.indelSizeDistributionPlotSuffix": "String (optional, default = \"_indelSizeDistributionPlot.pdf\")",
+  "GermlineVariantCallBenchmark.indelSizeDistributionPlotSuffix": "String (optional, default = \"_indelSizeDistributionPlot.png\")",
   "GermlineVariantCallBenchmark.outputFile_commonPrefix": "String (optional, default = \"results\")",
   "GermlineVariantCallBenchmark.freeze": "String",
   "GermlineVariantCallBenchmark.includeEIUT6": "Boolean (optional, default = true)"

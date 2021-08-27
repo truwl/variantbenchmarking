@@ -221,11 +221,11 @@ workflow GermlineVariantCallBenchmark {
       jupyter_notebook = Jupyter_report,
       upset_plot = myintervene.upsetplot,
       prec_recall_plot = aggprecRecall.precrecallplot,
-      indelDistribution_CodingExons = cdsresults.indelDistribution_CodingExons
-      indelDistribution_WholeExome = wesresults.indelDistribution_WholeExome
-      indelSizeDistribution_CodingExons = cdssize.indelSizeDistribution_CodingExons
-      indelSizeDistribution_WholeExome = wessize.indelSizeDistribution_WholeExome
-      indelSizeDistributionPlot_CodingExons = cdssize.indelSizeDistributionPlot_CodingExons
+      indelDistribution_CodingExons = cdsresults.indelDistribution_CodingExons,
+      indelDistribution_WholeExome = wesresults.indelDistribution_WholeExome,
+      indelSizeDistribution_CodingExons = cdssize.indelSizeDistribution_CodingExons,
+      indelSizeDistribution_WholeExome = wessize.indelSizeDistribution_WholeExome,
+      indelSizeDistributionPlot_CodingExons = cdssize.indelSizeDistributionPlot_CodingExons,
       indelSizeDistributionPlot_WholeExome = wessize.indelSizeDistributionPlot_WholeExome
   }
   
