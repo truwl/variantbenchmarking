@@ -62,7 +62,7 @@ task finalReport {
        cpu: 1
    }
    command <<<
-     papermill ~{jupyter_notebook} -p queryVCF ~{queryVCF} -p freeze ~{freeze} -p subject ~{subject} --stdout-file ~{outputFile_commonPrefix}~{WholeExomePrefix}.ipynb
+     papermill ~{jupyter_notebook} -p queryVCF ~{queryVCF} -p freeze ~{freeze} -p subject ~{subject} ~{outputFile_commonPrefix}~{WholeExomePrefix}.ipynb
      jupyter nbconvert ~{outputFile_commonPrefix}~{WholeExomePrefix}.ipynb --to html --output ~{outputFile_commonPrefix}~{WholeExomePrefix}.html
    >>>
 }
