@@ -29,7 +29,7 @@ workflow GermlineVariantCallBenchmark {
       },
       "HG004": {
         "hg37": "gs://truwl-giab/AshkenazimTrio/HG004_NA24143_mother/latest/GRCh37/HG004_GRCh37_1_22_v4.2.1_benchmark.vcf.gz",
-        "hg38": "gs://truwl-giab/AshkenazimTrio/HG004_NA24143_mother/latest/GRCh37/HG004_GRCh37_1_22_v4.2.1_benchmark.vcf.gz"
+        "hg38": "gs://truwl-giab/AshkenazimTrio/HG004_NA24143_mother/latest/GRCh38/HG004_GRCh38_1_22_v4.2.1_benchmark.vcf.gz"
       }
     }
     
