@@ -111,13 +111,19 @@ parameter_meta:
 parameter_group:
   Query:
     title: Query
+    display: true
   Truth:
     title: Truth sets
+    display: false
   Affixes:
     title: Prefixes/Suffixes
+    display: false
   Scripts:
     title: Scripts
+    display: false
   References:
     title: References
+    display: false
   Competitors:
     title: Competitors
+    display: false

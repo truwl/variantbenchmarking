@@ -30,6 +30,8 @@ task vcfComparison_by_Happy_CodingExons {
   command <<<
     if [[ ~{referenceFasta} =~ \.gz$ ]]; then
       gunzip -c ~{referenceFasta} > ref.fa
+    else
+      mv ~{referenceFasta} ref.fa
     fi
     mv ~{referenceFasta_indexed} ref.fa.fai
     export HGREF=ref.fa
@@ -70,7 +72,14 @@ task vcfComparison_by_Happy_WholeExome {
     File WholeExome_console_output_txt = "~{outputFile_commonPrefix}~{WholeExomePrefix}~{consoleOutputPartialFilename}"
   }
   command <<<
-    /opt/hap.py/bin/hap.py  --write-counts -V ~{truthWholeExomeVCF} ~{queryVCF} -f ~{truthWholeExomeBED} -T ~{truthWholeExomeBED} -r ~{referenceFasta} -o ~{outputFile_commonPrefix}~{WholeExomePrefix} > ~{outputFile_commonPrefix}~{WholeExomePrefix}~{consoleOutputPartialFilename}
+    if [[ ~{referenceFasta} =~ \.gz$ ]]; then
+      gunzip -c ~{referenceFasta} > ref.fa
+    else
+      mv ~{referenceFasta} ref.fa
+    fi
+    mv ~{referenceFasta_indexed} ref.fa.fai
+    export HGREF=ref.fa
+    /opt/hap.py/bin/hap.py  --write-counts -V ~{truthWholeExomeVCF} ~{queryVCF} -f ~{truthWholeExomeBED} -T ~{truthWholeExomeBED} -r ref.fa -o ~{outputFile_commonPrefix}~{WholeExomePrefix} > ~{outputFile_commonPrefix}~{WholeExomePrefix}~{consoleOutputPartialFilename}
   >>>
   runtime {
     docker: "paramost/hap.py"
