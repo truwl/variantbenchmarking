@@ -28,7 +28,12 @@ task vcfComparison_by_Happy_CodingExons {
     File codingExons_console_output_txt = "~{outputFile_commonPrefix}~{codingExonsPrefix}~{consoleOutputPartialFilename}"
   }
   command <<<
-    /opt/hap.py/bin/hap.py --write-counts -V ~{truthCodingExonsVCF} ~{queryVCF} -f ~{truthCodingExonsBED} -T ~{truthCodingExonsBED} -r ~{referenceFasta} -o ~{outputFile_commonPrefix}~{codingExonsPrefix} > ~{outputFile_commonPrefix}~{codingExonsPrefix}~{consoleOutputPartialFilename}
+    if [[ ~{referenceFasta} =~ \.gz$ ]]; then
+      gunzip -c ~{referenceFasta} > ref.fa
+    fi
+    mv ~{referenceFasta_indexed} ref.fa.fai
+    export HGREF=ref.fa
+    /opt/hap.py/bin/hap.py --write-counts -V ~{truthCodingExonsVCF} ~{queryVCF} -f ~{truthCodingExonsBED} -T ~{truthCodingExonsBED} -r ref.fa -o ~{outputFile_commonPrefix}~{codingExonsPrefix} > ~{outputFile_commonPrefix}~{codingExonsPrefix}~{consoleOutputPartialFilename}
   >>>
   runtime {
     docker: "paramost/hap.py"
