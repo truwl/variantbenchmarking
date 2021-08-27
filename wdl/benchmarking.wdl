@@ -52,7 +52,7 @@ workflow GermlineVariantCallBenchmark {
     String consoleOutputPartialFilename = "_ConsoleOutput.txt"
     String indelDistributionSuffix = "_indelDistribution_Frombcftools.txt"
     String indelSizeDistributionSuffix = "_indelSizeDistribution.txt"
-    String indelSizeDistributionPlotSuffix = "_indelSizeDistributionPlot.pdf"
+    String indelSizeDistributionPlotSuffix = "_indelSizeDistributionPlot.png"
 
     Boolean includeB1S5A = true
     Boolean includeWX8VK = true
@@ -220,7 +220,13 @@ workflow GermlineVariantCallBenchmark {
       subject = subject,
       jupyter_notebook = Jupyter_report,
       upset_plot = myintervene.upsetplot,
-      prec_recall_plot = aggprecRecall.precrecallplot
+      prec_recall_plot = aggprecRecall.precrecallplot,
+      indelDistribution_CodingExons = cdsresults.indelDistribution_CodingExons
+      indelDistribution_WholeExome = wesresults.indelDistribution_WholeExome
+      indelSizeDistribution_CodingExons = cdssize.indelSizeDistribution_CodingExons
+      indelSizeDistribution_WholeExome = wessize.indelSizeDistribution_WholeExome
+      indelSizeDistributionPlot_CodingExons = cdssize.indelSizeDistributionPlot_CodingExons
+      indelSizeDistributionPlot_WholeExome = wessize.indelSizeDistributionPlot_WholeExome
   }
   
   output {

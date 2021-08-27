@@ -53,6 +53,14 @@ task finalReport {
         File upset_plot
         File prec_recall_plot
         File jupyter_notebook
+        
+        
+        File indelDistribution_CodingExons
+        File indelDistribution_WholeExome
+        File indelSizeDistribution_CodingExons
+        File indelSizeDistribution_WholeExome
+        File indelSizeDistributionPlot_CodingExons
+        File indelSizeDistributionPlot_WholeExome
      }
    output {
        File annoreport = "~{outputFile_commonPrefix}~{WholeExomePrefix}.ipynb"
