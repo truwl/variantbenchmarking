@@ -92,8 +92,38 @@ task run_intervene {
     fi
     
     if [ "~{freeze}" = "hg37" ]; then
-        optvcfs="DRAGEN_HG002-NA24385-50x.vcf.gz ISAAC_HG002-NA24385_all_passed_variants.vcf.gz"
-        downloadList+=("gs://benchmarking-datasets/DRAGEN_HG002-NA24385-50x.vcf.gz","gs://benchmarking-datasets/ISAAC_HG002-NA24385_all_passed_variants.vcf.gz")
+        if ~{includeB1S5A}; then
+         optvcfs="${optvcfs} B1S5A_~{subject}.vcf.gz"
+         downloadList+=("gs://truwl-giab/ submission_vcfs/hg19/B1S5A/B1S5A_~{subject}.vcf.gz")
+        fi
+        if ~{includeWX8VK}; then
+         optvcfs="${optvcfs} WX8VK_~{subject}.vcf.gz"
+         downloadList+=("gs://truwl-giab/ submission_vcfs/hg19/WX8VK/WX8VK_~{subject}.vcf.gz")
+        fi
+        if ~{includeCZA1Y}; then
+         optvcfs="${optvcfs} CZA1Y_~{subject}.vcf.gz"
+         downloadList+=("gs://truwl-giab/ submission_vcfs/hg19/CZA1Y/CZA1Y_~{subject}.vcf.gz")
+        fi
+        if ~{includeEIUT6}; then
+         optvcfs="${optvcfs} EIUT6_~{subject}.vcf.gz"
+         downloadList+=("gs://truwl-giab/ submission_vcfs/hg19/EIUT6/EIUT6_~{subject}.vcf.gz")
+        fi
+        if ~{includeXC97E}; then
+         optvcfs="${optvcfs} XC97E_~{subject}.vcf.gz"
+         downloadList+=("gs://truwl-giab/ submission_vcfs/hg19/XC97E/XC97E_~{subject}.vcf.gz")
+        fi
+        if ~{includeXV7ZN}; then
+         optvcfs="${optvcfs} XV7ZN_~{subject}.vcf.gz"
+         downloadList+=("gs://truwl-giab/ submission_vcfs/hg19/XV7ZN/XV7ZN_~{subject}.vcf.gz")
+        fi
+        if ~{includeIA789}; then
+         optvcfs="${optvcfs} IA789_~{subject}.vcf.gz"
+         downloadList+=("gs://truwl-giab/ submission_vcfs/hg19/IA789/IA789_~{subject}.vcf.gz")
+        fi
+        if ~{includeW607K}; then
+         optvcfs="${optvcfs} W607K_~{subject}.vcf.gz"
+         downloadList+=("gs://truwl-giab/ submission_vcfs/hg19/W607K/W607K_~{subject}.vcf.gz")
+        fi
     fi
 
     for value in "${downloadList[@]}"
@@ -112,6 +142,7 @@ task run_intervene {
     docker: "truwl/intervene"
     memory: "8 GB"
     cpu: 2
+    disks: "local-disk 200 HDD"
   }
   output {
     File upsetplot = "Intervene_results/Intervene_upset.png"
