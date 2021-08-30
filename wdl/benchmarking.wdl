@@ -276,12 +276,12 @@ workflow GermlineVariantCallBenchmark {
     # File indelSizeDistributionPlot_WholeExome = wessize.indelSizeDistributionPlot_WholeExome
 
     
-    File upsetPlot = myintervene.upsetplot
-    File talltable = aggmelt.talltable
-    File bcfstatsoutput = bcfstatstask.bcfstatsoutput
+    #File upsetPlot = myintervene.upsetplot
+    #File talltable = aggmelt.talltable
+    #File bcfstatsoutput = bcfstatstask.bcfstatsoutput
     File multiqcReport = multiqcTask.multiqcReport
     
-    File precrecallplot = aggprecRecall.precrecallplot
+    #File precrecallplot = aggprecRecall.precrecallplot
     File finalreport = aggfinal.annohtml
   }
 }
