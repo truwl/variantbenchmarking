@@ -73,7 +73,7 @@ task finalReport {
    }
    command <<<
      mkdir -p /home/jovyan/.cache/black/21.7b0/
-     papermill ~{jupyter_notebook} -p queryVCF ~{queryVCF} -p freeze ~{freeze} -p subject ~{subject} -p upset_plot ~{upset_plot} -p ~{prec_recall_plot} -p ~{indelSizeDistributionPlot_CodingExons} -p ~{indelSizeDistributionPlot_WholeExome} ~{outputFile_commonPrefix}~{WholeExomePrefix}.ipynb
+     papermill ~{jupyter_notebook} -p queryVCF ~{queryVCF} -p freeze ~{freeze} -p subject ~{subject} -p upset_plot ~{upset_plot} -p prec_recall_plot ~{prec_recall_plot} -p indelSizeDistributionPlot_CodingExons ~{indelSizeDistributionPlot_CodingExons} -p indelSizeDistributionPlot_WholeExome ~{indelSizeDistributionPlot_WholeExome} ~{outputFile_commonPrefix}~{WholeExomePrefix}.ipynb
      jupyter nbconvert ~{outputFile_commonPrefix}~{WholeExomePrefix}.ipynb --to html --output ~{outputFile_commonPrefix}~{WholeExomePrefix}.html
    >>>
 }
