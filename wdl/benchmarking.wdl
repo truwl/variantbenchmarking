@@ -230,58 +230,60 @@ workflow GermlineVariantCallBenchmark {
   }
   
   output {
-#     File codingExons_annotated_vcf_gz = happyexons.codingExons_annotated_vcf_gz
-#     File codingExons_annotated_vcf_gz_tbi = happyexons.codingExons_annotated_vcf_gz_tbi
-# #    File codingExons_counts_csv = happyexons.codingExons_counts_csv
-# #    File codingExons_counts_json = happyexons.codingExons_counts_json
-#   #  File codingExons_runinfo_json = happyexons.codingExons_runinfo_json
-#     File codingExons_roc_indel_pass = happyexons.codingExons_roc_indel_pass
-#     File codingExons_roc_indel = happyexons.codingExons_roc_indel
-#     File codingExons_roc_snp_pass = happyexons.codingExons_roc_snp_pass
-#     File codingExons_roc_snp = happyexons.codingExons_roc_snp
-#     File codingExons_roc_all = happyexons.codingExons_roc_all
-#     File codingExons_extended_csv = happyexons.codingExons_extended_csv
-#     File codingExons_metrics_json = happyexons.codingExons_metrics_json
-#     File codingExons_summary_csv = happyexons.codingExons_summary_csv
-# #    File codingExons_console_output_txt = happyexons.codingExons_console_output_txt
-#
-#
-#     File WholeExome_annotated_vcf_gz = happyexome.WholeExome_annotated_vcf_gz
-#     File  WholeExome_annotated_vcf_gz_tbi = happyexome.WholeExome_annotated_vcf_gz_tbi
-# #    File  WholeExome_counts_csv = happyexome.WholeExome_counts_csv
-# #    File  WholeExome_counts_json = happyexome.WholeExome_counts_json
-#  #   File WholeExome_runinfo_json = happyexome.WholeExome_runinfo_json
-#     File WholeExome_roc_indel_pass = happyexome.WholeExome_roc_indel_pass
-#     File WholeExome_roc_indel = happyexome.WholeExome_roc_indel
-#     File WholeExome_roc_snp_pass = happyexome.WholeExome_roc_snp_pass
-#     File WholeExome_roc_snp = happyexome.WholeExome_roc_snp
-#     File WholeExome_roc_all = happyexome.WholeExome_roc_all
-#     File  WholeExome_extended_csv = happyexome.WholeExome_extended_csv
-#  #   File  WholeExome_metrics_json = happyexome.WholeExome_metrics_json
-#  #   File  WholeExome_summary_csv = happyexome.WholeExome_summary_csv
-#     File  WholeExome_console_output_txt = happyexome.WholeExome_console_output_txt
-#     File  codingExons_annotated_TPonly_vcf_gz = splitcds.codingExons_annotated_TPonly_vcf_gz
-#     File  codingExons_annotated_FPonly_vcf_gz = splitcds.codingExons_annotated_FPonly_vcf_gz
-#     File  codingExons_annotated_FNonly_vcf_gz = splitcds.codingExons_annotated_FNonly_vcf_gz
-#     File  WholeExome_annotated_TPonly_vcf_gz = splitwes.WholeExome_annotated_TPonly_vcf_gz
-#     File  WholeExome_annotated_FPonly_vcf_gz = splitwes.WholeExome_annotated_FPonly_vcf_gz
-#     File  WholeExome_annotated_FNonly_vcf_gz = splitwes.WholeExome_annotated_FNonly_vcf_gz
-    
-    
-    # File indelDistribution_CodingExons = cdsresults.indelDistribution_CodingExons
-    # File indelDistribution_WholeExome = wesresults.indelDistribution_WholeExome
-    # File indelSizeDistribution_CodingExons = cdssize.indelSizeDistribution_CodingExons
-    # File indelSizeDistribution_WholeExome = wessize.indelSizeDistribution_WholeExome
-    # File indelSizeDistributionPlot_CodingExons = cdssize.indelSizeDistributionPlot_CodingExons
-    # File indelSizeDistributionPlot_WholeExome = wessize.indelSizeDistributionPlot_WholeExome
-
-    
-    #File upsetPlot = myintervene.upsetplot
-    #File talltable = aggmelt.talltable
-    #File bcfstatsoutput = bcfstatstask.bcfstatsoutput
-    File multiqcReport = multiqcTask.multiqcReport
-    
-    #File precrecallplot = aggprecRecall.precrecallplot
-    File finalreport = aggfinal.annohtml
+        # File codingExons_annotated_vcf_gz = happyexons.codingExons_annotated_vcf_gz
+        # File codingExons_annotated_vcf_gz_tbi = happyexons.codingExons_annotated_vcf_gz_tbi
+        # File codingExons_counts_csv = happyexons.codingExons_counts_csv
+        # File codingExons_counts_json = happyexons.codingExons_counts_json
+        # File codingExons_runinfo_json = happyexons.codingExons_runinfo_json
+        # File codingExons_roc_indel_pass = happyexons.codingExons_roc_indel_pass
+        # File codingExons_roc_indel = happyexons.codingExons_roc_indel
+        # File codingExons_roc_snp_pass = happyexons.codingExons_roc_snp_pass
+        # File codingExons_roc_snp = happyexons.codingExons_roc_snp
+        # File codingExons_roc_all = happyexons.codingExons_roc_all
+        # File codingExons_extended_csv = happyexons.codingExons_extended_csv
+        # File codingExons_metrics_json = happyexons.codingExons_metrics_json
+        # File codingExons_summary_csv = happyexons.codingExons_summary_csv
+        # File codingExons_console_output_txt = happyexons.codingExons_console_output_txt
+        #
+        #
+        # File WholeExome_annotated_vcf_gz = happyexome.WholeExome_annotated_vcf_gz
+        # File  WholeExome_annotated_vcf_gz_tbi = happyexome.WholeExome_annotated_vcf_gz_tbi
+        # File  WholeExome_counts_csv = happyexome.WholeExome_counts_csv
+        # File  WholeExome_counts_json = happyexome.WholeExome_counts_json
+        # File WholeExome_runinfo_json = happyexome.WholeExome_runinfo_json
+        # File WholeExome_roc_indel_pass = happyexome.WholeExome_roc_indel_pass
+        # File WholeExome_roc_indel = happyexome.WholeExome_roc_indel
+        # File WholeExome_roc_snp_pass = happyexome.WholeExome_roc_snp_pass
+        # File WholeExome_roc_snp = happyexome.WholeExome_roc_snp
+        # File WholeExome_roc_all = happyexome.WholeExome_roc_all
+        # File  WholeExome_extended_csv = happyexome.WholeExome_extended_csv
+        # File  WholeExome_metrics_json = happyexome.WholeExome_metrics_json
+        # File  WholeExome_summary_csv = happyexome.WholeExome_summary_csv
+        # File  WholeExome_console_output_txt = happyexome.WholeExome_console_output_txt
+        # File  codingExons_annotated_TPonly_vcf_gz = splitcds.codingExons_annotated_TPonly_vcf_gz
+        # File  codingExons_annotated_FPonly_vcf_gz = splitcds.codingExons_annotated_FPonly_vcf_gz
+        # File  codingExons_annotated_FNonly_vcf_gz = splitcds.codingExons_annotated_FNonly_vcf_gz
+        # File  WholeExome_annotated_TPonly_vcf_gz = splitwes.WholeExome_annotated_TPonly_vcf_gz
+        # File  WholeExome_annotated_FPonly_vcf_gz = splitwes.WholeExome_annotated_FPonly_vcf_gz
+        # File  WholeExome_annotated_FNonly_vcf_gz = splitwes.WholeExome_annotated_FNonly_vcf_gz
+        #
+        #
+        # File indelDistribution_CodingExons = cdsresults.indelDistribution_CodingExons
+        # File indelDistribution_WholeExome = wesresults.indelDistribution_WholeExome
+        # File indelSizeDistribution_CodingExons = cdssize.indelSizeDistribution_CodingExons
+        # File indelSizeDistribution_WholeExome = wessize.indelSizeDistribution_WholeExome
+        # File indelSizeDistributionPlot_CodingExons = cdssize.indelSizeDistributionPlot_CodingExons
+        # File indelSizeDistributionPlot_WholeExome = wessize.indelSizeDistributionPlot_WholeExome
+        #
+        #
+        # File upsetPlot = myintervene.upsetplot
+        # File talltable = aggmelt.talltable
+        # File bcfstatsoutput = bcfstatstask.bcfstatsoutput
+        # File precrecallplot = aggprecRecall.precrecallplot
+        
+        
+        
+        File multiqcReport = multiqcTask.multiqcReport
+        File finalreport = aggfinal.annohtml
   }
 }
