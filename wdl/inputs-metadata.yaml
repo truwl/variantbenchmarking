@@ -108,6 +108,17 @@ parameter_meta:
     group: Scripts
     description:
     example: "precRecall.R"
+  GermlineVariantCallBenchmark.Jupyter_report:
+    group: Scripts
+    description:
+    example: "report.ipynb"
+  GermlineVariantCallBenchmark.job_id:
+    group: Builtin
+  GermlineVariantCallBenchmark.workflow_instance_identifier:
+    group: Builtin
+  GermlineVariantCallBenchmark.workflow_identifier:
+    group: Builtin
+
 parameter_group:
   Query:
     title: Query
@@ -127,3 +138,6 @@ parameter_group:
   Competitors:
     title: Competitors
     display: true
+  Builtin:
+    title: Built-in paramaeters
+    display: false

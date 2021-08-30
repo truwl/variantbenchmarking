@@ -17,19 +17,19 @@ workflow GermlineVariantCallBenchmark {
     String freeze
     #HG002 (child), HG003 (dad), HG004 (mom)
     String subject
-    
+
     Map[String,Map[String,File]] truthVCF = {
       "HG002": {
-        "hg37": "gs://truwl-giab/AshkenazimTrio/HG002_NA24385_son/latest/GRCh37/HG002_GRCh37_1_22_v4.2.1_benchmark.vcf.gz",
-        "hg38": "gs://truwl-giab/AshkenazimTrio/HG002_NA24385_son/latest/GRCh38/HG002_GRCh38_1_22_v4.2.1_benchmark.vcf.gz"
+        "hg37": "gs://truwl-giab/AshkenazimTrio/HG002_NA24385_son/NISTv4.2.1/GRCh37/HG002_GRCh37_1_22_v4.2.1_benchmark.vcf.gz",
+        "hg38": "gs://truwl-giab/AshkenazimTrio/HG002_NA24385_son/NISTv4.2.1/GRCh38/HG002_GRCh38_1_22_v4.2.1_benchmark.vcf.gz"
       },
       "HG003": {
-        "hg37": "gs://truwl-giab/AshkenazimTrio/HG003_NA24159_father/latest/GRCh37/HG003_GRCh37_1_22_v4.2.1_benchmark.vcf.gz",
-        "hg38": "gs://truwl-giab/AshkenazimTrio/HG003_NA24159_father/latest/GRCh38/HG003_GRCh38_1_22_v4.2.1_benchmark.vcf.gz"
+        "hg37": "gs://truwl-giab/AshkenazimTrio/HG003_NA24159_father/NISTv4.2.1/GRCh37/HG003_GRCh37_1_22_v4.2.1_benchmark.vcf.gz",
+        "hg38": "gs://truwl-giab/AshkenazimTrio/HG003_NA24159_father/NISTv4.2.1/GRCh38/HG003_GRCh38_1_22_v4.2.1_benchmark.vcf.gz"
       },
       "HG004": {
-        "hg37": "gs://truwl-giab/AshkenazimTrio/HG004_NA24143_mother/latest/GRCh37/HG004_GRCh37_1_22_v4.2.1_benchmark.vcf.gz",
-        "hg38": "gs://truwl-giab/AshkenazimTrio/HG004_NA24143_mother/latest/GRCh38/HG004_GRCh38_1_22_v4.2.1_benchmark.vcf.gz"
+        "hg37": "gs://truwl-giab/AshkenazimTrio/HG004_NA24143_mother/NISTv4.2.1/GRCh37/HG004_GRCh37_1_22_v4.2.1_benchmark.vcf.gz",
+        "hg38": "gs://truwl-giab/AshkenazimTrio/HG004_NA24143_mother/NISTv4.2.1/GRCh38/HG004_GRCh38_1_22_v4.2.1_benchmark.vcf.gz"
       }
     }
     
