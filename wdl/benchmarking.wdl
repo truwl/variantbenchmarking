@@ -63,6 +63,156 @@ workflow GermlineVariantCallBenchmark {
     Boolean includeIA789 = true
     Boolean includeW607K = true
 
+#FunctionalRegions
+      Boolean GRCh38_notinrefseq_cds = false          #         #FunctionalRegions
+      Boolean GRCh38_refseq_cds = false          #FunctionalRegions
+      Boolean GRCh38_BadPromoters = false          #FunctionalTechnicallyDifficultRegions
+      
+      
+      
+      Boolean GRCh38_gc15_slop50 = false          #GCcontent
+      Boolean GRCh38_gc15to20_slop50 = false          #GCcontent
+      Boolean GRCh38_gc20to25_slop50 = false          #GCcontent
+      Boolean GRCh38_gc25to30_slop50 = false          #GCcontent
+      Boolean GRCh38_gc30to55_slop50 = false          #GCcontent
+      Boolean GRCh38_gc55to60_slop50 = false          #GCcontent
+      Boolean GRCh38_gc60to65_slop50 = false          #GCcontent
+      Boolean GRCh38_gc65to70_slop50 = false          #GCcontent
+      Boolean GRCh38_gc70to75_slop50 = false          #GCcontent
+      Boolean GRCh38_gc75to80_slop50 = false          #GCcontent
+      Boolean GRCh38_gc80to85_slop50 = false          #GCcontent
+      Boolean GRCh38_gc85_slop50 = false          #GCcontent
+      Boolean GRCh38_gclt25orgt65_slop50 = false          #GCcontent
+      Boolean GRCh38_gclt30orgt55_slop50 = false          #GCcontent
+      
+      
+      
+      Boolean GRCh38_HG001_GIABv3.2.2_compoundhet_slop50 = false          #GenomeSpecific
+      Boolean GRCh38_HG001_GIABv3.2.2_varswithin50bp = false          #GenomeSpecific
+      Boolean GRCh38_HG001_GIABv3.3.2_comphetindel10bp_slop50 = false          #GenomeSpecific
+      Boolean GRCh38_HG001_GIABv3.3.2_comphetsnp10bp_slop50 = false          #GenomeSpecific
+      Boolean GRCh38_HG001_GIABv3.3.2_complexandSVs = false          #GenomeSpecific
+      Boolean GRCh38_HG001_GIABv3.3.2_complexindel10bp_slop50 = false          #GenomeSpecific
+      Boolean GRCh38_HG001_GIABv3.3.2_RTG_PG_v3.3.2_SVs_alldifficultregions = false          #GenomeSpecific
+      Boolean GRCh38_HG001_GIABv3.3.2_RTG_PG_v3.3.2_SVs_notin_alldifficultregions = false          #GenomeSpecific
+      Boolean GRCh38_HG001_GIABv3.3.2_snpswithin10bp_slop50 = false          #GenomeSpecific
+      Boolean GRCh38_HG001_PacBio_MetaSV = false          #GenomeSpecific
+      Boolean GRCh38_HG001_PG2016-1.0_comphetindel10bp_slop50 = false          #GenomeSpecific
+      Boolean GRCh38_HG001_PG2016-1.0_comphetsnp10bp_slop50 = false          #GenomeSpecific
+      Boolean GRCh38_HG001_PG2016-1.0_complexindel10bp_slop50 = false          #GenomeSpecific
+      Boolean GRCh38_HG001_PG2016-1.0_snpswithin10bp_slop50 = false          #GenomeSpecific
+      Boolean GRCh38_HG001_RTG_37.7.3_comphetindel10bp_slop50 = false          #GenomeSpecific
+      Boolean GRCh38_HG001_RTG_37.7.3_comphetsnp10bp_slop50 = false          #GenomeSpecific
+      Boolean GRCh38_HG001_RTG_37.7.3_complexindel10bp_slop50 = false          #GenomeSpecific
+      Boolean GRCh38_HG001_RTG_37.7.3_snpswithin10bp_slop50 = false          #GenomeSpecific
+      Boolean GRCh38_HG002_GIABv4.1_CNV_CCSandONT_elliptical_outlier = false          #GenomeSpecific
+      Boolean GRCh38_HG002_GIABv4.1_CNV_mrcanavarIllumina_CCShighcov_ONThighcov_intersection = false          #GenomeSpecific
+      Boolean GRCh38_HG002_expanded_150__Tier1plusTier2_v0.6.1 = false          #GenomeSpecific
+      Boolean GRCh38_HG002_GIABv3.2.2_compoundhet_slop50 = false          #GenomeSpecific
+      Boolean GRCh38_HG002_GIABv3.2.2_varswithin50bp = false          #GenomeSpecific
+      Boolean GRCh38_HG002_GIABv3.3.2_comphetindel10bp_slop50 = false          #GenomeSpecific
+      Boolean GRCh38_HG002_GIABv3.3.2_comphetsnp10bp_slop50 = false          #GenomeSpecific
+      Boolean GRCh38_HG002_GIABv3.3.2_complexandSVs = false          #GenomeSpecific
+      Boolean GRCh38_HG002_GIABv3.3.2_complexandSVs_alldifficultregions = false          #GenomeSpecific
+      Boolean GRCh38_HG002_GIABv3.3.2_complexindel10bp_slop50 = false          #GenomeSpecific
+      Boolean GRCh38_HG002_GIABv3.3.2_notin_complexandSVs_alldifficultregions = false          #GenomeSpecific
+      Boolean GRCh38_HG002_GIABv3.3.2_snpswithin10bp_slop50 = false          #GenomeSpecific
+      Boolean GRCh38_HG002_GIABv4.1_CNVsandSVs = false          #GenomeSpecific
+      Boolean GRCh38_HG002_GIABv4.1_comphetindel10bp_slop50 = false          #GenomeSpecific
+      Boolean GRCh38_HG002_GIABv4.1_comphetsnp10bp_slop50 = false          #GenomeSpecific
+      Boolean GRCh38_HG002_GIABv4.1_complexandSVs = false          #GenomeSpecific
+      Boolean GRCh38_HG002_GIABv4.1_complexandSVs_alldifficultregions = false          #GenomeSpecific
+      Boolean GRCh38_HG002_GIABv4.1_complexindel10bp_slop50 = false          #GenomeSpecific
+      Boolean GRCh38_HG002_GIABv4.1_notin_complexandSVs_alldifficultregions = false          #GenomeSpecific
+      Boolean GRCh38_HG002_GIABv4.1_othercomplexwithin10bp_slop50 = false          #GenomeSpecific
+      Boolean GRCh38_HG002_GIABv4.1_snpswithin10bp_slop50 = false          #GenomeSpecific
+      Boolean GRCh38_HG002_HG003_HG004_allsvs = false          #GenomeSpecific
+      Boolean GRCh38_HG002_GIABv4.1_CNV_gt2assemblycontigs_ONTCanu_ONTFlye_CCSCanu = false          #GenomeSpecific
+      Boolean GRCh38_HG002_GIABv4.1_inversions_slop25percent = false          #GenomeSpecific
+      Boolean GRCh38_HG002_Tier1plusTier2_v0.6.1 = false          #GenomeSpecific
+      Boolean GRCh38_HG003_GIABv3.3.2_comphetindel10bp_slop50 = false          #GenomeSpecific
+      Boolean GRCh38_HG003_GIABv3.3.2_comphetsnp10bp_slop50 = false          #GenomeSpecific
+      Boolean GRCh38_HG003_GIABv3.3.2_complexandSVs = false          #GenomeSpecific
+      Boolean GRCh38_HG003_GIABv3.3.2_complexandSVs_alldifficultregions = false          #GenomeSpecific
+      Boolean GRCh38_HG003_GIABv3.3.2_complexindel10bp_slop50 = false          #GenomeSpecific
+      Boolean GRCh38_HG003_GIABv3.3.2_notin_complexandSVs_alldifficultregions = false          #GenomeSpecific
+      Boolean GRCh38_HG003_GIABv3.3.2_snpswithin10bp_slop50 = false          #GenomeSpecific
+      Boolean GRCh38_HG004_GIABv3.3.2_comphetindel10bp_slop50 = false          #GenomeSpecific
+      Boolean GRCh38_HG004_GIABv3.3.2_comphetsnp10bp_slop50 = false          #GenomeSpecific
+      Boolean GRCh38_HG004_GIABv3.3.2_complexandSVs = false          #GenomeSpecific
+      Boolean GRCh38_HG004_GIABv3.3.2_complexandSVs_alldifficultregions = false          #GenomeSpecific
+      Boolean GRCh38_HG004_GIABv3.3.2_complexindel10bp_slop50 = false          #GenomeSpecific
+      Boolean GRCh38_HG004_GIABv3.3.2_notin_complexandSVs_alldifficultregions = false          #GenomeSpecific
+      Boolean GRCh38_HG004_GIABv3.3.2_snpswithin10bp_slop50 = false          #GenomeSpecific
+      Boolean GRCh38_HG005_GIABv3.3.2_comphetindel10bp_slop50 = false          #GenomeSpecific
+      Boolean GRCh38_HG005_GIABv3.3.2_comphetsnp10bp_slop50 = false          #GenomeSpecific
+      Boolean GRCh38_HG005_GIABv3.3.2_complexandSVs = false          #GenomeSpecific
+      Boolean GRCh38_HG005_GIABv3.3.2_complexandSVs_alldifficultregions = false          #GenomeSpecific
+      Boolean GRCh38_HG005_GIABv3.3.2_complexindel10bp_slop50 = false          #GenomeSpecific
+      Boolean GRCh38_HG005_GIABv3.3.2_notin_complexandSVs_alldifficultregions = false          #GenomeSpecific
+      Boolean GRCh38_HG005_GIABv3.3.2_snpswithin10bp_slop50 = false          #GenomeSpecific
+      Boolean GRCh38_HG005_HG006_HG007_MetaSV_allsvs = false          #GenomeSpecific
+      
+      
+      
+      Boolean GRCh38_AllHomopolymers_gt6bp_imperfectgt10bp_slop5 = false          #LowComplexity
+      Boolean GRCh38_AllTandemRepeats_201to10000bp_slop5 = false          #LowComplexity
+      Boolean GRCh38_AllTandemRepeats_51to200bp_slop5 = false          #LowComplexity
+      Boolean GRCh38_AllTandemRepeats_gt10000bp_slop5 = false          #LowComplexity
+      Boolean GRCh38_AllTandemRepeats_gt100bp_slop5 = false          #LowComplexity
+      Boolean GRCh38_AllTandemRepeats_lt51bp_slop5 = false          #LowComplexity
+      Boolean GRCh38_AllTandemRepeatsandHomopolymers_slop5 = false          #LowComplexity
+      Boolean GRCh38_notinAllHomopolymers_gt6bp_imperfectgt10bp_slop5 = false          #LowComplexity
+      Boolean GRCh38_notinAllTandemRepeatsandHomopolymers_slop5 = false          #LowComplexity
+      Boolean GRCh38_SimpleRepeat_diTR_11to50_slop5 = false          #LowComplexity
+      Boolean GRCh38_SimpleRepeat_diTR_51to200_slop5 = false          #LowComplexity
+      Boolean GRCh38_SimpleRepeat_diTR_gt200_slop5 = false          #LowComplexity
+      Boolean GRCh38_SimpleRepeat_homopolymer_4to6_slop5 = false          #LowComplexity
+      Boolean GRCh38_SimpleRepeat_homopolymer_7to11_slop5 = false          #LowComplexity
+      Boolean GRCh38_SimpleRepeat_homopolymer_gt11_slop5 = false          #LowComplexity
+      Boolean GRCh38_SimpleRepeat_imperfecthomopolgt10_slop5 = false          #LowComplexity
+      Boolean GRCh38_SimpleRepeat_quadTR_20to50_slop5 = false          #LowComplexity
+      Boolean GRCh38_SimpleRepeat_quadTR_51to200_slop5 = false          #LowComplexity
+      Boolean GRCh38_SimpleRepeat_quadTR_gt200_slop5 = false          #LowComplexity
+      Boolean GRCh38_SimpleRepeat_triTR_15to50_slop5 = false          #LowComplexity
+      Boolean GRCh38_SimpleRepeat_triTR_51to200_slop5 = false          #LowComplexity
+      Boolean GRCh38_SimpleRepeat_triTR_gt200_slop5 = false          #LowComplexity
+      
+      
+      
+      Boolean GRCh38_nonunique_l100_m2_e1 = false          #mappability
+      Boolean GRCh38_nonunique_l250_m0_e0 = false          #mappability
+      Boolean GRCh38_lowmappabilityall = false          #mappability
+      Boolean GRCh38_notinlowmappabilityall = false          #mappability
+      
+      
+      
+      Boolean GRCh38_allOtherDifficultregions = false          #OtherDifficult
+      Boolean GRCh38_contigs_lt500kb = false          #OtherDifficult
+      Boolean GRCh38_gaps_slop15kb = false          #OtherDifficult
+      Boolean GRCh38_L1H_gt500 = false          #OtherDifficult
+      Boolean GRCh38_MHC = false          #OtherDifficult
+      Boolean GRCh38_VDJ = false          #OtherDifficult
+      
+      
+      
+      Boolean GRCh38_chainSelf = false          #SegmentalDuplications
+      Boolean GRCh38_chainSelf_gt10kb = false          #SegmentalDuplications
+      Boolean GRCh38_gt5segdups_gt10kb_gt99percidentity = false          #SegmentalDuplications
+      Boolean GRCh38_notinchainSelf = false          #SegmentalDuplications
+      Boolean GRCh38_notinchainSelf_gt10kb = false          #SegmentalDuplications
+      Boolean GRCh38_notinsegdups = false          #SegmentalDuplications
+      Boolean GRCh38_notinsegdups_gt10kb = false          #SegmentalDuplications
+      Boolean GRCh38_segdups = false          #SegmentalDuplications
+      Boolean GRCh38_segdups_gt10kb = false          #SegmentalDuplications
+      
+      
+      Boolean GRCh38_alldifficultregions = false          #union
+      Boolean GRCh38_alllowmapandsegdupregions = false          #union
+      Boolean GRCh38_notinalldifficultregions = false          #union
+      Boolean GRCh38_notinalllowmapandsegdupregions = false          #union
+
+
     String job_id
     String workflow_instance_identifier
     String workflow_identifier
