@@ -6,6 +6,7 @@ import "./happy.wdl" as happy
 import "./intervene.wdl" as intervene
 import "./aggregate.wdl" as aggregate
 import "./multiqc.wdl" as multiqc
+import "./structs.wdl" as structs
 
 # WORKFLOW DEFINITION
 
@@ -16,7 +17,7 @@ workflow GermlineVariantCallBenchmark {
     File queryVCF
     String freeze
     #HG002 (child), HG003 (dad), HG004 (mom)
-    String subject
+    String subject = "HG002"
 
     Map[String,Map[String,File]] truthVCF = {
       "HG002": {
@@ -48,7 +49,7 @@ workflow GermlineVariantCallBenchmark {
     String chrRemovedVCF_fileSuffix = "_chrRemoved.vcf.gz"
     String outputFile_commonPrefix = "results"
     String codingExonsPrefix = "cds"
-    String WholeExomePrefix = "wes"
+    String happyPrefix = "wes"
     String consoleOutputPartialFilename = "_ConsoleOutput.txt"
     String indelDistributionSuffix = "_indelDistribution_Frombcftools.txt"
     String indelSizeDistributionSuffix = "_indelSizeDistribution.txt"
@@ -63,155 +64,14 @@ workflow GermlineVariantCallBenchmark {
     Boolean includeIA789 = true
     Boolean includeW607K = true
 
-#FunctionalRegions
-      Boolean GRCh38_notinrefseq_cds = false          #         #FunctionalRegions
-      Boolean GRCh38_refseq_cds = false          #FunctionalRegions
-      Boolean GRCh38_BadPromoters = false          #FunctionalTechnicallyDifficultRegions
-      
-      
-      
-      Boolean GRCh38_gc15_slop50 = false          #GCcontent
-      Boolean GRCh38_gc15to20_slop50 = false          #GCcontent
-      Boolean GRCh38_gc20to25_slop50 = false          #GCcontent
-      Boolean GRCh38_gc25to30_slop50 = false          #GCcontent
-      Boolean GRCh38_gc30to55_slop50 = false          #GCcontent
-      Boolean GRCh38_gc55to60_slop50 = false          #GCcontent
-      Boolean GRCh38_gc60to65_slop50 = false          #GCcontent
-      Boolean GRCh38_gc65to70_slop50 = false          #GCcontent
-      Boolean GRCh38_gc70to75_slop50 = false          #GCcontent
-      Boolean GRCh38_gc75to80_slop50 = false          #GCcontent
-      Boolean GRCh38_gc80to85_slop50 = false          #GCcontent
-      Boolean GRCh38_gc85_slop50 = false          #GCcontent
-      Boolean GRCh38_gclt25orgt65_slop50 = false          #GCcontent
-      Boolean GRCh38_gclt30orgt55_slop50 = false          #GCcontent
-      
-      
-      
-      Boolean GRCh38_HG001_GIABv3.2.2_compoundhet_slop50 = false          #GenomeSpecific
-      Boolean GRCh38_HG001_GIABv3.2.2_varswithin50bp = false          #GenomeSpecific
-      Boolean GRCh38_HG001_GIABv3.3.2_comphetindel10bp_slop50 = false          #GenomeSpecific
-      Boolean GRCh38_HG001_GIABv3.3.2_comphetsnp10bp_slop50 = false          #GenomeSpecific
-      Boolean GRCh38_HG001_GIABv3.3.2_complexandSVs = false          #GenomeSpecific
-      Boolean GRCh38_HG001_GIABv3.3.2_complexindel10bp_slop50 = false          #GenomeSpecific
-      Boolean GRCh38_HG001_GIABv3.3.2_RTG_PG_v3.3.2_SVs_alldifficultregions = false          #GenomeSpecific
-      Boolean GRCh38_HG001_GIABv3.3.2_RTG_PG_v3.3.2_SVs_notin_alldifficultregions = false          #GenomeSpecific
-      Boolean GRCh38_HG001_GIABv3.3.2_snpswithin10bp_slop50 = false          #GenomeSpecific
-      Boolean GRCh38_HG001_PacBio_MetaSV = false          #GenomeSpecific
-      Boolean GRCh38_HG001_PG2016-1.0_comphetindel10bp_slop50 = false          #GenomeSpecific
-      Boolean GRCh38_HG001_PG2016-1.0_comphetsnp10bp_slop50 = false          #GenomeSpecific
-      Boolean GRCh38_HG001_PG2016-1.0_complexindel10bp_slop50 = false          #GenomeSpecific
-      Boolean GRCh38_HG001_PG2016-1.0_snpswithin10bp_slop50 = false          #GenomeSpecific
-      Boolean GRCh38_HG001_RTG_37.7.3_comphetindel10bp_slop50 = false          #GenomeSpecific
-      Boolean GRCh38_HG001_RTG_37.7.3_comphetsnp10bp_slop50 = false          #GenomeSpecific
-      Boolean GRCh38_HG001_RTG_37.7.3_complexindel10bp_slop50 = false          #GenomeSpecific
-      Boolean GRCh38_HG001_RTG_37.7.3_snpswithin10bp_slop50 = false          #GenomeSpecific
-      Boolean GRCh38_HG002_GIABv4.1_CNV_CCSandONT_elliptical_outlier = false          #GenomeSpecific
-      Boolean GRCh38_HG002_GIABv4.1_CNV_mrcanavarIllumina_CCShighcov_ONThighcov_intersection = false          #GenomeSpecific
-      Boolean GRCh38_HG002_expanded_150__Tier1plusTier2_v0.6.1 = false          #GenomeSpecific
-      Boolean GRCh38_HG002_GIABv3.2.2_compoundhet_slop50 = false          #GenomeSpecific
-      Boolean GRCh38_HG002_GIABv3.2.2_varswithin50bp = false          #GenomeSpecific
-      Boolean GRCh38_HG002_GIABv3.3.2_comphetindel10bp_slop50 = false          #GenomeSpecific
-      Boolean GRCh38_HG002_GIABv3.3.2_comphetsnp10bp_slop50 = false          #GenomeSpecific
-      Boolean GRCh38_HG002_GIABv3.3.2_complexandSVs = false          #GenomeSpecific
-      Boolean GRCh38_HG002_GIABv3.3.2_complexandSVs_alldifficultregions = false          #GenomeSpecific
-      Boolean GRCh38_HG002_GIABv3.3.2_complexindel10bp_slop50 = false          #GenomeSpecific
-      Boolean GRCh38_HG002_GIABv3.3.2_notin_complexandSVs_alldifficultregions = false          #GenomeSpecific
-      Boolean GRCh38_HG002_GIABv3.3.2_snpswithin10bp_slop50 = false          #GenomeSpecific
-      Boolean GRCh38_HG002_GIABv4.1_CNVsandSVs = false          #GenomeSpecific
-      Boolean GRCh38_HG002_GIABv4.1_comphetindel10bp_slop50 = false          #GenomeSpecific
-      Boolean GRCh38_HG002_GIABv4.1_comphetsnp10bp_slop50 = false          #GenomeSpecific
-      Boolean GRCh38_HG002_GIABv4.1_complexandSVs = false          #GenomeSpecific
-      Boolean GRCh38_HG002_GIABv4.1_complexandSVs_alldifficultregions = false          #GenomeSpecific
-      Boolean GRCh38_HG002_GIABv4.1_complexindel10bp_slop50 = false          #GenomeSpecific
-      Boolean GRCh38_HG002_GIABv4.1_notin_complexandSVs_alldifficultregions = false          #GenomeSpecific
-      Boolean GRCh38_HG002_GIABv4.1_othercomplexwithin10bp_slop50 = false          #GenomeSpecific
-      Boolean GRCh38_HG002_GIABv4.1_snpswithin10bp_slop50 = false          #GenomeSpecific
-      Boolean GRCh38_HG002_HG003_HG004_allsvs = false          #GenomeSpecific
-      Boolean GRCh38_HG002_GIABv4.1_CNV_gt2assemblycontigs_ONTCanu_ONTFlye_CCSCanu = false          #GenomeSpecific
-      Boolean GRCh38_HG002_GIABv4.1_inversions_slop25percent = false          #GenomeSpecific
-      Boolean GRCh38_HG002_Tier1plusTier2_v0.6.1 = false          #GenomeSpecific
-      Boolean GRCh38_HG003_GIABv3.3.2_comphetindel10bp_slop50 = false          #GenomeSpecific
-      Boolean GRCh38_HG003_GIABv3.3.2_comphetsnp10bp_slop50 = false          #GenomeSpecific
-      Boolean GRCh38_HG003_GIABv3.3.2_complexandSVs = false          #GenomeSpecific
-      Boolean GRCh38_HG003_GIABv3.3.2_complexandSVs_alldifficultregions = false          #GenomeSpecific
-      Boolean GRCh38_HG003_GIABv3.3.2_complexindel10bp_slop50 = false          #GenomeSpecific
-      Boolean GRCh38_HG003_GIABv3.3.2_notin_complexandSVs_alldifficultregions = false          #GenomeSpecific
-      Boolean GRCh38_HG003_GIABv3.3.2_snpswithin10bp_slop50 = false          #GenomeSpecific
-      Boolean GRCh38_HG004_GIABv3.3.2_comphetindel10bp_slop50 = false          #GenomeSpecific
-      Boolean GRCh38_HG004_GIABv3.3.2_comphetsnp10bp_slop50 = false          #GenomeSpecific
-      Boolean GRCh38_HG004_GIABv3.3.2_complexandSVs = false          #GenomeSpecific
-      Boolean GRCh38_HG004_GIABv3.3.2_complexandSVs_alldifficultregions = false          #GenomeSpecific
-      Boolean GRCh38_HG004_GIABv3.3.2_complexindel10bp_slop50 = false          #GenomeSpecific
-      Boolean GRCh38_HG004_GIABv3.3.2_notin_complexandSVs_alldifficultregions = false          #GenomeSpecific
-      Boolean GRCh38_HG004_GIABv3.3.2_snpswithin10bp_slop50 = false          #GenomeSpecific
-      Boolean GRCh38_HG005_GIABv3.3.2_comphetindel10bp_slop50 = false          #GenomeSpecific
-      Boolean GRCh38_HG005_GIABv3.3.2_comphetsnp10bp_slop50 = false          #GenomeSpecific
-      Boolean GRCh38_HG005_GIABv3.3.2_complexandSVs = false          #GenomeSpecific
-      Boolean GRCh38_HG005_GIABv3.3.2_complexandSVs_alldifficultregions = false          #GenomeSpecific
-      Boolean GRCh38_HG005_GIABv3.3.2_complexindel10bp_slop50 = false          #GenomeSpecific
-      Boolean GRCh38_HG005_GIABv3.3.2_notin_complexandSVs_alldifficultregions = false          #GenomeSpecific
-      Boolean GRCh38_HG005_GIABv3.3.2_snpswithin10bp_slop50 = false          #GenomeSpecific
-      Boolean GRCh38_HG005_HG006_HG007_MetaSV_allsvs = false          #GenomeSpecific
-      
-      
-      
-      Boolean GRCh38_AllHomopolymers_gt6bp_imperfectgt10bp_slop5 = false          #LowComplexity
-      Boolean GRCh38_AllTandemRepeats_201to10000bp_slop5 = false          #LowComplexity
-      Boolean GRCh38_AllTandemRepeats_51to200bp_slop5 = false          #LowComplexity
-      Boolean GRCh38_AllTandemRepeats_gt10000bp_slop5 = false          #LowComplexity
-      Boolean GRCh38_AllTandemRepeats_gt100bp_slop5 = false          #LowComplexity
-      Boolean GRCh38_AllTandemRepeats_lt51bp_slop5 = false          #LowComplexity
-      Boolean GRCh38_AllTandemRepeatsandHomopolymers_slop5 = false          #LowComplexity
-      Boolean GRCh38_notinAllHomopolymers_gt6bp_imperfectgt10bp_slop5 = false          #LowComplexity
-      Boolean GRCh38_notinAllTandemRepeatsandHomopolymers_slop5 = false          #LowComplexity
-      Boolean GRCh38_SimpleRepeat_diTR_11to50_slop5 = false          #LowComplexity
-      Boolean GRCh38_SimpleRepeat_diTR_51to200_slop5 = false          #LowComplexity
-      Boolean GRCh38_SimpleRepeat_diTR_gt200_slop5 = false          #LowComplexity
-      Boolean GRCh38_SimpleRepeat_homopolymer_4to6_slop5 = false          #LowComplexity
-      Boolean GRCh38_SimpleRepeat_homopolymer_7to11_slop5 = false          #LowComplexity
-      Boolean GRCh38_SimpleRepeat_homopolymer_gt11_slop5 = false          #LowComplexity
-      Boolean GRCh38_SimpleRepeat_imperfecthomopolgt10_slop5 = false          #LowComplexity
-      Boolean GRCh38_SimpleRepeat_quadTR_20to50_slop5 = false          #LowComplexity
-      Boolean GRCh38_SimpleRepeat_quadTR_51to200_slop5 = false          #LowComplexity
-      Boolean GRCh38_SimpleRepeat_quadTR_gt200_slop5 = false          #LowComplexity
-      Boolean GRCh38_SimpleRepeat_triTR_15to50_slop5 = false          #LowComplexity
-      Boolean GRCh38_SimpleRepeat_triTR_51to200_slop5 = false          #LowComplexity
-      Boolean GRCh38_SimpleRepeat_triTR_gt200_slop5 = false          #LowComplexity
-      
-      
-      
-      Boolean GRCh38_nonunique_l100_m2_e1 = false          #mappability
-      Boolean GRCh38_nonunique_l250_m0_e0 = false          #mappability
-      Boolean GRCh38_lowmappabilityall = false          #mappability
-      Boolean GRCh38_notinlowmappabilityall = false          #mappability
-      
-      
-      
-      Boolean GRCh38_allOtherDifficultregions = false          #OtherDifficult
-      Boolean GRCh38_contigs_lt500kb = false          #OtherDifficult
-      Boolean GRCh38_gaps_slop15kb = false          #OtherDifficult
-      Boolean GRCh38_L1H_gt500 = false          #OtherDifficult
-      Boolean GRCh38_MHC = false          #OtherDifficult
-      Boolean GRCh38_VDJ = false          #OtherDifficult
-      
-      
-      
-      Boolean GRCh38_chainSelf = false          #SegmentalDuplications
-      Boolean GRCh38_chainSelf_gt10kb = false          #SegmentalDuplications
-      Boolean GRCh38_gt5segdups_gt10kb_gt99percidentity = false          #SegmentalDuplications
-      Boolean GRCh38_notinchainSelf = false          #SegmentalDuplications
-      Boolean GRCh38_notinchainSelf_gt10kb = false          #SegmentalDuplications
-      Boolean GRCh38_notinsegdups = false          #SegmentalDuplications
-      Boolean GRCh38_notinsegdups_gt10kb = false          #SegmentalDuplications
-      Boolean GRCh38_segdups = false          #SegmentalDuplications
-      Boolean GRCh38_segdups_gt10kb = false          #SegmentalDuplications
-      
-      
-      Boolean GRCh38_alldifficultregions = false          #union
-      Boolean GRCh38_alllowmapandsegdupregions = false          #union
-      Boolean GRCh38_notinalldifficultregions = false          #union
-      Boolean GRCh38_notinalllowmapandsegdupregions = false          #union
-
+    FunctionalRegions fcRegions
+    GCcontent gcRegions
+    GenomeSpecific gsRegions
+    LowComplexity lcRegions
+    Mappability mpRegions
+    OtherDifficult odRegions
+    SegmentalDuplications sdRegions
+    Union unRegions
 
     String job_id
     String workflow_instance_identifier
@@ -246,86 +106,30 @@ workflow GermlineVariantCallBenchmark {
         outDir = "multiqc"
   }
 
-  call happy.vcfComparison_by_Happy_CodingExons as happyexons {
+  call happy.generateStratTable as makeStrat {
+      input: 
+        fcRegions = fcRegions,
+        gcRegions = gcRegions,
+        gsRegions = gsRegions,
+        lcRegions = lcRegions,
+        mpRegions = mpRegions,
+        odRegions = odRegions,
+        sdRegions = sdRegions,
+        unRegions = unRegions
+  }
+
+  call happy.happyStratify as happystrat {
     input:
       queryVCF = queryVCF,
-      outputFile_commonPrefix = outputFile_commonPrefix,
-      truthCodingExonsVCF = truthVCF[subject][freeze],
-      truthCodingExonsBED = truthCodingExonsBED[freeze],
+      truthVCF = truthVCF[subject][freeze],
+    
       referenceFasta = referenceFasta[freeze],
       referenceFasta_indexed = referenceFasta_indexed[freeze],
-      codingExonsPrefix = codingExonsPrefix,
+    
+      stratTable = makeStrat.stratTable,
+      happyPrefix =  happyPrefix,
       consoleOutputPartialFilename = consoleOutputPartialFilename
   }
-
-  call happy.vcfComparison_by_Happy_WholeExome as happyexome {
-    input:
-      queryVCF = queryVCF,
-      outputFile_commonPrefix = outputFile_commonPrefix,
-      truthWholeExomeVCF = truthVCF[subject][freeze],
-      truthWholeExomeBED = truthWholeExomeBED[freeze],
-      referenceFasta = referenceFasta[freeze],
-      referenceFasta_indexed = referenceFasta_indexed[freeze],
-      WholeExomePrefix =  WholeExomePrefix,
-      consoleOutputPartialFilename = consoleOutputPartialFilename
-  }
-
-  call bcftools.splittingAnnotatedVCF_CodingExons as splitcds {
-    input:
-      outputFile_commonPrefix = outputFile_commonPrefix,
-      codingExonsPrefix = codingExonsPrefix,
-      codingExons_annotated_vcf_gz = happyexons.codingExons_annotated_vcf_gz
-  }
-
-  call bcftools.splittingAnnotatedVCF_WholeExome as splitwes {
-    input:
-      outputFile_commonPrefix = outputFile_commonPrefix,
-      WholeExomePrefix = WholeExomePrefix,
-      WholeExome_annotated_vcf_gz = happyexome.WholeExome_annotated_vcf_gz
-  }
-
-  call indel.indelDistribution_CodingExons_HappyResults as cdsresults {
-    input:
-      outputFile_commonPrefix = outputFile_commonPrefix,
-      codingExonsPrefix = outputFile_commonPrefix,
-      truthCodingExonsVCF = truthVCF[subject][freeze],
-      indelDistributionSuffix = indelDistributionSuffix
-  }
-
-  call indel.indelDistribution_WholeExome_HappyResults  as wesresults {
-    input:
-      outputFile_commonPrefix = outputFile_commonPrefix,
-      WholeExomePrefix = WholeExomePrefix,
-      truthWholeExomeVCF = truthVCF[subject][freeze],
-      indelDistributionSuffix = indelDistributionSuffix
-  }
-
-  call indel.indelSizeDistribution_CodingExons_HappyResults as cdssize {
-    input:
-      outputFile_commonPrefix = outputFile_commonPrefix,
-      codingExonsPrefix = codingExonsPrefix,
-      indelDistribution_CodingExons = cdsresults.indelDistribution_CodingExons,
-      indelSizeDistributionSuffix = indelSizeDistributionSuffix,
-      indelSizeDistributionPlotSuffix = indelSizeDistributionPlotSuffix,
-      codingExons_annotated_TPonly_vcf_gz = splitcds.codingExons_annotated_TPonly_vcf_gz,
-      codingExons_annotated_FPonly_vcf_gz = splitcds.codingExons_annotated_FPonly_vcf_gz,
-      codingExons_annotated_FNonly_vcf_gz = splitcds.codingExons_annotated_FNonly_vcf_gz,
-      Rscript_indelSize = Rscript_indelSize
-  }
-
-  call indel.indelSizeDistribution_WholeExome_HappyResults as wessize {
-    input:
-      outputFile_commonPrefix = outputFile_commonPrefix,
-      WholeExomePrefix = WholeExomePrefix,
-      indelDistribution_WholeExome = wesresults.indelDistribution_WholeExome,
-      indelSizeDistributionSuffix = indelSizeDistributionSuffix,
-      indelSizeDistributionPlotSuffix = indelSizeDistributionPlotSuffix,
-      WholeExome_annotated_TPonly_vcf_gz = splitwes.WholeExome_annotated_TPonly_vcf_gz,
-      WholeExome_annotated_FPonly_vcf_gz = splitwes.WholeExome_annotated_FPonly_vcf_gz,
-      WholeExome_annotated_FNonly_vcf_gz = splitwes.WholeExome_annotated_FNonly_vcf_gz,
-      Rscript_indelSize = Rscript_indelSize
-  }
-
 
   call intervene.run_intervene as myintervene {
       input:
@@ -347,8 +151,7 @@ workflow GermlineVariantCallBenchmark {
       job_id = job_id,
       workflow_instance_identifier = workflow_instance_identifier,
       workflow_identifier = workflow_identifier,
-      codingExons_summary_csv = happyexons.codingExons_summary_csv,
-      WholeExome_summary_csv = happyexome.WholeExome_summary_csv,
+      extended_csv = happystrat.extended_csv,
       Rscript_aggregate = Rscript_aggregate
   }
   
@@ -364,68 +167,16 @@ workflow GermlineVariantCallBenchmark {
   call aggregate.finalReport as aggfinal {
     input:
       outputFile_commonPrefix = outputFile_commonPrefix,
-      WholeExomePrefix = WholeExomePrefix,
+      happyPrefix = happyPrefix,
       queryVCF = queryVCF,
       freeze = freeze,
       subject = subject,
       jupyter_notebook = Jupyter_report,
       upset_plot = myintervene.upsetplot,
-      prec_recall_plot = aggprecRecall.precrecallplot,
-      indelDistribution_CodingExons = cdsresults.indelDistribution_CodingExons,
-      indelDistribution_WholeExome = wesresults.indelDistribution_WholeExome,
-      indelSizeDistribution_CodingExons = cdssize.indelSizeDistribution_CodingExons,
-      indelSizeDistribution_WholeExome = wessize.indelSizeDistribution_WholeExome,
-      indelSizeDistributionPlot_CodingExons = cdssize.indelSizeDistributionPlot_CodingExons,
-      indelSizeDistributionPlot_WholeExome = wessize.indelSizeDistributionPlot_WholeExome
+      prec_recall_plot = aggprecRecall.precrecallplot
   }
   
   output {
-        # File codingExons_annotated_vcf_gz = happyexons.codingExons_annotated_vcf_gz
-        # File codingExons_annotated_vcf_gz_tbi = happyexons.codingExons_annotated_vcf_gz_tbi
-        # File codingExons_counts_csv = happyexons.codingExons_counts_csv
-        # File codingExons_counts_json = happyexons.codingExons_counts_json
-        # File codingExons_runinfo_json = happyexons.codingExons_runinfo_json
-        # File codingExons_roc_indel_pass = happyexons.codingExons_roc_indel_pass
-        # File codingExons_roc_indel = happyexons.codingExons_roc_indel
-        # File codingExons_roc_snp_pass = happyexons.codingExons_roc_snp_pass
-        # File codingExons_roc_snp = happyexons.codingExons_roc_snp
-        # File codingExons_roc_all = happyexons.codingExons_roc_all
-        # File codingExons_extended_csv = happyexons.codingExons_extended_csv
-        # File codingExons_metrics_json = happyexons.codingExons_metrics_json
-        # File codingExons_summary_csv = happyexons.codingExons_summary_csv
-        # File codingExons_console_output_txt = happyexons.codingExons_console_output_txt
-        #
-        #
-        # File WholeExome_annotated_vcf_gz = happyexome.WholeExome_annotated_vcf_gz
-        # File  WholeExome_annotated_vcf_gz_tbi = happyexome.WholeExome_annotated_vcf_gz_tbi
-        # File  WholeExome_counts_csv = happyexome.WholeExome_counts_csv
-        # File  WholeExome_counts_json = happyexome.WholeExome_counts_json
-        # File WholeExome_runinfo_json = happyexome.WholeExome_runinfo_json
-        # File WholeExome_roc_indel_pass = happyexome.WholeExome_roc_indel_pass
-        # File WholeExome_roc_indel = happyexome.WholeExome_roc_indel
-        # File WholeExome_roc_snp_pass = happyexome.WholeExome_roc_snp_pass
-        # File WholeExome_roc_snp = happyexome.WholeExome_roc_snp
-        # File WholeExome_roc_all = happyexome.WholeExome_roc_all
-        # File  WholeExome_extended_csv = happyexome.WholeExome_extended_csv
-        # File  WholeExome_metrics_json = happyexome.WholeExome_metrics_json
-        # File  WholeExome_summary_csv = happyexome.WholeExome_summary_csv
-        # File  WholeExome_console_output_txt = happyexome.WholeExome_console_output_txt
-        # File  codingExons_annotated_TPonly_vcf_gz = splitcds.codingExons_annotated_TPonly_vcf_gz
-        # File  codingExons_annotated_FPonly_vcf_gz = splitcds.codingExons_annotated_FPonly_vcf_gz
-        # File  codingExons_annotated_FNonly_vcf_gz = splitcds.codingExons_annotated_FNonly_vcf_gz
-        # File  WholeExome_annotated_TPonly_vcf_gz = splitwes.WholeExome_annotated_TPonly_vcf_gz
-        # File  WholeExome_annotated_FPonly_vcf_gz = splitwes.WholeExome_annotated_FPonly_vcf_gz
-        # File  WholeExome_annotated_FNonly_vcf_gz = splitwes.WholeExome_annotated_FNonly_vcf_gz
-        #
-        #
-        # File indelDistribution_CodingExons = cdsresults.indelDistribution_CodingExons
-        # File indelDistribution_WholeExome = wesresults.indelDistribution_WholeExome
-        # File indelSizeDistribution_CodingExons = cdssize.indelSizeDistribution_CodingExons
-        # File indelSizeDistribution_WholeExome = wessize.indelSizeDistribution_WholeExome
-        # File indelSizeDistributionPlot_CodingExons = cdssize.indelSizeDistributionPlot_CodingExons
-        # File indelSizeDistributionPlot_WholeExome = wessize.indelSizeDistributionPlot_WholeExome
-        #
-        #
         # File upsetPlot = myintervene.upsetplot
         # File talltable = aggmelt.talltable
         # File bcfstatsoutput = bcfstatstask.bcfstatsoutput

@@ -5,15 +5,14 @@ task melt {
       String job_id
       String workflow_instance_identifier
       String workflow_identifier
-      File codingExons_summary_csv
-      File WholeExome_summary_csv
+      File extended_csv
       File Rscript_aggregate
   }
   output {
     File talltable = "truwlbenchmarks.txt"
   }
   command <<<
-    Rscript ~{Rscript_aggregate} ~{job_id} ~{workflow_instance_identifier} ~{workflow_identifier} ~{WholeExome_summary_csv} ~{codingExons_summary_csv} truwlbenchmarks.txt
+    Rscript ~{Rscript_aggregate} ~{job_id} ~{workflow_instance_identifier} ~{workflow_identifier} ~{extended_csv} truwlbenchmarks.txt
   >>>
   runtime {
     docker: "rocker/tidyverse:4.1.0"
@@ -49,18 +48,10 @@ task finalReport {
         String freeze
         String subject
         String outputFile_commonPrefix
-        String WholeExomePrefix
+        String happyPrefix
         File upset_plot
         File prec_recall_plot
         File jupyter_notebook
-        
-        
-        File indelDistribution_CodingExons
-        File indelDistribution_WholeExome
-        File indelSizeDistribution_CodingExons
-        File indelSizeDistribution_WholeExome
-        File indelSizeDistributionPlot_CodingExons
-        File indelSizeDistributionPlot_WholeExome
      }
    output {
        File annoreport = "finalReport.ipynb"
@@ -73,7 +64,7 @@ task finalReport {
    }
    command <<<
      mkdir -p /home/jovyan/.cache/black/21.7b0/
-     papermill ~{jupyter_notebook} -p queryVCF ~{queryVCF} -p freeze ~{freeze} -p subject ~{subject} -p upset_plot ~{upset_plot} -p prec_recall_plot ~{prec_recall_plot} -p indelSizeDistributionPlot_CodingExons ~{indelSizeDistributionPlot_CodingExons} -p indelSizeDistributionPlot_WholeExome ~{indelSizeDistributionPlot_WholeExome} finalReport.ipynb
+     papermill ~{jupyter_notebook} -p queryVCF ~{queryVCF} -p freeze ~{freeze} -p subject ~{subject} -p upset_plot ~{upset_plot} -p prec_recall_plot ~{prec_recall_plot} finalReport.ipynb
      jupyter nbconvert finalReport.ipynb --to html --output finalReport.html
    >>>
 }
