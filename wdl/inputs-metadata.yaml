@@ -1,6 +1,7 @@
 workflow_name: Variant Benchmarking
 workflow_description: This repository contains the benchmarking workflow that can be used to assess performance of germline variant calling pipelines based on testing with GIAB samples
 parameter_meta:
+  
   GermlineVariantCallBenchmark.queryVCF:
     group: Query
     description:
@@ -48,6 +49,10 @@ parameter_meta:
     group: Affixes
     description:
     example: "wes"
+  GermlineVariantCallBenchmark.happyPrefix:
+    group: Affixes
+    description:
+    example: "hap"
   GermlineVariantCallBenchmark.referenceFasta:
     group: References
     description:
@@ -120,281 +125,24 @@ parameter_meta:
     group: Builtin
 
 
-  GermlineVariantCallBenchmark.region_GRCh38_notinrefseq_cds:
-    group: FunctionalRegions          #         #FunctionalRegions
-  GermlineVariantCallBenchmark.region_GRCh38_refseq_cds:
-    group: FunctionalRegions          #FunctionalRegions
-  GermlineVariantCallBenchmark.region_GRCh38_BadPromoters:
-    group: FunctionalRegions          #FunctionalTechnicallyDifficultRegions
-      
-      
-      
-  GermlineVariantCallBenchmark.region_GRCh38_gc15_slop50:
-    group: GCcontentRegions          #GCcontent
-  GermlineVariantCallBenchmark.region_GRCh38_gc15to20_slop50:
-    group: GCcontentRegions          #GCcontent
-  GermlineVariantCallBenchmark.region_GRCh38_gc20to25_slop50:
-    group: GCcontentRegions          #GCcontent
-  GermlineVariantCallBenchmark.region_GRCh38_gc25to30_slop50:
-    group: GCcontentRegions          #GCcontent
-  GermlineVariantCallBenchmark.region_GRCh38_gc30to55_slop50:
-    group: GCcontentRegions          #GCcontent
-  GermlineVariantCallBenchmark.region_GRCh38_gc55to60_slop50:
-    group: GCcontentRegions          #GCcontent
-  GermlineVariantCallBenchmark.region_GRCh38_gc60to65_slop50:
-    group: GCcontentRegions          #GCcontent
-  GermlineVariantCallBenchmark.region_GRCh38_gc65to70_slop50:
-    group: GCcontentRegions          #GCcontent
-  GermlineVariantCallBenchmark.region_GRCh38_gc70to75_slop50:
-    group: GCcontentRegions          #GCcontent
-  GermlineVariantCallBenchmark.region_GRCh38_gc75to80_slop50:
-    group: GCcontentRegions          #GCcontent
-  GermlineVariantCallBenchmark.region_GRCh38_gc80to85_slop50:
-    group: GCcontentRegions          #GCcontent
-  GermlineVariantCallBenchmark.region_GRCh38_gc85_slop50:
-    group: GCcontentRegions          #GCcontent
-  GermlineVariantCallBenchmark.region_GRCh38_gclt25orgt65_slop50:
-    group: GCcontentRegions          #GCcontent
-  GermlineVariantCallBenchmark.region_GRCh38_gclt30orgt55_slop50:
-    group: GCcontentRegions          #GCcontent
-      
-      
-      
-  GermlineVariantCallBenchmark.region_GRCh38_HG001_GIABv322_compoundhet_slop50:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG001_GIABv322_varswithin50bp:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG001_GIABv332_comphetindel10bp_slop50:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG001_GIABv332_comphetsnp10bp_slop50:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG001_GIABv332_complexandSVs:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG001_GIABv332_complexindel10bp_slop50:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG001_GIABv332_RTG_PG_v332_SVs_alldifficultregions:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG001_GIABv332_RTG_PG_v332_SVs_notin_alldifficultregions:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG001_GIABv332_snpswithin10bp_slop50:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG001_PacBio_MetaSV:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG001_PG2016_10_comphetindel10bp_slop50:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG001_PG2016_10_comphetsnp10bp_slop50:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG001_PG2016_10_complexindel10bp_slop50:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG001_PG2016_10_snpswithin10bp_slop50:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG001_RTG_3773_comphetindel10bp_slop50:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG001_RTG_3773_comphetsnp10bp_slop50:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG001_RTG_3773_complexindel10bp_slop50:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG001_RTG_3773_snpswithin10bp_slop50:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG002_GIABv41_CNV_CCSandONT_elliptical_outlier:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG002_GIABv41_CNV_mrcanavarIllumina_CCShighcov_ONThighcov_intersection:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG002_expanded_150__Tier1plusTier2_v061:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG002_GIABv322_compoundhet_slop50:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG002_GIABv322_varswithin50bp:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG002_GIABv332_comphetindel10bp_slop50:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG002_GIABv332_comphetsnp10bp_slop50:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG002_GIABv332_complexandSVs:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG002_GIABv332_complexandSVs_alldifficultregions:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG002_GIABv332_complexindel10bp_slop50:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG002_GIABv332_notin_complexandSVs_alldifficultregions:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG002_GIABv332_snpswithin10bp_slop50:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG002_GIABv41_CNVsandSVs:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG002_GIABv41_comphetindel10bp_slop50:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG002_GIABv41_comphetsnp10bp_slop50:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG002_GIABv41_complexandSVs:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG002_GIABv41_complexandSVs_alldifficultregions:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG002_GIABv41_complexindel10bp_slop50:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG002_GIABv41_notin_complexandSVs_alldifficultregions:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG002_GIABv41_othercomplexwithin10bp_slop50:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG002_GIABv41_snpswithin10bp_slop50:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG002_HG003_HG004_allsvs:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG002_GIABv41_CNV_gt2assemblycontigs_ONTCanu_ONTFlye_CCSCanu:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG002_GIABv41_inversions_slop25percent:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG002_Tier1plusTier2_v061:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG003_GIABv332_comphetindel10bp_slop50:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG003_GIABv332_comphetsnp10bp_slop50:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG003_GIABv332_complexandSVs:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG003_GIABv332_complexandSVs_alldifficultregions:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG003_GIABv332_complexindel10bp_slop50:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG003_GIABv332_notin_complexandSVs_alldifficultregions:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG003_GIABv332_snpswithin10bp_slop50:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG004_GIABv332_comphetindel10bp_slop50:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG004_GIABv332_comphetsnp10bp_slop50:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG004_GIABv332_complexandSVs:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG004_GIABv332_complexandSVs_alldifficultregions:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG004_GIABv332_complexindel10bp_slop50:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG004_GIABv332_notin_complexandSVs_alldifficultregions:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG004_GIABv332_snpswithin10bp_slop50:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG005_GIABv332_comphetindel10bp_slop50:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG005_GIABv332_comphetsnp10bp_slop50:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG005_GIABv332_complexandSVs:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG005_GIABv332_complexandSVs_alldifficultregions:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG005_GIABv332_complexindel10bp_slop50:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG005_GIABv332_notin_complexandSVs_alldifficultregions:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG005_GIABv332_snpswithin10bp_slop50:
-    group: GenomeSpecificRegions          #GenomeSpecific
-  GermlineVariantCallBenchmark.region_GRCh38_HG005_HG006_HG007_MetaSV_allsvs:
-    group: GenomeSpecificRegions          #GenomeSpecific
-      
-      
-      
-  GermlineVariantCallBenchmark.region_GRCh38_AllHomopolymers_gt6bp_imperfectgt10bp_slop5:
-    group: LowComplexityRegions          #LowComplexity
-  GermlineVariantCallBenchmark.region_GRCh38_AllTandemRepeats_201to10000bp_slop5:
-    group: LowComplexityRegions          #LowComplexity
-  GermlineVariantCallBenchmark.region_GRCh38_AllTandemRepeats_51to200bp_slop5:
-    group: LowComplexityRegions          #LowComplexity
-  GermlineVariantCallBenchmark.region_GRCh38_AllTandemRepeats_gt10000bp_slop5:
-    group: LowComplexityRegions          #LowComplexity
-  GermlineVariantCallBenchmark.region_GRCh38_AllTandemRepeats_gt100bp_slop5:
-    group: LowComplexityRegions          #LowComplexity
-  GermlineVariantCallBenchmark.region_GRCh38_AllTandemRepeats_lt51bp_slop5:
-    group: LowComplexityRegions          #LowComplexity
-  GermlineVariantCallBenchmark.region_GRCh38_AllTandemRepeatsandHomopolymers_slop5:
-    group: LowComplexityRegions          #LowComplexity
-  GermlineVariantCallBenchmark.region_GRCh38_notinAllHomopolymers_gt6bp_imperfectgt10bp_slop5:
-    group: LowComplexityRegions          #LowComplexity
-  GermlineVariantCallBenchmark.region_GRCh38_notinAllTandemRepeatsandHomopolymers_slop5:
-    group: LowComplexityRegions          #LowComplexity
-  GermlineVariantCallBenchmark.region_GRCh38_SimpleRepeat_diTR_11to50_slop5:
-    group: LowComplexityRegions          #LowComplexity
-  GermlineVariantCallBenchmark.region_GRCh38_SimpleRepeat_diTR_51to200_slop5:
-    group: LowComplexityRegions          #LowComplexity
-  GermlineVariantCallBenchmark.region_GRCh38_SimpleRepeat_diTR_gt200_slop5:
-    group: LowComplexityRegions          #LowComplexity
-  GermlineVariantCallBenchmark.region_GRCh38_SimpleRepeat_homopolymer_4to6_slop5:
-    group: LowComplexityRegions          #LowComplexity
-  GermlineVariantCallBenchmark.region_GRCh38_SimpleRepeat_homopolymer_7to11_slop5:
-    group: LowComplexityRegions          #LowComplexity
-  GermlineVariantCallBenchmark.region_GRCh38_SimpleRepeat_homopolymer_gt11_slop5:
-    group: LowComplexityRegions          #LowComplexity
-  GermlineVariantCallBenchmark.region_GRCh38_SimpleRepeat_imperfecthomopolgt10_slop5:
-    group: LowComplexityRegions          #LowComplexity
-  GermlineVariantCallBenchmark.region_GRCh38_SimpleRepeat_quadTR_20to50_slop5:
-    group: LowComplexityRegions          #LowComplexity
-  GermlineVariantCallBenchmark.region_GRCh38_SimpleRepeat_quadTR_51to200_slop5:
-    group: LowComplexityRegions          #LowComplexity
-  GermlineVariantCallBenchmark.region_GRCh38_SimpleRepeat_quadTR_gt200_slop5:
-    group: LowComplexityRegions          #LowComplexity
-  GermlineVariantCallBenchmark.region_GRCh38_SimpleRepeat_triTR_15to50_slop5:
-    group: LowComplexityRegions          #LowComplexity
-  GermlineVariantCallBenchmark.region_GRCh38_SimpleRepeat_triTR_51to200_slop5:
-    group: LowComplexityRegions          #LowComplexity
-  GermlineVariantCallBenchmark.region_GRCh38_SimpleRepeat_triTR_gt200_slop5:
-    group: LowComplexityRegions          #LowComplexity
-      
-      
-      
-  GermlineVariantCallBenchmark.region_GRCh38_nonunique_l100_m2_e1:
-    group: MappabilityRegions          #mappability
-  GermlineVariantCallBenchmark.region_GRCh38_nonunique_l250_m0_e0:
-    group: MappabilityRegions          #mappability
-  GermlineVariantCallBenchmark.region_GRCh38_lowmappabilityall:
-    group: MappabilityRegions          #mappability
-  GermlineVariantCallBenchmark.region_GRCh38_notinlowmappabilityall:
-    group: MappabilityRegions          #mappability
-      
-      
-      
-  GermlineVariantCallBenchmark.region_GRCh38_allOtherDifficultregions:
-    group: OtherDifficultRegions          #OtherDifficult
-  GermlineVariantCallBenchmark.region_GRCh38_contigs_lt500kb:
-    group: OtherDifficultRegions          #OtherDifficult
-  GermlineVariantCallBenchmark.region_GRCh38_gaps_slop15kb:
-    group: OtherDifficultRegions          #OtherDifficult
-  GermlineVariantCallBenchmark.region_GRCh38_L1H_gt500:
-    group: OtherDifficultRegions          #OtherDifficult
-  GermlineVariantCallBenchmark.region_GRCh38_MHC:
-    group: OtherDifficultRegions          #OtherDifficult
-  GermlineVariantCallBenchmark.region_GRCh38_VDJ:
-    group: OtherDifficultRegions          #OtherDifficult
-      
-      
-      
-  GermlineVariantCallBenchmark.region_GRCh38_chainSelf:
-    group: OtherDifficultRegions          #SegmentalDuplications
-  GermlineVariantCallBenchmark.region_GRCh38_chainSelf_gt10kb:
-    group: OtherDifficultRegions          #SegmentalDuplications
-  GermlineVariantCallBenchmark.region_GRCh38_gt5segdups_gt10kb_gt99percidentity:
-    group: OtherDifficultRegions          #SegmentalDuplications
-  GermlineVariantCallBenchmark.region_GRCh38_notinchainSelf:
-    group: OtherDifficultRegions          #SegmentalDuplications
-  GermlineVariantCallBenchmark.region_GRCh38_notinchainSelf_gt10kb:
-    group: OtherDifficultRegions          #SegmentalDuplications
-  GermlineVariantCallBenchmark.region_GRCh38_notinsegdups:
-    group: OtherDifficultRegions          #SegmentalDuplications
-  GermlineVariantCallBenchmark.region_GRCh38_notinsegdups_gt10kb:
-    group: OtherDifficultRegions          #SegmentalDuplications
-  GermlineVariantCallBenchmark.region_GRCh38_segdups:
-    group: OtherDifficultRegions          #SegmentalDuplications
-  GermlineVariantCallBenchmark.region_GRCh38_segdups_gt10kb:
-    group: OtherDifficultRegions          #SegmentalDuplications
-      
-      
-  GermlineVariantCallBenchmark.region_GRCh38_alldifficultregions:
-    group: UnionRegions          #union
-  GermlineVariantCallBenchmark.region_GRCh38_alllowmapandsegdupregions:
-    group: UnionRegions          #union
-  GermlineVariantCallBenchmark.region_GRCh38_notinalldifficultregions:
-    group: UnionRegions          #union
-  GermlineVariantCallBenchmark.region_GRCh38_notinalllowmapandsegdupregions:
-    group: UnionRegions          #union
-      
+  GermlineVariantCallBenchmark.gsRegions:
+    group: GenomeSpecificRegions
+  GermlineVariantCallBenchmark.mpRegions:
+    group: MappabilityRegions
+  GermlineVariantCallBenchmark.odRegions:
+    group: OtherDifficultRegions
+  GermlineVariantCallBenchmark.sdRegions:
+    group: SegmentalDuplicationRegions
+  GermlineVariantCallBenchmark.unRegions:
+    group: UnionRegions
+  GermlineVariantCallBenchmark.lcRegions:
+    group: LowComplexityRegions
+  GermlineVariantCallBenchmark.gcRegions:
+    group: GCcontentRegions
+  GermlineVariantCallBenchmark.fcRegions:
+    group: FunctionalRegions
+  
+  
       
 parameter_group:
   Query:
@@ -438,4 +186,7 @@ parameter_group:
     display: true
   UnionRegions:
     title: Union Regions
+    display: true
+  SegmentalDuplicationRegions:
+    title: Segmental Duplication Regions
     display: true

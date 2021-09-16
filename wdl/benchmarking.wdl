@@ -17,7 +17,7 @@ workflow GermlineVariantCallBenchmark {
     File queryVCF
     String freeze
     #HG002 (child), HG003 (dad), HG004 (mom)
-    String subject = "HG002"
+    String subject
 
     Map[String,Map[String,File]] truthVCF = {
       "HG002": {
@@ -49,7 +49,7 @@ workflow GermlineVariantCallBenchmark {
     String chrRemovedVCF_fileSuffix = "_chrRemoved.vcf.gz"
     String outputFile_commonPrefix = "results"
     String codingExonsPrefix = "cds"
-    String happyPrefix = "wes"
+    String happyPrefix = "hap"
     String consoleOutputPartialFilename = "_ConsoleOutput.txt"
     String indelDistributionSuffix = "_indelDistribution_Frombcftools.txt"
     String indelSizeDistributionSuffix = "_indelSizeDistribution.txt"
@@ -128,6 +128,7 @@ workflow GermlineVariantCallBenchmark {
     
       stratTable = makeStrat.stratTable,
       happyPrefix =  happyPrefix,
+      outputFile_commonPrefix = outputFile_commonPrefix,
       consoleOutputPartialFilename = consoleOutputPartialFilename
   }
 
