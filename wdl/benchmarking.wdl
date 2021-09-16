@@ -1,12 +1,12 @@
 version 1.0
 
-import "./structs.wdl" as structs
-import "./bcftools.wdl" as bcftools
-import "./indel.wdl" as indel
-import "./happy.wdl" as happy
-import "./intervene.wdl" as intervene
-import "./aggregate.wdl" as aggregate
-import "./multiqc.wdl" as multiqc
+import "structs.wdl" as structs
+import "bcftools.wdl" as bcftools
+import "indel.wdl" as indel
+import "happy.wdl" as happy
+import "intervene.wdl" as intervene
+import "aggregate.wdl" as aggregate
+import "multiqc.wdl" as multiqc
 
 
 # WORKFLOW DEFINITION
