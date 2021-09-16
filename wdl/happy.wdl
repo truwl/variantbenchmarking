@@ -1,6 +1,7 @@
 version 1.0
 
-
+import "smooglie.wdl" as smoggle
+import "structs.wdl" as structs
 
 task generateStratTable {
     input {
