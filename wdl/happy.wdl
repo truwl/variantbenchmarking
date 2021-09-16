@@ -1,5 +1,5 @@
 version 1.0
-import "structsy.wdl" as structsy
+import "compoundbools.wdl" as compoundbools
 
 task generateStratTable {
     input {
