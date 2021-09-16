@@ -1,4 +1,5 @@
 version 1.0
+
 import "compoundbools.wdl" as compoundbools
 
 task generateStratTable {
