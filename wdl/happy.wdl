@@ -20,6 +20,11 @@ task generateStratTable {
     output {
         File stratTable = "stratifications.tsv"
     }
+    runtime {
+      docker: "truwl/debian-buster"
+      memory: "1 MB"
+      cpu: 1
+    }
 }
 
 task happyStratify {
