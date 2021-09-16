@@ -1,6 +1,6 @@
 version 1.0
 
-
+import "structsy.wdl" as structs
 import "bcftools.wdl" as bcftools
 import "indel.wdl" as indel
 import "happy.wdl" as happy
