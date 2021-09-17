@@ -1,5 +1,40 @@
 version 1.0
 
+import "compoundbools.wdl"
+
+task extract_true {
+  input {
+  FunctionalRegions fcRegions
+  File structToTrueLines
+  }
+  command <<<
+   python -c '''s="~{fcRegions}";mydict=json.loads(s.replace('{','{"').replace(':','":').replace(', ',', "')); filtered = [k for k, v in mydict.items() if v];print(l) for l in filtered'''
+   >>>
+   runtime {
+     docker: "truwl/debian-buster"
+     memory: "5 MB"
+     cpu: 1
+   }
+   output {
+     Array[String] matches = read_lines(stdout())
+   }
+}
+
+task test_intervene {
+  input {
+    String region
+  }
+  command <<<
+    echo ~{region}
+    >>>
+  runtime {
+    docker: "truwl/debian-buster"
+    memory: "5 MB"
+    cpu: 1
+  }
+}
+
+
 task run_intervene {
   input {
   

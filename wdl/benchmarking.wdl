@@ -265,7 +265,16 @@ workflow GermlineVariantCallBenchmark {
       outputFile_commonPrefix = outputFile_commonPrefix,
       consoleOutputPartialFilename = consoleOutputPartialFilename
   }
-
+  
+  #https://github.com/openwdl/wdl/issues/279
+  #https://bioinformatics.stackexchange.com/questions/16100/extracting-wdl-map-keys-as-a-task
+  
+  #Array[String] fcKeys = keys(fcRegions)
+  Array[String] fcKeys = fcRegions.keys()
+  scatter (pairs in fcRegions) {
+     String keys = pairs.left
+     # String values = pairs.right
+   }
   call intervene.run_intervene as myintervene {
       input:
           includeB1S5A = includeB1S5A,
