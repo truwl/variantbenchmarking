@@ -8,7 +8,7 @@ task extract_true {
   File structToTrueLines
   }
   command <<<
-   python -c '''s="~{fcRegions}";mydict=json.loads(s.replace('{','{"').replace(':','":').replace(', ',', "')); filtered = [k for k, v in mydict.items() if v];print(l) for l in filtered'''
+   python ~{structToTrueLines} "~{fcRegions}"
    >>>
    runtime {
      docker: "truwl/debian-buster"

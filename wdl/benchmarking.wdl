@@ -42,6 +42,7 @@ workflow GermlineVariantCallBenchmark {
     File Rscript_indelSize = "gs://benchmarking-datasets/indelSizeDistribution_Detailed.R"  ## Specify the R script indelSizeDistribution_Detailed.R
     File Rscript_aggregate = "gs://benchmarking-datasets/aggregateResults.R"
     File Rscript_precrecall = "gs://benchmarking-datasets/precRecallPlot.R"
+    File structToTrueLines = "gs://benchmarking-datasets/structToTrueLines.py"
     File Jupyter_report = "gs://benchmarking-datasets/report.ipynb"
 
     Map[String,File] referenceFasta = {"hg37":"gs://truwl-giab/references/GRCh37-lite.fa", "hg38":"gs://truwl-giab/references/GRCh38/GCA_000001405.15_GRCh38_no_alt_analysis_set_maskedGRC_exclusions.fasta.gz"}
