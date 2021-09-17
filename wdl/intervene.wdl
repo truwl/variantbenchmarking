@@ -17,7 +17,7 @@ task extract_true {
      cpu: 1
    }
    output {
-     Array[File] matches = read_lines("trueRegions.txt")
+     Array[String] matches = read_lines("trueRegions.txt")
    }
 }
 
