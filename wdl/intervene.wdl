@@ -17,7 +17,7 @@ task extract_true {
      cpu: 1
    }
    output {
-     Array[String] matches = read_lines("trueRegions.txt")
+     Array[File] matches = read_lines("trueRegions.txt")
    }
 }
 
@@ -52,6 +52,7 @@ task run_intervene {
     String subject
     String freeze
     File queryVCF
+    File region
   }
 #
 # gs://benchmarking-datasets/DRAGEN_HG002-NA24385-50x.vcf.gz
@@ -162,16 +163,21 @@ task run_intervene {
         fi
     fi
 
+    mkdir fullVCF
     for value in "${downloadList[@]}"
     do
          echo $value
-         gsutil cp $value .
+         gsutil cp $value fullVCF/
+         vcfname=$(basename "$value")
+         bedtools intersect -a fullVCF/$full -b ~{region} -wa -header | gzip -c > $vcfname
     done
+    
+    bedtools intersect -a ~{queryVCF} -b ~{region} -wa -header | gzip -c > region~{queryVCF}
     
     mkdir -p Intervene_results
     mkdir -p Intervene_results/sets
-    echo "intervene upset --figtype png --type reentrant -i ~{queryVCF} $optvcfs --save-overlaps --filenames --bedtools-options header"
-    intervene upset --figtype png --type genomic -i ~{queryVCF} $optvcfs --save-overlaps --filenames --bedtools-options header
+    echo "intervene upset --figtype png --type reentrant -i region~{queryVCF} $optvcfs --save-overlaps --filenames --bedtools-options header"
+    intervene upset --figtype png --type genomic -i region~{queryVCF} $optvcfs --save-overlaps --filenames --bedtools-options header
   >>>
   
   runtime {

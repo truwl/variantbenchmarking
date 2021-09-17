@@ -276,19 +276,30 @@ workflow GermlineVariantCallBenchmark {
      String keys = pairs.left
      # String values = pairs.right
    }
-  call intervene.run_intervene as myintervene {
-      input:
-          includeB1S5A = includeB1S5A,
-          includeWX8VK = includeWX8VK,
-          includeCZA1Y = includeCZA1Y,
-          includeEIUT6 = includeEIUT6,
-          includeXC97E = includeXC97E,
-          includeXV7ZN = includeXV7ZN,
-          includeIA789 = includeIA789,
-          includeW607K = includeW607K,
-          subject = subject,
-          queryVCF = queryVCF,
-          freeze = freeze
+   
+   call intervene.extract_true as extractme {
+       input:
+           fcRegions = fcRegions,
+           structToTrueLines = structToTrueLines,
+           bucketPath = bucketPath
+   }
+   
+   scatter (regionFile in extractme.matches){
+      call intervene.run_intervene as myintervene {
+          input:
+              includeB1S5A = includeB1S5A,
+              includeWX8VK = includeWX8VK,
+              includeCZA1Y = includeCZA1Y,
+              includeEIUT6 = includeEIUT6,
+              includeXC97E = includeXC97E,
+              includeXV7ZN = includeXV7ZN,
+              includeIA789 = includeIA789,
+              includeW607K = includeW607K,
+              subject = subject,
+              queryVCF = queryVCF,
+              freeze = freeze,
+              region = regionFile
+      }
   }
 
   call aggregate.melt as aggmelt {
