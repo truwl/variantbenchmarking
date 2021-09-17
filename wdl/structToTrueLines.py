@@ -21,4 +21,4 @@ else:
 filtered = [k for k, v in mydict.items() if v]
 
 for l in filtered:
-    print(os.path.join(bucketPath,l.replace('region_',''))+'.bed.gz')
+    print(os.path.join(bucketPath,l.replace('region_','')+'.bed.gz'))
