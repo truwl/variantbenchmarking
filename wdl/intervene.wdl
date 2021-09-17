@@ -8,7 +8,7 @@ task extract_true {
   File structToTrueLines
   }
   command <<<
-   python ~{structToTrueLines} "~{fcRegions}"
+   python ~{structToTrueLines} "~{fcRegions}" false > trueRegions.txt
    >>>
    runtime {
      docker: "truwl/debian-buster"
@@ -16,7 +16,7 @@ task extract_true {
      cpu: 1
    }
    output {
-     Array[String] matches = read_lines(stdout())
+     Array[String] matches = read_lines("trueRegions.txt")
    }
 }
 
