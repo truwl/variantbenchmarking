@@ -16,5 +16,6 @@ else:
 
 filtered = [k for k, v in mydict.items() if v]
 
+print("test line")
 for l in filtered:
     print(l)
