@@ -49,7 +49,7 @@ task finalReport {
         String subject
         String outputFile_commonPrefix
         String happyPrefix
-        File upset_plot
+        Array[File] upset_plots
         File prec_recall_plot
         File jupyter_notebook
      }
@@ -64,7 +64,7 @@ task finalReport {
    }
    command <<<
      mkdir -p /home/jovyan/.cache/black/21.7b0/
-     papermill ~{jupyter_notebook} -p queryVCF ~{queryVCF} -p freeze ~{freeze} -p subject ~{subject} -p upset_plot ~{upset_plot} -p prec_recall_plot ~{prec_recall_plot} finalReport.ipynb
+     papermill ~{jupyter_notebook} -p queryVCF ~{queryVCF} -p freeze ~{freeze} -p subject ~{subject} -p upset_plot ~{upset_plots} -p prec_recall_plot ~{prec_recall_plot} finalReport.ipynb
      jupyter nbconvert finalReport.ipynb --to html --output finalReport.html
    >>>
 }

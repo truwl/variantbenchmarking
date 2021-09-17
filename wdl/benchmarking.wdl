@@ -66,11 +66,14 @@ workflow GermlineVariantCallBenchmark {
     Boolean includeIA789 = true
     Boolean includeW607K = true
 
+    String fcRegionsPath = "gs://truwl-giab/genome-stratifications/v2.0/GRCh38/FunctionalRegions/"
     FunctionalRegions fcRegions = {
   'region_GRCh38_notinrefseq_cds':false,
   'region_GRCh38_refseq_cds':false,
   'region_GRCh38_BadPromoters':false
 }
+    
+    String gcRegionsPath = "gs://truwl-giab/genome-stratifications/v2.0/GRCh38/GCcontent/"
     GCcontent gcRegions = {
   'region_GRCh38_gc15_slop50':false,
   'region_GRCh38_gc15to20_slop50':false,
@@ -87,6 +90,8 @@ workflow GermlineVariantCallBenchmark {
   'region_GRCh38_gclt25orgt65_slop50':false,
   'region_GRCh38_gclt30orgt55_slop50':false
 }
+
+    String gsRegionsPath = "gs://truwl-giab/genome-stratifications/v2.0/GRCh38/GenomeSpecific/"
     GenomeSpecific gsRegions = {
   'region_GRCh38_HG001_GIABv322_compoundhet_slop50':false,
   'region_GRCh38_HG001_GIABv322_varswithin50bp':false,
@@ -154,6 +159,8 @@ workflow GermlineVariantCallBenchmark {
   'region_GRCh38_HG005_GIABv332_snpswithin10bp_slop50':false,
   'region_GRCh38_HG005_HG006_HG007_MetaSV_allsvs':false
 }
+
+    String lcRegionsPath = "gs://truwl-giab/genome-stratifications/v2.0/GRCh38/LowComplexity/"
     LowComplexity lcRegions = {
   'region_GRCh38_AllHomopolymers_gt6bp_imperfectgt10bp_slop5':false,
   'region_GRCh38_AllTandemRepeats_201to10000bp_slop5':false,
@@ -179,7 +186,10 @@ workflow GermlineVariantCallBenchmark {
   'region_GRCh38_SimpleRepeat_triTR_gt200_slop5':false
 }
 
+    String mpRegionsPath = "gs://truwl-giab/genome-stratifications/v2.0/GRCh38/mappability/"
     Mappability mpRegions = {'region_GRCh38_nonunique_l100_m2_e1':false,'region_GRCh38_nonunique_l250_m0_e0':false,'region_GRCh38_lowmappabilityall':false,'region_GRCh38_notinlowmappabilityall':false}
+
+    String odRegionsPath = "gs://truwl-giab/genome-stratifications/v2.0/GRCh38/OtherDifficult/"
     OtherDifficult odRegions = {
   'region_GRCh38_allOtherDifficultregions':false,
   'region_GRCh38_contigs_lt500kb':false,
@@ -189,6 +199,7 @@ workflow GermlineVariantCallBenchmark {
   'region_GRCh38_VDJ':false
 }
 
+    String sdRegionsPath = "gs://truwl-giab/genome-stratifications/v2.0/GRCh38/SegmentalDuplications/"
     SegmentalDuplications sdRegions = {
   'region_GRCh38_chainSelf':false,
   'region_GRCh38_chainSelf_gt10kb':false,
@@ -201,6 +212,7 @@ workflow GermlineVariantCallBenchmark {
   'region_GRCh38_segdups_gt10kb':false
 }
 
+    String unRegionsPath = "gs://truwl-giab/genome-stratifications/v2.0/GRCh38/union/"
     Union unRegions = {
   'region_GRCh38_alldifficultregions':false,
   'region_GRCh38_alllowmapandsegdupregions':false,
@@ -250,7 +262,15 @@ workflow GermlineVariantCallBenchmark {
         mpRegions = mpRegions,
         odRegions = odRegions,
         sdRegions = sdRegions,
-        unRegions = unRegions
+        unRegions = unRegions,
+        fcRegionsPath = fcRegionsPath,
+        gcRegionsPath = gcRegionsPath,
+        gsRegionsPath = gsRegionsPath,
+        lcRegionsPath = lcRegionsPath,
+        mpRegionsPath = mpRegionsPath,
+        odRegionsPath = odRegionsPath,
+        sdRegionsPath = sdRegionsPath,
+        unRegionsPath = unRegionsPath
   }
 
   call happy.happyStratify as happystrat {
@@ -270,18 +290,12 @@ workflow GermlineVariantCallBenchmark {
   #https://github.com/openwdl/wdl/issues/279
   #https://bioinformatics.stackexchange.com/questions/16100/extracting-wdl-map-keys-as-a-task
   
-  #Array[String] fcKeys = keys(fcRegions)
-  Array[String] fcKeys = fcRegions.keys()
-  scatter (pairs in fcRegions) {
-     String keys = pairs.left
-     # String values = pairs.right
-   }
    
    call intervene.extract_true as extractme {
        input:
            fcRegions = fcRegions,
            structToTrueLines = structToTrueLines,
-           bucketPath = bucketPath
+           bucketPath = fcRegionsPath
    }
    
    scatter (regionFile in extractme.matches){
@@ -319,7 +333,7 @@ workflow GermlineVariantCallBenchmark {
      samplename = job_id,
      outputplotname = "precRecall.png"
   }
-
+  
   call aggregate.finalReport as aggfinal {
     input:
       outputFile_commonPrefix = outputFile_commonPrefix,
@@ -328,7 +342,7 @@ workflow GermlineVariantCallBenchmark {
       freeze = freeze,
       subject = subject,
       jupyter_notebook = Jupyter_report,
-      upset_plot = myintervene.upsetplot,
+      upset_plots = select_all(myintervene.upsetplot),
       prec_recall_plot = aggprecRecall.precrecallplot
   }
   

@@ -5,13 +5,21 @@ import "compoundbools.wdl" as compoundbools
 task generateStratTable {
     input {
     FunctionalRegions fcRegions
+    String fcRegionsPath
     GCcontent gcRegions
+    String gcRegionsPath
     GenomeSpecific gsRegions
+    String gsRegionsPath
     LowComplexity lcRegions
+    String lcRegionsPath
     Mappability mpRegions
+    String mpRegionsPath
     OtherDifficult odRegions
+    String odRegionsPath
     SegmentalDuplications sdRegions
+    String sdRegionsPath
     Union unRegions
+    String unRegionsPath
     }
     
     command <<<
