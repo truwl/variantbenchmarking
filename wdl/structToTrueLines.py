@@ -2,9 +2,11 @@
 
 import sys
 import json
+import os
 
 s=sys.argv[1]
-quotedKeys = sys.argv[2]
+bucketPath= sys.argv[2]
+quotedKeys = sys.argv[3]
 
 mydict = {}
 
@@ -19,4 +21,4 @@ else:
 filtered = [k for k, v in mydict.items() if v]
 
 for l in filtered:
-    print(l)
+    print(os.path.join(bucketPath,l))
