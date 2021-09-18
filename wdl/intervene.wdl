@@ -12,7 +12,7 @@ task extract_true {
    python ~{structToTrueLines} " "{region_GRCh38_notinrefseq_cds: false, region_GRCh38_refseq_cds: true, region_GRCh38_HG001_PG2016_10_comphetindel10bp_slop50: true}"" ~{bucketPath} lines > trueRegions.txt
    >>>
    runtime {
-     docker: "truwl/debian-buster"
+     docker: "truwl/debian-buster:latest"
      memory: "5 MB"
      cpu: 1
    }
@@ -29,7 +29,7 @@ task test_intervene {
     echo ~{region}
     >>>
   runtime {
-    docker: "truwl/debian-buster"
+    docker: "truwl/debian-buster:latest"
     memory: "5 MB"
     cpu: 1
   }
