@@ -1,30 +1,31 @@
 version 1.0
 
-import "compoundbools.wdl" as compoundbools
-
 task generateStratTable {
     input {
-    FunctionalRegions fcRegions
-    String fcRegionsPath
-    GCcontent gcRegions
-    String gcRegionsPath
-    GenomeSpecific gsRegions
-    String gsRegionsPath
-    LowComplexity lcRegions
-    String lcRegionsPath
-    Mappability mpRegions
-    String mpRegionsPath
-    OtherDifficult odRegions
-    String odRegionsPath
-    SegmentalDuplications sdRegions
-    String sdRegionsPath
-    Union unRegions
-    String unRegionsPath
+    Map [String, Boolean] myRegions
+    File structToTrueLines
+    String bucketPath
+    
+    # GCcontent gcRegions
+    # String gcRegionsPath
+    # GenomeSpecific gsRegions
+    # String gsRegionsPath
+    # LowComplexity lcRegions
+    # String lcRegionsPath
+    # Mappability mpRegions
+    # String mpRegionsPath
+    # OtherDifficult odRegions
+    # String odRegionsPath
+    # SegmentalDuplications sdRegions
+    # String sdRegionsPath
+    # Union unRegions
+    # String unRegionsPath
     }
     
     command <<<
-        echo "cds\tgs://truwl-giab/genome-stratifications/v2.0/GRCh38/FunctionalRegions/GRCh38_refseq_cds.bed.gz" >> "stratifications.tsv"
-    >>>
+         python ~{structToTrueLines} ~{write_json(fcRegions)} ~{bucketPath} lines > "stratifications.tsv"
+     >>>
+     
     output {
         File stratTable = "stratifications.tsv"
     }

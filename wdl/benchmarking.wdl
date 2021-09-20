@@ -406,25 +406,30 @@ workflow GermlineVariantCallBenchmark {
   }
 
   call happy.generateStratTable as makeStrat {
-      input: 
-        fcRegions = fcRegions,
-        gcRegions = gcRegions,
-        gsRegions = gsRegions,
-        lcRegions = lcRegions,
-        mpRegions = mpRegions,
-        odRegions = odRegions,
-        sdRegions = sdRegions,
-        unRegions = unRegions,
-        fcRegionsPath = fcRegionsPath,
-        gcRegionsPath = gcRegionsPath,
-        gsRegionsPath = gsRegionsPath,
-        lcRegionsPath = lcRegionsPath,
-        mpRegionsPath = mpRegionsPath,
-        odRegionsPath = odRegionsPath,
-        sdRegionsPath = sdRegionsPath,
-        unRegionsPath = unRegionsPath
-  }
+    input: 
+      myRegions = fcRegions,
+      structToTrueLines = structToTrueLines,
+      bucketPath = fcRegionsPath
 
+  }
+        # fcRegions = fcRegions,
+        # gcRegions = gcRegions,
+        # gsRegions = gsRegions,
+        # lcRegions = lcRegions,
+        # mpRegions = mpRegions,
+        # odRegions = odRegions,
+        # sdRegions = sdRegions,
+        # unRegions = unRegions,
+        # fcRegionsPath = fcRegionsPath,
+        # gcRegionsPath = gcRegionsPath,
+        # gsRegionsPath = gsRegionsPath,
+        # lcRegionsPath = lcRegionsPath,
+        # mpRegionsPath = mpRegionsPath,
+        # odRegionsPath = odRegionsPath,
+        # sdRegionsPath = sdRegionsPath,
+        # unRegionsPath = unRegionsPath
+        
+        
   call happy.happyStratify as happystrat {
     input:
       queryVCF = queryVCF,
@@ -445,7 +450,7 @@ workflow GermlineVariantCallBenchmark {
    
    call intervene.extract_true as extractme {
        input:
-           fcRegions = fcRegions,
+           myRegions = fcRegions,
            structToTrueLines = structToTrueLines,
            bucketPath = fcRegionsPath
    }

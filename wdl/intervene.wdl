@@ -5,12 +5,12 @@ version 1.0
 task extract_true {
   input {
   #FunctionalRegions fcRegions
-  Map [String, Boolean] fcRegions
+  Map [String, Boolean] myRegions
   File structToTrueLines
   String bucketPath
   }
   command <<<
-       python ~{structToTrueLines} ~{write_json(fcRegions)} ~{bucketPath} lines > trueRegions.txt
+       python ~{structToTrueLines} ~{write_json(myRegions)} ~{bucketPath} lines > trueRegions.txt
    >>>
    runtime {
      docker: "truwl/debian-buster:latest"
