@@ -178,8 +178,7 @@ task run_intervene {
     
     mkdir -p Intervene_results
     mkdir -p Intervene_results/sets
-    echo "intervene upset --figtype png --type reentrant -i region~{queryVCF} $optvcfs --save-overlaps --filenames --bedtools-options header"
-    intervene upset --figtype png --type genomic -i region~{queryVCF} $optvcfs --save-overlaps --filenames --bedtools-options header
+    intervene upset --figtype png --type genomic -i "region"$queryVCFname $optvcfs --save-overlaps --filenames --bedtools-options header
   >>>
   
   runtime {
