@@ -173,7 +173,8 @@ task run_intervene {
          echo ${compvcfname}
          echo "bedtools intersect -a fullVCF/${compvcfname} -b ~{region} -wa -header | gzip -c > tmpintersect.vcf.gz"
          bedtools intersect -a "fullVCF/${compvcfname}" -b ~{region} -wa -header | gzip -c > tmpintersect.vcf.gz
-         mv tmpintersect.vcf.gz ${compvcfname}
+         echo "mv tmpintersect.vcf.gz ${compvcfname}"
+         mv tmpintersect.vcf.gz "${compvcfname}"
     done
     
     queryVCFname=$(basename "~{queryVCF}")
