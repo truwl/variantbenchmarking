@@ -1,10 +1,11 @@
 version 1.0
 
-import "compoundbools.wdl"
+#import "boolmaps.wdl"
 
 task extract_true {
   input {
-  FunctionalRegions fcRegions
+  #FunctionalRegions fcRegions
+  Map [String, Boolean] fcRegions
   File structToTrueLines
   String bucketPath
   }
