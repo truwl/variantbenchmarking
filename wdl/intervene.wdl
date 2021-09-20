@@ -179,9 +179,10 @@ task run_intervene {
     queryVCFname=$(basename "~{queryVCF}")
     bedtools intersect -a ~{queryVCF} -b ~{region} -wa -header | gzip -c > "region"$queryVCFname
     
+    regionName=$(basename "~{region}")
     mkdir -p Intervene_results
     mkdir -p Intervene_results/sets
-    intervene upset --figtype png --type genomic -i "region"$queryVCFname $optvcfs --save-overlaps --filenames --bedtools-options header
+    intervene upset –mblabel "Intersections in $regionName" –sxlabel "Set size in $regionName"--figtype png --type genomic -i "region"$queryVCFname $optvcfs --save-overlaps --filenames --bedtools-options header
   >>>
   
   runtime {
