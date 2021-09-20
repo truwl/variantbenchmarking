@@ -171,7 +171,8 @@ task run_intervene {
          gsutil cp $value fullVCF/
          compvcfname=$(basename "$value")
          echo ${compvcfname}
-         bedtools intersect -a fullVCF/$full -b ~{region} -wa -header | gzip -c > tmpintersect.vcf.gz
+         echo "bedtools intersect -a fullVCF/${compvcfname} -b ~{region} -wa -header | gzip -c > tmpintersect.vcf.gz"
+         bedtools intersect -a "fullVCF/${compvcfname}" -b ~{region} -wa -header | gzip -c > tmpintersect.vcf.gz
          mv tmpintersect.vcf.gz ${compvcfname}
     done
     
