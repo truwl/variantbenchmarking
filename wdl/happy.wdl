@@ -23,7 +23,7 @@ task generateStratTable {
     }
     
     command <<<
-         python ~{structToTrueLines} ~{write_json(fcRegions)} ~{bucketPath} strattable > "stratifications.tsv"
+         python ~{structToTrueLines} ~{write_json(myRegions)} ~{bucketPath} strattable > "stratifications.tsv"
      >>>
      
     output {
