@@ -169,11 +169,12 @@ task run_intervene {
     do
          echo $value
          gsutil cp $value fullVCF/
-         vcfname=$(basename "$value")
-         bedtools intersect -a fullVCF/$full -b ~{region} -wa -header | gzip -c > $vcfname
+         compvcfname=$(basename "$value")
+         bedtools intersect -a fullVCF/$full -b ~{region} -wa -header | gzip -c > $compvcfname
     done
     
-    bedtools intersect -a ~{queryVCF} -b ~{region} -wa -header | gzip -c > region~{queryVCF}
+    queryVCFname=$(basename "~{queryVCF}")
+    bedtools intersect -a ~{queryVCF} -b ~{region} -wa -header | gzip -c > "region"$queryVCFname
     
     mkdir -p Intervene_results
     mkdir -p Intervene_results/sets
