@@ -16,7 +16,7 @@ parser.add_argument(dest='regionHash', type=str, help="some region hash like {re
 parser.add_argument(dest='bucketPath', type=str, help="some bucketPath like gs://truwl-giab/genome-stratifications/v2.0/GRCh38/GenomeSpecific")
 parser.add_argument(dest='outputStyle', type=str, help="lines (region paths) or strattable (name\tregionPath)")
 
-parser.add_argument('-quotedKeys', action="store_true", default=False)
+parser.add_argument('-quotedKeys', action="store_true", default=True)
 args = parser.parse_args()
 
 
@@ -24,9 +24,9 @@ mydict = {}
 
 #if the keys aren't quoted make them
 if args.quotedKeys == True:
-    mydict = json.loads(args.regionHash)
+    mydict = json.load(args.regionHash)
 elif args.quotedKeys == False:
-    mydict = json.loads(args.regionHash.replace('{','{"').replace(':','":').replace(', ',', "'))
+    mydict = json.load(args.regionHash.replace('{','{"').replace(':','":').replace(', ',', "'))
 else:
     print("need quoted keys arg")
     sys.exit(1)

@@ -10,7 +10,7 @@ task extract_true {
   String bucketPath
   }
   command <<<
-       python ~{structToTrueLines} "~{fcRegions}" ~{bucketPath} lines > trueRegions.txt
+       python ~{structToTrueLines} ~{write_json(fcRegions)} ~{bucketPath} lines > trueRegions.txt
    >>>
    runtime {
      docker: "truwl/debian-buster:latest"
