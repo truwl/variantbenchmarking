@@ -182,7 +182,7 @@ task run_intervene {
     regionName=$(basename "~{region}")
     mkdir -p Intervene_results
     mkdir -p Intervene_results/sets
-    intervene upset –mblabel "Intersections in $regionName" –sxlabel "Set size in $regionName"--figtype png --type genomic -i "region"$queryVCFname $optvcfs --save-overlaps --filenames --bedtools-options header
+    intervene upset –mblabel "Intersections in $regionName" –sxlabel "Set size in $regionName" --figtype png --type genomic -i "region"$queryVCFname $optvcfs --save-overlaps --filenames --bedtools-options header
   >>>
   
   runtime {
