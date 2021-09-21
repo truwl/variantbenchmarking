@@ -171,10 +171,10 @@ task run_intervene {
          gsutil cp $value fullVCF/
          compvcfname=$(basename "$value")
          echo ${compvcfname}
-         echo "cmd: bedtools intersect -a fullVCF/${compvcfname} -b ~{region} -wa -header | gzip -c > tmpintersect.vcf.gz"
-         bedtools intersect -a "fullVCF/${compvcfname}" -b ~{region} -wa -header | gzip -c > tmpintersect.vcf.gz
+         echo "cmd: bedtools intersect -a fullVCF/$(basename "$value") -b ~{region} -wa -header | gzip -c > tmpintersect.vcf.gz"
+         bedtools intersect -a "fullVCF/"$(basename "$value") -b ~{region} -wa -header | gzip -c > tmpintersect.vcf.gz
          echo "cmd: mv tmpintersect.vcf.gz ${compvcfname}"
-         mv tmpintersect.vcf.gz "${compvcfname}"
+         mv tmpintersect.vcf.gz $(basename "$value")
     done
     
     queryVCFname=$(basename "~{queryVCF}")
@@ -183,7 +183,7 @@ task run_intervene {
     regionName=$(basename "~{region}")
     mkdir -p Intervene_results
     mkdir -p Intervene_results/sets
-    intervene upset –mblabel 'Intersections in '$regionName –sxlabel 'Set size in '$regionName --figtype png --type genomic -i "region"$queryVCFname $optvcfs --save-overlaps --filenames --bedtools-options header
+    intervene upset -–mblabel 'Intersections in '$regionName -–sxlabel 'Set size in '$regionName --figtype png --type genomic -i "region"$queryVCFname $optvcfs --save-overlaps --filenames --bedtools-options header
   >>>
   
   runtime {
