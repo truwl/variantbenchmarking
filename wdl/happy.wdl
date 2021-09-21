@@ -24,10 +24,12 @@ task generateStratTable {
     
     command <<<
          python ~{structToTrueLines} ~{write_json(myRegions)} ~{bucketPath} strattable > "stratifications.tsv"
+         python ~{structToTrueLines} ~{write_json(myRegions)} ~{bucketPath} lines > "trueRegions.txt"
      >>>
      
     output {
         File stratTable = "stratifications.tsv"
+        Array[String] regionFiles = read_lines("trueRegions.txt")
     }
     runtime {
       docker: "truwl/debian-buster"
@@ -45,6 +47,7 @@ task happyStratify {
     File referenceFasta_indexed
     
     File stratTable
+    Array[File] regions
     String outputFile_commonPrefix
     String happyPrefix
     String consoleOutputPartialFilename

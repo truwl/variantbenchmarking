@@ -439,6 +439,7 @@ workflow GermlineVariantCallBenchmark {
       referenceFasta_indexed = referenceFasta_indexed[freeze],
     
       stratTable = makeStrat.stratTable,
+      regions = makeStrat.regionFiles,
       happyPrefix =  happyPrefix,
       outputFile_commonPrefix = outputFile_commonPrefix,
       consoleOutputPartialFilename = consoleOutputPartialFilename
