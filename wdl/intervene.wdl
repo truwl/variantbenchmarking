@@ -165,23 +165,23 @@ task run_intervene {
     fi
 
     mkdir fullVCF
-    for competitor in "${dollar}{downloadList[@]}"
+    for competitor in "~{dollar}{downloadList[@]}"
     do
-         echo ${dollar}competitor
-         gsutil cp ${dollar}competitor fullVCF/
-         echo "cmd: bedtools intersect -a fullVCF/${dollar}(basename "${dollar}competitor") -b ~{region} -wa -header | gzip -c > tmpintersect.vcf.gz"
-         bedtools intersect -a "fullVCF/"${dollar}(basename "${dollar}competitor") -b ~{region} -wa -header | gzip -c > tmpintersect.vcf.gz
-         mv tmpintersect.vcf.gz `basename "${dollar}competitor"`
+         echo ~{dollar}competitor
+         gsutil cp ~{dollar}competitor fullVCF/
+         echo "cmd: bedtools intersect -a fullVCF/~{dollar}(basename "~{dollar}competitor") -b ~{region} -wa -header | gzip -c > tmpintersect.vcf.gz"
+         bedtools intersect -a "fullVCF/"~{dollar}(basename "~{dollar}competitor") -b ~{region} -wa -header | gzip -c > tmpintersect.vcf.gz
+         mv tmpintersect.vcf.gz `basename "~{dollar}competitor"`
     done
     
-    queryVCFname=${dollar}(basename "~{queryVCF}")
-    bedtools intersect -a ~{queryVCF} -b ~{region} -wa -header | gzip -c > "region"${dollar}queryVCFname
+    queryVCFname=~{dollar}(basename "~{queryVCF}")
+    bedtools intersect -a ~{queryVCF} -b ~{region} -wa -header | gzip -c > "region"~{dollar}queryVCFname
     
-    regionName=${dollar}(basename "~{region}")
+    regionName=~{dollar}(basename "~{region}")
     mkdir -p Intervene_results
     mkdir -p Intervene_results/sets
-    #-–mblabel 'Intersections in '${dollar}regionName -–sxlabel 'Set size in '${dollar}regionName
-    intervene upset  --figtype png --type genomic -i "region"${dollar}queryVCFname ${dollar}optvcfs --save-overlaps --filenames --bedtools-options header
+    #-–mblabel 'Intersections in '~{dollar}regionName -–sxlabel 'Set size in '~{dollar}regionName
+    intervene upset  --figtype png --type genomic -i "region"~{dollar}queryVCFname ~{dollar}optvcfs --save-overlaps --filenames --bedtools-options header
   >>>
   
   runtime {
