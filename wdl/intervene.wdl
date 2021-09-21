@@ -90,7 +90,7 @@ task run_intervene {
 # gs://benchmarking-datasets/precRecallPlot.R
 # gs://benchmarking-datasets/simple_notebook.ipynb
 
-
+  String dollar = "$"
   command <<<
     downloadList=("")
     optvcfs=""
@@ -165,26 +165,23 @@ task run_intervene {
     fi
 
     mkdir fullVCF
-    for value in "${downloadList[@]}"
+    for competitor in "${dollar}{downloadList[@]}"
     do
-         echo $value
-         gsutil cp $value fullVCF/
-         compvcfname=$(basename "$value")
-         echo ${compvcfname}
-         echo "cmd: bedtools intersect -a fullVCF/$(basename "$value") -b ~{region} -wa -header | gzip -c > tmpintersect.vcf.gz"
-         bedtools intersect -a "fullVCF/"$(basename "$value") -b ~{region} -wa -header | gzip -c > tmpintersect.vcf.gz
-         echo "cmd: mv tmpintersect.vcf.gz ${compvcfname}"
-         mv tmpintersect.vcf.gz `basename "$value"`
+         echo ${dollar}competitor
+         gsutil cp ${dollar}competitor fullVCF/
+         echo "cmd: bedtools intersect -a fullVCF/${dollar}(basename "${dollar}competitor") -b ~{region} -wa -header | gzip -c > tmpintersect.vcf.gz"
+         bedtools intersect -a "fullVCF/"${dollar}(basename "${dollar}competitor") -b ~{region} -wa -header | gzip -c > tmpintersect.vcf.gz
+         mv tmpintersect.vcf.gz `basename "${dollar}competitor"`
     done
     
-    queryVCFname=$(basename "~{queryVCF}")
-    bedtools intersect -a ~{queryVCF} -b ~{region} -wa -header | gzip -c > "region"$queryVCFname
+    queryVCFname=${dollar}(basename "~{queryVCF}")
+    bedtools intersect -a ~{queryVCF} -b ~{region} -wa -header | gzip -c > "region"${dollar}queryVCFname
     
-    regionName=$(basename "~{region}")
+    regionName=${dollar}(basename "~{region}")
     mkdir -p Intervene_results
     mkdir -p Intervene_results/sets
-    #-–mblabel 'Intersections in '$regionName -–sxlabel 'Set size in '$regionName
-    intervene upset  --figtype png --type genomic -i "region"$queryVCFname $optvcfs --save-overlaps --filenames --bedtools-options header
+    #-–mblabel 'Intersections in '${dollar}regionName -–sxlabel 'Set size in '${dollar}regionName
+    intervene upset  --figtype png --type genomic -i "region"${dollar}queryVCFname ${dollar}optvcfs --save-overlaps --filenames --bedtools-options header
   >>>
   
   runtime {
