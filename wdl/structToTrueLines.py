@@ -46,7 +46,10 @@ for region in filtered:
     if args.outputStyle == 'lines':
         print(os.path.join(args.bucketPath,regionFile))
     elif args.outputStyle == 'strattable':
-        print("{0}\t{1}".format(region,regionFile))
+        #gs://truwl-giab/genome-stratifications/v2.0/GRCh38/FunctionalRegions/GRCh38_BadPromoters.bed.gz
+        #this gets localized as /cromwell_root/truwl-giab/genome-stratifications/v2.0/GRCh38/FunctionalRegions/GRCh38_BadPromoters.bed.gz
+        absPath=args.bucketPath.replace('gs://','/cromwell_root/')
+        print("{0}\t{1}".format(region,os.path.join(absPath,regionFile)))
     else:
         print("need format as lines or strattable")
         sys.exit(1)

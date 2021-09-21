@@ -40,7 +40,7 @@ workflow GermlineVariantCallBenchmark {
     
     
     File Rscript_indelSize = "gs://benchmarking-datasets/indelSizeDistribution_Detailed.R"  ## Specify the R script indelSizeDistribution_Detailed.R
-    File Rscript_aggregate = "gs://benchmarking-datasets/aggregateResults.R"
+    File Rscript_aggregate = "gs://benchmarking-datasets/aggregateExtended.R"
     File Rscript_precrecall = "gs://benchmarking-datasets/precRecallPlot.R"
     File structToTrueLines = "gs://benchmarking-datasets/structToTrueLines.py"
     File Jupyter_report = "gs://benchmarking-datasets/report.ipynb"
