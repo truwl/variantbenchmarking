@@ -174,7 +174,7 @@ task run_intervene {
          echo "cmd: bedtools intersect -a fullVCF/$(basename "$value") -b ~{region} -wa -header | gzip -c > tmpintersect.vcf.gz"
          bedtools intersect -a "fullVCF/"$(basename "$value") -b ~{region} -wa -header | gzip -c > tmpintersect.vcf.gz
          echo "cmd: mv tmpintersect.vcf.gz ${compvcfname}"
-         mv tmpintersect.vcf.gz $(basename "$value")
+         mv tmpintersect.vcf.gz `basename "$value"`
     done
     
     queryVCFname=$(basename "~{queryVCF}")
@@ -183,7 +183,8 @@ task run_intervene {
     regionName=$(basename "~{region}")
     mkdir -p Intervene_results
     mkdir -p Intervene_results/sets
-    intervene upset -–mblabel 'Intersections in '$regionName -–sxlabel 'Set size in '$regionName --figtype png --type genomic -i "region"$queryVCFname $optvcfs --save-overlaps --filenames --bedtools-options header
+    #-–mblabel 'Intersections in '$regionName -–sxlabel 'Set size in '$regionName
+    intervene upset  --figtype png --type genomic -i "region"$queryVCFname $optvcfs --save-overlaps --filenames --bedtools-options header
   >>>
   
   runtime {
