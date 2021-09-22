@@ -83,7 +83,7 @@ task nonEmpty {
         Array[String] noEmptyLines = read_lines(stdout())
     }
     command <<<
-        perl -ne 'print unless (/^\s*\n/)' < ${write_lines(emptyLines)}
+        perl -ne 'print unless (/^\s*\n/)' < ~{write_lines(emptyLines)}
     >>>
     runtime {
       docker: "truwl/debian-buster"
