@@ -5,6 +5,7 @@ task generateStratTable {
     Map [String, Boolean] myRegions
     File structToTrueLines
     String bucketPath
+    String prefix
     
     # GCcontent gcRegions
     # String gcRegionsPath
@@ -23,13 +24,13 @@ task generateStratTable {
     }
     
     command <<<
-         python ~{structToTrueLines} ~{write_json(myRegions)} ~{bucketPath} strattable > "stratifications.tsv"
-         python ~{structToTrueLines} ~{write_json(myRegions)} ~{bucketPath} lines > "trueRegions.txt"
+         python ~{structToTrueLines} ~{write_json(myRegions)} ~{bucketPath} strattable > "~{prefix}_stratifications.tsv"
+         python ~{structToTrueLines} ~{write_json(myRegions)} ~{bucketPath} lines > "~{prefix}_trueRegions.txt"
      >>>
      
     output {
-        File stratTable = "stratifications.tsv"
-        Array[String] regionFiles = read_lines("trueRegions.txt")
+        File stratTable = "~{prefix}_stratifications.tsv"
+        Array[String] regionFiles = read_lines("~{prefix}_trueRegions.txt")
     }
     runtime {
       docker: "truwl/debian-buster"

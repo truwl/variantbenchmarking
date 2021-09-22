@@ -43,7 +43,7 @@ workflow GermlineVariantCallBenchmark {
     File Rscript_aggregate = "gs://benchmarking-datasets/aggregateExtended.R"
     File Rscript_precrecall = "gs://benchmarking-datasets/precRecallPlot.R"
     File structToTrueLines = "gs://benchmarking-datasets/structToTrueLines.py"
-    File Jupyter_report = "gs://benchmarking-datasets/reportmultiple.ipynb"
+    File Jupyter_report = "gs://benchmarking-datasets/scripts/0.2/reportmultiple.ipynb"
 
     Map[String,File] referenceFasta = {"hg37":"gs://truwl-giab/references/GRCh37-lite.fa", "hg38":"gs://truwl-giab/references/GRCh38/GCA_000001405.15_GRCh38_no_alt_analysis_set_maskedGRC_exclusions.fasta.gz"}
     Map[String,File] referenceFasta_indexed = {"hg37":"gs://truwl-giab/GRCh37-lite.fa.fai", "hg38":"gs://truwl-giab/references/GRCh38/GCA_000001405.15_GRCh38_no_alt_analysis_set_maskedGRC_exclusions.fasta.gz.fai"}
@@ -405,12 +405,61 @@ workflow GermlineVariantCallBenchmark {
         outDir = "multiqc"
   }
 
-  call happy.generateStratTable as makeStrat {
+  call happy.generateStratTable as fcmakeStrat {
     input: 
       myRegions = fcRegions,
       structToTrueLines = structToTrueLines,
-      bucketPath = fcRegionsPath
-
+      bucketPath = fcRegionsPath,
+      prefix = 'fc'
+  }
+  call happy.generateStratTable as gcmakeStrat {
+    input: 
+      myRegions = gcRegions,
+      structToTrueLines = structToTrueLines,
+      bucketPath = gcRegionsPath,
+      prefix = 'gc'
+  }
+  call happy.generateStratTable as gsmakeStrat {
+    input: 
+      myRegions = gsRegions,
+      structToTrueLines = structToTrueLines,
+      bucketPath = gsRegionsPath,
+      prefix = 'gs'
+  }
+  call happy.generateStratTable as lcmakeStrat {
+    input: 
+      myRegions = lcRegions,
+      structToTrueLines = structToTrueLines,
+      bucketPath = lcRegionsPath,
+      prefix = 'lc'
+  }
+  call happy.generateStratTable as mpmakeStrat {
+    input: 
+      myRegions = mpRegions,
+      structToTrueLines = structToTrueLines,
+      bucketPath = mpRegionsPath,
+      prefix = 'mp'
+  }
+  call happy.generateStratTable as odmakeStrat {
+    input: 
+      myRegions = odRegions,
+      structToTrueLines = structToTrueLines,
+      bucketPath = odRegionsPath,
+      prefix = 'od'
+  }
+  call happy.generateStratTable as sdmakeStrat {
+    input: 
+      myRegions = sdRegions,
+      structToTrueLines = structToTrueLines,
+      bucketPath = sdRegionsPath,
+      prefix = 'sd'
+  }
+  call happy.generateStratTable as unmakeStrat {
+    input: 
+      myRegions = unRegions,
+      structToTrueLines = structToTrueLines,
+      bucketPath = unRegionsPath,
+      prefix = 'un'
   }
         # fcRegions = fcRegions,
         # gcRegions = gcRegions,
@@ -428,8 +477,16 @@ workflow GermlineVariantCallBenchmark {
         # odRegionsPath = odRegionsPath,
         # sdRegionsPath = sdRegionsPath,
         # unRegionsPath = unRegionsPath
-        
-        
+
+  call aggregate.aggStrat as aggAllStrats {
+      input:
+          stratTables = [fcmakeStrat.stratTable,fcmakeStrat.stratTable,gcmakeStrat.stratTable,gsmakeStrat.stratTable,lcmakeStrat.stratTable,mpmakeStrat.stratTable,odmakeStrat.stratTable,sdmakeStrat.stratTable,unmakeStrat.stratTable]
+  }
+  call aggregate.aggFiles as aggAllRegions {
+      input:
+          regionFilesArrays = [fcmakeStrat.regionFiles,fcmakeStrat.regionFiles,gcmakeStrat.regionFiles,gsmakeStrat.regionFiles,lcmakeStrat.regionFiles,mpmakeStrat.regionFiles,odmakeStrat.regionFiles,sdmakeStrat.regionFiles,unmakeStrat.regionFiles]
+
+  }
   call happy.happyStratify as happystrat {
     input:
       queryVCF = queryVCF,
@@ -438,8 +495,8 @@ workflow GermlineVariantCallBenchmark {
       referenceFasta = referenceFasta[freeze],
       referenceFasta_indexed = referenceFasta_indexed[freeze],
     
-      stratTable = makeStrat.stratTable,
-      regions = makeStrat.regionFiles,
+      stratTable = aggAllStrats.stratTable,
+      regions = aggAllRegions.regionFiles,
       happyPrefix =  happyPrefix,
       outputFile_commonPrefix = outputFile_commonPrefix,
       consoleOutputPartialFilename = consoleOutputPartialFilename

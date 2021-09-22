@@ -42,6 +42,27 @@ task precRecall {
     }
 }
 
+task aggStrat {
+    input {
+        Array[File] stratTables
+    }
+    output {
+        File strattable = "stratifications.tsv"
+    }
+    command <<<
+        cat ~{sep=' ' stratTables} > "stratifications.tsv"
+    }
+}
+
+task aggFiles {
+    input {
+        Array[Array[String]] regionFilesArrays
+    }
+    output {
+        Array[String] regionFiles = flatten(regionFilesArrays)
+    }
+}
+
 task finalReport {
     input {
         File queryVCF
