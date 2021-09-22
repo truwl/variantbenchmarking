@@ -480,11 +480,11 @@ workflow GermlineVariantCallBenchmark {
 
   call aggregate.aggStrat as aggAllStrats {
       input:
-          stratTables = [fcmakeStrat.stratTable,fcmakeStrat.stratTable,gcmakeStrat.stratTable,gsmakeStrat.stratTable,lcmakeStrat.stratTable,mpmakeStrat.stratTable,odmakeStrat.stratTable,sdmakeStrat.stratTable,unmakeStrat.stratTable]
+          stratTables = [fcmakeStrat.stratTable,gcmakeStrat.stratTable,gsmakeStrat.stratTable,lcmakeStrat.stratTable,mpmakeStrat.stratTable,odmakeStrat.stratTable,sdmakeStrat.stratTable,unmakeStrat.stratTable]
   }
   call aggregate.aggFiles as aggAllRegions {
       input:
-          regionFilesArrays = [fcmakeStrat.regionFiles,fcmakeStrat.regionFiles,gcmakeStrat.regionFiles,gsmakeStrat.regionFiles,lcmakeStrat.regionFiles,mpmakeStrat.regionFiles,odmakeStrat.regionFiles,sdmakeStrat.regionFiles,unmakeStrat.regionFiles]
+          regionFilesArrays = [fcmakeStrat.regionFiles,gcmakeStrat.regionFiles,gsmakeStrat.regionFiles,lcmakeStrat.regionFiles,mpmakeStrat.regionFiles,odmakeStrat.regionFiles,sdmakeStrat.regionFiles,unmakeStrat.regionFiles]
   }
   call happy.happyStratify as happystrat {
     input:

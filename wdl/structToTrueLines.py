@@ -26,14 +26,15 @@ regionHash = open(args.regionHashFile,'r')
 
 #if the keys aren't quoted make them
 if args.quotedKeys == True:
-
     mydict = json.load(regionHash)
 elif args.quotedKeys == False:
     mydict = json.load(regionHash.replace('{','{"').replace(':','":').replace(', ',', "'))
 else:
     print("need quoted keys arg")
     sys.exit(1)
-filtered = [k for k, v in mydict.items() if v]
+
+
+filtered = [k for k, v in mydict.items() if (v==True or v=='true')]
 
 
 nodots = {'GIABv332':'GIABv3.2.2','GIABv41':'GIABv4.1','PG2016_10':'PG2016-1.0','RTG_3773':'RTG_37.7.3'}
