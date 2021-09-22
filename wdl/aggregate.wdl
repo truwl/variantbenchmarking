@@ -51,6 +51,11 @@ task aggStrat {
     }
     command <<<
         cat ~{sep=' ' stratTables} > "stratifications.tsv"
+    >>>
+    runtime {
+        docker: "rocker/tidyverse:4.1.0"
+        memory: "1 GB"
+        cpu: 1
     }
 }
 
@@ -60,6 +65,13 @@ task aggFiles {
     }
     output {
         Array[String] regionFiles = flatten(regionFilesArrays)
+    }
+    command <<<
+    >>>
+    runtime {
+        docker: "rocker/tidyverse:4.1.0"
+        memory: "1 GB"
+        cpu: 1
     }
 }
 
