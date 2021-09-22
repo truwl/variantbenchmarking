@@ -486,6 +486,10 @@ workflow GermlineVariantCallBenchmark {
       input:
           regionFilesArrays = [fcmakeStrat.regionFiles,gcmakeStrat.regionFiles,gsmakeStrat.regionFiles,lcmakeStrat.regionFiles,mpmakeStrat.regionFiles,odmakeStrat.regionFiles,sdmakeStrat.regionFiles,unmakeStrat.regionFiles]
   }
+  call aggregate.nonEmpty as removeEmpty {
+      input:
+           emptyLines = aggAllRegions.regionFiles
+  }
   call happy.happyStratify as happystrat {
     input:
       queryVCF = queryVCF,
@@ -495,7 +499,7 @@ workflow GermlineVariantCallBenchmark {
       referenceFasta_indexed = referenceFasta_indexed[freeze],
     
       stratTable = aggAllStrats.strattable,
-      regions = aggAllRegions.regionFiles,
+      regions = removeEmpty.noEmptyLines,
       happyPrefix =  happyPrefix,
       outputFile_commonPrefix = outputFile_commonPrefix,
       consoleOutputPartialFilename = consoleOutputPartialFilename

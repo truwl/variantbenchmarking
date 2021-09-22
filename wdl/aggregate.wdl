@@ -64,7 +64,7 @@ task aggFiles {
         Array[Array[String]] regionFilesArrays
     }
     output {
-        Array[String] regionFiles = select_all(flatten(select_all(regionFilesArrays)))
+        Array[String] regionFiles = flatten(regionFilesArrays)
     }
     command <<<
     >>>
@@ -75,6 +75,17 @@ task aggFiles {
     }
 }
 
+task nonEmpty {
+    input {
+       Array[String] emptyLines
+    }
+    output {
+        Array[String] noEmptyLines = read_lines(stdout())
+    }
+    command <<<
+        perl -ne 'print unless (/^\s*\n/)' < ${write_lines(emptyRegionFiles)}
+    >>>
+}
 task finalReport {
     input {
         File queryVCF
