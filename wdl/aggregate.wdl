@@ -69,9 +69,9 @@ task aggFiles {
     command <<<
     >>>
     runtime {
-        docker: "rocker/tidyverse:4.1.0"
-        memory: "1 GB"
-        cpu: 1
+      docker: "truwl/debian-buster"
+      memory: "1 MB"
+      cpu: 1
     }
 }
 
@@ -85,6 +85,11 @@ task nonEmpty {
     command <<<
         perl -ne 'print unless (/^\s*\n/)' < ${write_lines(emptyRegionFiles)}
     >>>
+    runtime {
+      docker: "truwl/debian-buster"
+      memory: "1 MB"
+      cpu: 1
+    }
 }
 task finalReport {
     input {
