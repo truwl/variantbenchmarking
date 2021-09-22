@@ -64,7 +64,7 @@ task aggFiles {
         Array[Array[String]] regionFilesArrays
     }
     output {
-        Array[String] regionFiles = flatten(regionFilesArrays)
+        Array[String] regionFiles = select_all(flatten(select_all(regionFilesArrays)))
     }
     command <<<
     >>>
