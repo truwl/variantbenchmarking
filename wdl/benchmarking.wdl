@@ -509,14 +509,14 @@ workflow GermlineVariantCallBenchmark {
   #https://bioinformatics.stackexchange.com/questions/16100/extracting-wdl-map-keys-as-a-task
   
    
-   call intervene.extract_true as extractme {
-       input:
-           myRegions = fcRegions,
-           structToTrueLines = structToTrueLines,
-           bucketPath = fcRegionsPath
-   }
+   # call intervene.extract_true as extractme {
+   #     input:
+   #         myRegions = fcRegions,
+   #         structToTrueLines = structToTrueLines,
+   #         bucketPath = fcRegionsPath
+   # }
    
-   scatter (regionFile in extractme.matches){
+   scatter (regionFile in removeEmpty.noEmptyLines){
       call intervene.run_intervene as myintervene {
           input:
               includeB1S5A = includeB1S5A,
