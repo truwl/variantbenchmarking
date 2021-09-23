@@ -36,8 +36,7 @@ else:
 
 filtered = [k for k, v in mydict.items() if (v==True or v=='true')]
 
-
-nodots = {'GIABv332':'GIABv3.2.2','GIABv41':'GIABv4.1','PG2016_10':'PG2016-1.0','RTG_3773':'RTG_37.7.3'}
+nodots = {'GIABv332':'GIABv3.2.2','GIABv41':'GIABv4.1','PG2016_10':'PG2016-1.0','RTG_3773':'RTG_37.7.3','v061':'v0.6.1'}
 
 
 for region in filtered:
