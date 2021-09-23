@@ -66,6 +66,7 @@ workflow GermlineVariantCallBenchmark {
     Boolean includeIA789 = true
     Boolean includeW607K = true
 
+    String popRegionsPath = "gs://truwl-giab/genome-stratifications/v2.0/GRCh38/popular/"
     String fcRegionsPath = "gs://truwl-giab/genome-stratifications/v2.0/GRCh38/FunctionalRegions/"
     String gcRegionsPath = "gs://truwl-giab/genome-stratifications/v2.0/GRCh38/GCcontent/"
     String gsRegionsPath = "gs://truwl-giab/genome-stratifications/v2.0/GRCh38/GenomeSpecific/"
@@ -74,6 +75,12 @@ workflow GermlineVariantCallBenchmark {
     String odRegionsPath = "gs://truwl-giab/genome-stratifications/v2.0/GRCh38/OtherDifficult/"
     String sdRegionsPath = "gs://truwl-giab/genome-stratifications/v2.0/GRCh38/SegmentalDuplications/"
     String unRegionsPath = "gs://truwl-giab/genome-stratifications/v2.0/GRCh38/union/"
+    
+    Map[String, Boolean] popRegions = {
+      "Twist_Exome_Target_hg38" : false,
+      "region_GRCh38_alldifficultregions" : false,
+      "region_GRCh38_MHC" : false
+    }
     
     Map[String, Boolean] fcRegions = {
       "region_GRCh38_notinrefseq_cds" : false,
@@ -198,12 +205,12 @@ workflow GermlineVariantCallBenchmark {
       "region_GRCh38_notinlowmappabilityall" : false,
     }
 
+    #region_GRCh38_MHC moved to popular
     Map[String, Boolean] odRegions = {
       "region_GRCh38_allOtherDifficultregions" : false,
       "region_GRCh38_contigs_lt500kb" : false,
       "region_GRCh38_gaps_slop15kb" : false,
       "region_GRCh38_L1H_gt500" : false,
-      "region_GRCh38_MHC" : false,
       "region_GRCh38_VDJ" : false,
     }
 
@@ -219,8 +226,8 @@ workflow GermlineVariantCallBenchmark {
       "region_GRCh38_segdups_gt10kb" : false,
     }
 
+    #region_GRCh38_alldifficultregions moved to popular
     Map[String, Boolean] unRegions = {
-      "region_GRCh38_alldifficultregions" : false,
       "region_GRCh38_alllowmapandsegdupregions" : false,
       "region_GRCh38_notinalldifficultregions" : false,
       "region_GRCh38_notinalllowmapandsegdupregions" : false,
@@ -405,6 +412,13 @@ workflow GermlineVariantCallBenchmark {
         outDir = "multiqc"
   }
 
+  call happy.generateStratTable as popmakeStrat {
+    input: 
+      myRegions = popRegions,
+      structToTrueLines = structToTrueLines,
+      bucketPath = popRegionsPath,
+      prefix = 'pop'
+  }
   call happy.generateStratTable as fcmakeStrat {
     input: 
       myRegions = fcRegions,
@@ -480,11 +494,11 @@ workflow GermlineVariantCallBenchmark {
 
   call aggregate.aggStrat as aggAllStrats {
       input:
-          stratTables = [fcmakeStrat.stratTable,gcmakeStrat.stratTable,gsmakeStrat.stratTable,lcmakeStrat.stratTable,mpmakeStrat.stratTable,odmakeStrat.stratTable,sdmakeStrat.stratTable,unmakeStrat.stratTable]
+          stratTables = [popmakeStrat.stratTable,fcmakeStrat.stratTable,gcmakeStrat.stratTable,gsmakeStrat.stratTable,lcmakeStrat.stratTable,mpmakeStrat.stratTable,odmakeStrat.stratTable,sdmakeStrat.stratTable,unmakeStrat.stratTable]
   }
   call aggregate.aggFiles as aggAllRegions {
       input:
-          regionFilesArrays = [fcmakeStrat.regionFiles,gcmakeStrat.regionFiles,gsmakeStrat.regionFiles,lcmakeStrat.regionFiles,mpmakeStrat.regionFiles,odmakeStrat.regionFiles,sdmakeStrat.regionFiles,unmakeStrat.regionFiles]
+          regionFilesArrays = [popmakeStrat.regionFiles,fcmakeStrat.regionFiles,gcmakeStrat.regionFiles,gsmakeStrat.regionFiles,lcmakeStrat.regionFiles,mpmakeStrat.regionFiles,odmakeStrat.regionFiles,sdmakeStrat.regionFiles,unmakeStrat.regionFiles]
   }
   call aggregate.nonEmpty as removeEmpty {
       input:

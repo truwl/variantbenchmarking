@@ -75,6 +75,7 @@ task aggFiles {
     }
 }
 
+# remove empty lines otherwise Cromwell will try to fetch them as files
 task nonEmpty {
     input {
        Array[String] emptyLines
@@ -91,6 +92,7 @@ task nonEmpty {
       cpu: 1
     }
 }
+
 task finalReport {
     input {
         File queryVCF

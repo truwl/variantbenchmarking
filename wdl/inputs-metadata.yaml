@@ -117,6 +117,8 @@ parameter_meta:
     group: Scripts
     description:
     example: "report.ipynb"
+  GermlineVariantCallBenchmark.structToTrueLines:
+    group: Scripts
   GermlineVariantCallBenchmark.job_id:
     group: Builtin
   GermlineVariantCallBenchmark.workflow_instance_identifier:
@@ -124,7 +126,8 @@ parameter_meta:
   GermlineVariantCallBenchmark.workflow_identifier:
     group: Builtin
 
-
+  GermlineVariantCallBenchmark.popRegions:
+    group: PopularRegions
   GermlineVariantCallBenchmark.gsRegions:
     group: GenomeSpecificRegions
   GermlineVariantCallBenchmark.mpRegions:
@@ -141,7 +144,26 @@ parameter_meta:
     group: GCcontentRegions
   GermlineVariantCallBenchmark.fcRegions:
     group: FunctionalRegions
-  
+
+  GermlineVariantCallBenchmark.popRegionsPath:
+    group: Paths
+  GermlineVariantCallBenchmark.fcRegionsPath:
+    group: Paths
+  GermlineVariantCallBenchmark.gcRegionsPath:
+    group: Paths
+  GermlineVariantCallBenchmark.gsRegionsPath:
+    group: Paths
+  GermlineVariantCallBenchmark.lcRegionsPath:
+    group: Paths
+  GermlineVariantCallBenchmark.mpRegionsPath:
+    group: Paths
+  GermlineVariantCallBenchmark.odRegionsPath:
+    group: Paths
+  GermlineVariantCallBenchmark.sdRegionsPath:
+    group: Paths
+  GermlineVariantCallBenchmark.unRegionsPath:
+    group: Paths
+
   
       
 parameter_group:
@@ -157,6 +179,9 @@ parameter_group:
   Scripts:
     title: Scripts
     display: false
+  Paths:
+    title: Scripts
+    display: false
   References:
     title: References
     display: false
@@ -166,6 +191,9 @@ parameter_group:
   Builtin:
     title: Built-in parameters
     display: false
+  PopularRegions:
+    title: Popular Regions
+    display: true
   FunctionalRegions:
     title: Functional Regions
     display: true
