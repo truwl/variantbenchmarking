@@ -128,8 +128,14 @@ parameter_meta:
 
   GermlineVariantCallBenchmark.popRegions:
     group: PopularRegions
-  GermlineVariantCallBenchmark.gsRegions:
-    group: GenomeSpecificRegions
+  GermlineVariantCallBenchmark.gsSonRegions:
+    group: GenomeSpecificRegionsSon
+  GermlineVariantCallBenchmark.gsMomRegions:
+    group: GenomeSpecificRegionsMom
+  GermlineVariantCallBenchmark.gsDadRegions:
+    group: GenomeSpecificRegionsDad
+  GermlineVariantCallBenchmark.gsOtherRegions:
+    group: GenomeSpecificRegionsOther
   GermlineVariantCallBenchmark.mpRegions:
     group: MappabilityRegions
   GermlineVariantCallBenchmark.odRegions:

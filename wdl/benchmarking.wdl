@@ -105,25 +105,7 @@ workflow GermlineVariantCallBenchmark {
       "region_GRCh38_gclt30orgt55_slop50" : false,
     }
 
-    Map[String, Boolean] gsRegions = {
-      "region_GRCh38_HG001_GIABv322_compoundhet_slop50" : false,
-      "region_GRCh38_HG001_GIABv322_varswithin50bp" : false,
-      "region_GRCh38_HG001_GIABv332_comphetindel10bp_slop50" : false,
-      "region_GRCh38_HG001_GIABv332_comphetsnp10bp_slop50" : false,
-      "region_GRCh38_HG001_GIABv332_complexandSVs" : false,
-      "region_GRCh38_HG001_GIABv332_complexindel10bp_slop50" : false,
-      "region_GRCh38_HG001_GIABv332_RTG_PG_v332_SVs_alldifficultregions" : false,
-      "region_GRCh38_HG001_GIABv332_RTG_PG_v332_SVs_notin_alldifficultregions" : false,
-      "region_GRCh38_HG001_GIABv332_snpswithin10bp_slop50" : false,
-      "region_GRCh38_HG001_PacBio_MetaSV" : false,
-      "region_GRCh38_HG001_PG2016_10_comphetindel10bp_slop50" : false,
-      "region_GRCh38_HG001_PG2016_10_comphetsnp10bp_slop50" : false,
-      "region_GRCh38_HG001_PG2016_10_complexindel10bp_slop50" : false,
-      "region_GRCh38_HG001_PG2016_10_snpswithin10bp_slop50" : false,
-      "region_GRCh38_HG001_RTG_3773_comphetindel10bp_slop50" : false,
-      "region_GRCh38_HG001_RTG_3773_comphetsnp10bp_slop50" : false,
-      "region_GRCh38_HG001_RTG_3773_complexindel10bp_slop50" : false,
-      "region_GRCh38_HG001_RTG_3773_snpswithin10bp_slop50" : false,
+    Map[String, Boolean] gsRegionsSon = {
       "region_GRCh38_HG002_GIABv41_CNV_CCSandONT_elliptical_outlier" : false,
       "region_GRCh38_HG002_GIABv41_CNV_mrcanavarIllumina_CCShighcov_ONThighcov_intersection" : false,
       "region_GRCh38_HG002_expanded_150__Tier1plusTier2_v061" : false,
@@ -145,17 +127,51 @@ workflow GermlineVariantCallBenchmark {
       "region_GRCh38_HG002_GIABv41_notin_complexandSVs_alldifficultregions" : false,
       "region_GRCh38_HG002_GIABv41_othercomplexwithin10bp_slop50" : false,
       "region_GRCh38_HG002_GIABv41_snpswithin10bp_slop50" : false,
-      "region_GRCh38_HG002_HG003_HG004_allsvs" : false,
       "region_GRCh38_HG002_GIABv41_CNV_gt2assemblycontigs_ONTCanu_ONTFlye_CCSCanu" : false,
       "region_GRCh38_HG002_GIABv41_inversions_slop25percent" : false,
-      "region_GRCh38_HG002_Tier1plusTier2_v061" : false,
+      "region_GRCh38_HG002_Tier1plusTier2_v061" : false
+    }
+    
+    Map[String, Boolean] gsRegionsMom = {
+      "region_GRCh38_HG004_GIABv332_comphetindel10bp_slop50" : false,
+      "region_GRCh38_HG004_GIABv332_comphetsnp10bp_slop50" : false,
+      "region_GRCh38_HG004_GIABv332_complexandSVs" : false,
+      "region_GRCh38_HG004_GIABv332_complexandSVs_alldifficultregions" : false,
+      "region_GRCh38_HG004_GIABv332_complexindel10bp_slop50" : false,
+      "region_GRCh38_HG004_GIABv332_notin_complexandSVs_alldifficultregions" : false,
+      "region_GRCh38_HG004_GIABv332_snpswithin10bp_slop50" : false
+    }
+
+    Map[String, Boolean] gsRegionsDad = {
       "region_GRCh38_HG003_GIABv332_comphetindel10bp_slop50" : false,
       "region_GRCh38_HG003_GIABv332_comphetsnp10bp_slop50" : false,
       "region_GRCh38_HG003_GIABv332_complexandSVs" : false,
       "region_GRCh38_HG003_GIABv332_complexandSVs_alldifficultregions" : false,
       "region_GRCh38_HG003_GIABv332_complexindel10bp_slop50" : false,
       "region_GRCh38_HG003_GIABv332_notin_complexandSVs_alldifficultregions" : false,
-      "region_GRCh38_HG003_GIABv332_snpswithin10bp_slop50" : false,
+      "region_GRCh38_HG003_GIABv332_snpswithin10bp_slop50" : false
+    }
+    
+    Map[String, Boolean] gsRegionsOther = {
+      "region_GRCh38_HG001_GIABv322_compoundhet_slop50" : false,
+      "region_GRCh38_HG001_GIABv322_varswithin50bp" : false,
+      "region_GRCh38_HG001_GIABv332_comphetindel10bp_slop50" : false,
+      "region_GRCh38_HG001_GIABv332_comphetsnp10bp_slop50" : false,
+      "region_GRCh38_HG001_GIABv332_complexandSVs" : false,
+      "region_GRCh38_HG001_GIABv332_complexindel10bp_slop50" : false,
+      "region_GRCh38_HG001_GIABv332_RTG_PG_v332_SVs_alldifficultregions" : false,
+      "region_GRCh38_HG001_GIABv332_RTG_PG_v332_SVs_notin_alldifficultregions" : false,
+      "region_GRCh38_HG001_GIABv332_snpswithin10bp_slop50" : false,
+      "region_GRCh38_HG001_PacBio_MetaSV" : false,
+      "region_GRCh38_HG001_PG2016_10_comphetindel10bp_slop50" : false,
+      "region_GRCh38_HG001_PG2016_10_comphetsnp10bp_slop50" : false,
+      "region_GRCh38_HG001_PG2016_10_complexindel10bp_slop50" : false,
+      "region_GRCh38_HG001_PG2016_10_snpswithin10bp_slop50" : false,
+      "region_GRCh38_HG001_RTG_3773_comphetindel10bp_slop50" : false,
+      "region_GRCh38_HG001_RTG_3773_comphetsnp10bp_slop50" : false,
+      "region_GRCh38_HG001_RTG_3773_complexindel10bp_slop50" : false,
+      "region_GRCh38_HG001_RTG_3773_snpswithin10bp_slop50" : false,
+      "region_GRCh38_HG002_HG003_HG004_allsvs" : false,
       "region_GRCh38_HG004_GIABv332_comphetindel10bp_slop50" : false,
       "region_GRCh38_HG004_GIABv332_comphetsnp10bp_slop50" : false,
       "region_GRCh38_HG004_GIABv332_complexandSVs" : false,
@@ -172,7 +188,7 @@ workflow GermlineVariantCallBenchmark {
       "region_GRCh38_HG005_GIABv332_snpswithin10bp_slop50" : false,
       "region_GRCh38_HG005_HG006_HG007_MetaSV_allsvs" : false,
     }
-
+    
     Map[String, Boolean] lcRegions = {
       "region_GRCh38_AllHomopolymers_gt6bp_imperfectgt10bp_slop5" : false,
       "region_GRCh38_AllTandemRepeats_201to10000bp_slop5" : false,
@@ -433,12 +449,33 @@ workflow GermlineVariantCallBenchmark {
       bucketPath = gcRegionsPath,
       prefix = 'gc'
   }
-  call happy.generateStratTable as gsmakeStrat {
+  call happy.generateStratTable as gsSonmakeStrat {
     input: 
-      myRegions = gsRegions,
+      myRegions = gsRegionsSon,
       structToTrueLines = structToTrueLines,
       bucketPath = gsRegionsPath,
-      prefix = 'gs'
+      prefix = 'gsSon'
+  }
+  call happy.generateStratTable as gsDadmakeStrat {
+    input: 
+      myRegions = gsRegionsDad,
+      structToTrueLines = structToTrueLines,
+      bucketPath = gsRegionsPath,
+      prefix = 'gsDad'
+  }
+  call happy.generateStratTable as gsMommakeStrat {
+    input: 
+      myRegions = gsRegionsMom,
+      structToTrueLines = structToTrueLines,
+      bucketPath = gsRegionsPath,
+      prefix = 'gsMom'
+  }
+  call happy.generateStratTable as gsOthermakeStrat {
+    input: 
+      myRegions = gsRegionsOther,
+      structToTrueLines = structToTrueLines,
+      bucketPath = gsRegionsPath,
+      prefix = 'gsOther'
   }
   call happy.generateStratTable as lcmakeStrat {
     input: 
@@ -494,11 +531,11 @@ workflow GermlineVariantCallBenchmark {
 
   call aggregate.aggStrat as aggAllStrats {
       input:
-          stratTables = [popmakeStrat.stratTable,fcmakeStrat.stratTable,gcmakeStrat.stratTable,gsmakeStrat.stratTable,lcmakeStrat.stratTable,mpmakeStrat.stratTable,odmakeStrat.stratTable,sdmakeStrat.stratTable,unmakeStrat.stratTable]
+          stratTables = [popmakeStrat.stratTable,fcmakeStrat.stratTable,gcmakeStrat.stratTable,gsSonmakeStrat.stratTable,gsDadmakeStrat.stratTable,gsMommakeStrat.stratTable, gsOthermakeStrat.stratTable,lcmakeStrat.stratTable,mpmakeStrat.stratTable,odmakeStrat.stratTable,sdmakeStrat.stratTable,unmakeStrat.stratTable]
   }
   call aggregate.aggFiles as aggAllRegions {
       input:
-          regionFilesArrays = [popmakeStrat.regionFiles,fcmakeStrat.regionFiles,gcmakeStrat.regionFiles,gsmakeStrat.regionFiles,lcmakeStrat.regionFiles,mpmakeStrat.regionFiles,odmakeStrat.regionFiles,sdmakeStrat.regionFiles,unmakeStrat.regionFiles]
+          regionFilesArrays = [popmakeStrat.regionFiles,fcmakeStrat.regionFiles,gcmakeStrat.regionFiles,gsSonmakeStrat.regionFiles,gsDadmakeStrat.regionFiles,gsMommakeStrat.regionFiles,gsOthermakeStrat.regionFiles,lcmakeStrat.regionFiles,mpmakeStrat.regionFiles,odmakeStrat.regionFiles,sdmakeStrat.regionFiles,unmakeStrat.regionFiles]
   }
   call aggregate.nonEmpty as removeEmpty {
       input:
