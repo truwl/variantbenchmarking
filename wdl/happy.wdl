@@ -94,12 +94,13 @@ task happyStratify {
     /opt/hap.py/bin/hap.py --write-counts \
     -V ~{truthVCF} ~{queryVCF} \
     --engine=vcfeval --stratification ~{stratTable} \
+    --threads 8 \
     -r ref.fa -o ~{outputFile_commonPrefix}~{happyPrefix} > ~{outputFile_commonPrefix}~{happyPrefix}~{consoleOutputPartialFilename} 
   >>>
   runtime {
     docker: "paramost/hap.py"
-    memory: "16 GB"
-    cpu: 2
+    memory: "32 GB"
+    cpu: 8
     disks: "local-disk 100 HDD"
   }
 }
