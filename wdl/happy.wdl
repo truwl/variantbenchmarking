@@ -1,76 +1,106 @@
 version 1.0
 
-task vcfComparison_by_Happy_CodingExons {
-  input {
-    File queryVCF
-    String outputFile_commonPrefix
-    File truthCodingExonsVCF
-    File truthCodingExonsBED
-    File referenceFasta
-    File referenceFasta_indexed  ## *.fai
-    String codingExonsPrefix
-    String consoleOutputPartialFilename
-  }
-  output {
-    File codingExons_annotated_vcf_gz = "~{outputFile_commonPrefix}~{codingExonsPrefix}.vcf.gz" ##Need this later if doing indel size distribution
-    File codingExons_annotated_vcf_gz_tbi = "~{outputFile_commonPrefix}~{codingExonsPrefix}.vcf.gz.tbi"
-#    File codingExons_counts_csv = "~{outputFile_commonPrefix}~{codingExonsPrefix}.counts.csv" i don't think these are really a thing
-#    File codingExons_counts_json = "~{outputFile_commonPrefix}~{codingExonsPrefix}.counts.json"
-    File codingExons_runinfo_json = "~{outputFile_commonPrefix}~{codingExonsPrefix}.runinfo.json"
-    File codingExons_roc_indel_pass = "~{outputFile_commonPrefix}~{codingExonsPrefix}.roc.Locations.INDEL.PASS.csv.gz"
-    File codingExons_roc_indel = "~{outputFile_commonPrefix}~{codingExonsPrefix}.roc.Locations.INDEL.csv.gz"
-    File codingExons_roc_snp_pass = "~{outputFile_commonPrefix}~{codingExonsPrefix}.roc.Locations.SNP.PASS.csv.gz"
-    File codingExons_roc_snp = "~{outputFile_commonPrefix}~{codingExonsPrefix}.roc.Locations.SNP.csv.gz"
-    File codingExons_roc_all = "~{outputFile_commonPrefix}~{codingExonsPrefix}.roc.all.csv.gz"
-    File codingExons_extended_csv = "~{outputFile_commonPrefix}~{codingExonsPrefix}.extended.csv"
-    File codingExons_metrics_json = "~{outputFile_commonPrefix}~{codingExonsPrefix}.metrics.json.gz"
-    File codingExons_summary_csv = "~{outputFile_commonPrefix}~{codingExonsPrefix}.summary.csv"
-    File codingExons_console_output_txt = "~{outputFile_commonPrefix}~{codingExonsPrefix}~{consoleOutputPartialFilename}"
-  }
-  command <<<
-    /opt/hap.py/bin/hap.py --write-counts -V ~{truthCodingExonsVCF} ~{queryVCF} -f ~{truthCodingExonsBED} -T ~{truthCodingExonsBED} -r ~{referenceFasta} -o ~{outputFile_commonPrefix}~{codingExonsPrefix} > ~{outputFile_commonPrefix}~{codingExonsPrefix}~{consoleOutputPartialFilename}
-  >>>
-  runtime {
-    docker: "paramost/hap.py"
-    memory: "8 GB"
-    cpu: 2
-  }
+task generateStratTable {
+    input {
+    Map [String, Boolean] myRegions
+    File structToTrueLines
+    String bucketPath
+    String prefix
+    
+    # GCcontent gcRegions
+    # String gcRegionsPath
+    # GenomeSpecific gsRegions
+    # String gsRegionsPath
+    # LowComplexity lcRegions
+    # String lcRegionsPath
+    # Mappability mpRegions
+    # String mpRegionsPath
+    # OtherDifficult odRegions
+    # String odRegionsPath
+    # SegmentalDuplications sdRegions
+    # String sdRegionsPath
+    # Union unRegions
+    # String unRegionsPath
+    }
+    
+    command <<<
+         python ~{structToTrueLines} ~{write_json(myRegions)} ~{bucketPath} strattable > "~{prefix}_stratifications.tsv"
+         python ~{structToTrueLines} ~{write_json(myRegions)} ~{bucketPath} lines > "~{prefix}_trueRegions.txt"
+     >>>
+     
+    output {
+        File stratTable = "~{prefix}_stratifications.tsv"
+        Array[String] regionFiles = read_lines("~{prefix}_trueRegions.txt")
+    }
+    runtime {
+      docker: "truwl/debian-buster"
+      memory: "1 MB"
+      cpu: 1
+    }
 }
 
-task vcfComparison_by_Happy_WholeExome {
+task happyStratify {
   input {
     File queryVCF
-    String outputFile_commonPrefix
-    File truthWholeExomeVCF
-    File truthWholeExomeBED
+    File truthVCF
+    
     File referenceFasta
-    File referenceFasta_indexed  ## *.fai
-    String WholeExomePrefix
+    File referenceFasta_indexed
+    
+    File stratTable
+    Array[File?] regions
+    String outputFile_commonPrefix
+    String happyPrefix
     String consoleOutputPartialFilename
   }
+  
+  
+# 8H_out.metrics.json.gz
+# 8H_out.extended.csv
+# 8H_out.summary.csv
+# 8H_out.roc.Locations.INDEL.PASS.csv.gz
+# 8H_out.roc.Locations.SNP.csv.gz
+# 8H_out.roc.Locations.SNP.PASS.csv.gz
+# 8H_out.roc.Locations.INDEL.csv.gz
+# 8H_out.roc.all.csv.gz
+# 8H_out.vcf.gz.tbi
+# 8H_out.vcf.gz
+# 8H_out.runinfo.json
+
+  
+  
   output {
-    File WholeExome_annotated_vcf_gz = "~{outputFile_commonPrefix}~{WholeExomePrefix}.vcf.gz" ##Need this later if doing indel size distribution
-    File WholeExome_annotated_vcf_gz_tbi = "~{outputFile_commonPrefix}~{WholeExomePrefix}.vcf.gz.tbi"
-#    File WholeExome_counts_csv = "~{outputFile_commonPrefix}~{WholeExomePrefix}.counts.csv"
-#    File WholeExome_counts_json = "~{outputFile_commonPrefix}~{WholeExomePrefix}.counts.json"
-    File WholeExome_runinfo_json = "~{outputFile_commonPrefix}~{WholeExomePrefix}.runinfo.json"
-    File WholeExome_roc_indel_pass = "~{outputFile_commonPrefix}~{WholeExomePrefix}.roc.Locations.INDEL.PASS.csv.gz"
-    File WholeExome_roc_indel = "~{outputFile_commonPrefix}~{WholeExomePrefix}.roc.Locations.INDEL.csv.gz"
-    File WholeExome_roc_snp_pass = "~{outputFile_commonPrefix}~{WholeExomePrefix}.roc.Locations.SNP.PASS.csv.gz"
-    File WholeExome_roc_snp = "~{outputFile_commonPrefix}~{WholeExomePrefix}.roc.Locations.SNP.csv.gz"
-    File WholeExome_roc_all = "~{outputFile_commonPrefix}~{WholeExomePrefix}.roc.all.csv.gz"
-    File WholeExome_extended_csv = "~{outputFile_commonPrefix}~{WholeExomePrefix}.extended.csv"
-    File WholeExome_metrics_json = "~{outputFile_commonPrefix}~{WholeExomePrefix}.metrics.json.gz"
-    File WholeExome_summary_csv = "~{outputFile_commonPrefix}~{WholeExomePrefix}.summary.csv"
-    File WholeExome_console_output_txt = "~{outputFile_commonPrefix}~{WholeExomePrefix}~{consoleOutputPartialFilename}"
+    File annotated_vcf_gz = "~{outputFile_commonPrefix}~{happyPrefix}.vcf.gz"
+    File annotated_vcf_gz_tbi = "~{outputFile_commonPrefix}~{happyPrefix}.vcf.gz.tbi"
+    File runinfo_json = "~{outputFile_commonPrefix}~{happyPrefix}.runinfo.json"
+    File roc_indel_pass = "~{outputFile_commonPrefix}~{happyPrefix}.roc.Locations.INDEL.PASS.csv.gz"
+    File roc_indel = "~{outputFile_commonPrefix}~{happyPrefix}.roc.Locations.INDEL.csv.gz"
+    File roc_snp_pass = "~{outputFile_commonPrefix}~{happyPrefix}.roc.Locations.SNP.PASS.csv.gz"
+    File roc_snp = "~{outputFile_commonPrefix}~{happyPrefix}.roc.Locations.SNP.csv.gz"
+    File roc_all = "~{outputFile_commonPrefix}~{happyPrefix}.roc.all.csv.gz"
+    File extended_csv = "~{outputFile_commonPrefix}~{happyPrefix}.extended.csv"
+    File metrics_json = "~{outputFile_commonPrefix}~{happyPrefix}.metrics.json.gz"
+    File summary_csv = "~{outputFile_commonPrefix}~{happyPrefix}.summary.csv"
+    File console_output_txt = "~{outputFile_commonPrefix}~{happyPrefix}~{consoleOutputPartialFilename}"
   }
   command <<<
-    /opt/hap.py/bin/hap.py  --write-counts -V ~{truthWholeExomeVCF} ~{queryVCF} -f ~{truthWholeExomeBED} -T ~{truthWholeExomeBED} -r ~{referenceFasta} -o ~{outputFile_commonPrefix}~{WholeExomePrefix} > ~{outputFile_commonPrefix}~{WholeExomePrefix}~{consoleOutputPartialFilename}
+    if [[ ~{referenceFasta} =~ \.gz$ ]]; then
+      gunzip -c ~{referenceFasta} > ref.fa
+    else
+      mv ~{referenceFasta} ref.fa
+    fi
+    mv ~{referenceFasta_indexed} ref.fa.fai
+    export HGREF=ref.fa
+    /opt/hap.py/bin/hap.py --write-counts \
+    -V ~{truthVCF} ~{queryVCF} \
+    --engine=vcfeval --stratification ~{stratTable} \
+    --threads 8 \
+    -r ref.fa -o ~{outputFile_commonPrefix}~{happyPrefix} > ~{outputFile_commonPrefix}~{happyPrefix}~{consoleOutputPartialFilename} 
   >>>
   runtime {
     docker: "paramost/hap.py"
-    memory: "16 GB"
-    cpu: 2
+    memory: "32 GB"
+    cpu: 8
     disks: "local-disk 100 HDD"
   }
 }

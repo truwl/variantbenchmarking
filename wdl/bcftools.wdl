@@ -49,3 +49,23 @@ task  splittingAnnotatedVCF_WholeExome {
     cpu: 1
   }
 }
+
+task bcfstats {
+  input {
+    File queryVCF
+  }
+
+  command <<<
+    bcftools stats ~{queryVCF} > bcfstats.txt
+  >>>
+
+  output {
+    File bcfstatsoutput = "bcfstats.txt"
+  }
+
+  runtime {
+    docker: "vandhanak/bcftools:1.3.1"
+    memory: "8 GB"
+    cpu: 1
+  }
+}
