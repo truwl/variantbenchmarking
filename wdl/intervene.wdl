@@ -92,7 +92,7 @@ task run_intervene {
 
   String dollar = "$"
   command <<<
-    downloadList=("")
+    declare -a downloadList=()
     optvcfs=""
     if [ "~{freeze}" = "hg38" ]; then
         if ~{includeB1S5A}; then
