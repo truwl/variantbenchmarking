@@ -7,6 +7,9 @@ parameter_meta:
     description:
     example: "gs://benchmarking-datasets/HG002run1_S1.genome.vcf"
     name: queryVCF
+    upload:
+      accept: [".vcf",".vcf.gz",".vcf.bgz"]
+      maxSize: 150000000
   GermlineVariantCallBenchmark.subject:
     group: Query
     description: Member of Ashkenazi trio used in the query VCF (HG002, HG003, or HG004)
@@ -128,13 +131,13 @@ parameter_meta:
 
   GermlineVariantCallBenchmark.popRegions:
     group: PopularRegions
-  GermlineVariantCallBenchmark.gsSonRegions:
+  GermlineVariantCallBenchmark.gsRegionsSon:
     group: GenomeSpecificRegionsSon
-  GermlineVariantCallBenchmark.gsMomRegions:
+  GermlineVariantCallBenchmark.gsRegionsMom:
     group: GenomeSpecificRegionsMom
-  GermlineVariantCallBenchmark.gsDadRegions:
+  GermlineVariantCallBenchmark.gsRegionsDad:
     group: GenomeSpecificRegionsDad
-  GermlineVariantCallBenchmark.gsOtherRegions:
+  GermlineVariantCallBenchmark.gsRegionsOther:
     group: GenomeSpecificRegionsOther
   GermlineVariantCallBenchmark.mpRegions:
     group: MappabilityRegions
@@ -206,8 +209,17 @@ parameter_group:
   GCcontentRegions:
     title: GC Content Regions
     display: true
-  GenomeSpecificRegions:
-    title: Genome Specific Regions
+  GenomeSpecificRegionsSon:
+    title: HG002/Son Regions
+    display: true
+  GenomeSpecificRegionsMom:
+    title: HG004/Mom Regions
+    display: true
+  GenomeSpecificRegionsDad:
+    title: HG003/Dad Regions
+    display: true 
+  GenomeSpecificRegionsOther:
+    title: Other GS Regions
     display: true
   LowComplexityRegions:
     title: Low Complexity Regions

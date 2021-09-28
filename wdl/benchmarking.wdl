@@ -79,7 +79,8 @@ workflow GermlineVariantCallBenchmark {
     Map[String, Boolean] popRegions = {
       "Twist_Exome_Target_hg38" : false,
       "region_GRCh38_alldifficultregions" : false,
-      "region_GRCh38_MHC" : false
+      "region_GRCh38_MHC" : false,
+      "region_HG002_GIAB_highconfidence": false
     }
     
     Map[String, Boolean] fcRegions = {
