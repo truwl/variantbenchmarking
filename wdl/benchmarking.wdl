@@ -48,6 +48,7 @@ workflow GermlineVariantCallBenchmark {
     Map[String,File] referenceFasta = {"hg37":"gs://truwl-giab/references/GRCh37-lite.fa", "hg38":"gs://truwl-giab/references/GRCh38/GCA_000001405.15_GRCh38_no_alt_analysis_set_maskedGRC_exclusions.fasta.gz"}
     Map[String,File] referenceFasta_indexed = {"hg37":"gs://truwl-giab/GRCh37-lite.fa.fai", "hg38":"gs://truwl-giab/references/GRCh38/GCA_000001405.15_GRCh38_no_alt_analysis_set_maskedGRC_exclusions.fasta.gz.fai"}
 
+    Map[String,File] competitors = {"hg37":"gs://benchmarking-datasets/competitors.csv","hg38":"gs://benchmarking-datasets/competitors_grch38.csv"}
     String chrRemovedVCF_fileSuffix = "_chrRemoved.vcf.gz"
     String outputFile_commonPrefix = "results"
     String codingExonsPrefix = "cds"
@@ -598,7 +599,7 @@ workflow GermlineVariantCallBenchmark {
   call aggregate.precRecall as aggprecRecall {
     input:
      Rscript_precrecall = Rscript_precrecall,
-     staticcompetitors = "gs://benchmarking-datasets/competitors.csv",
+     staticcompetitors = competitors[freeze],
      truwlbenchmarks = aggmelt.talltable,
      samplename = job_id,
      outputplotname = "precRecall.png"
