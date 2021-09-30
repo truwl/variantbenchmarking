@@ -14,7 +14,8 @@ task melt {
   command <<<
     Rscript ~{Rscript_aggregate} ~{job_id} ~{workflow_instance_identifier} ~{workflow_identifier} ~{extended_csv} allmetrics.txt
     #filter out non-numeric output
-    cat allmetrics.txt | perl -ne 'm/[0-9]$/ && print' > truwlbenchmarks.txt
+    head -n 1 allmetrics >  truwlbenchmarks.txt
+    cat allmetrics.txt | perl -ne 'm/[0-9]$/ && print' >> truwlbenchmarks.txt
   >>>
   runtime {
     docker: "rocker/tidyverse:4.1.0"
