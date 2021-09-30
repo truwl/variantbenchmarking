@@ -1,5 +1,14 @@
 version 1.0
 
+
+struct popRegions {
+  Boolean Twist_Exome_Target_hg38
+  Boolean region_GRCh38_alldifficultregions
+  Boolean region_GRCh38_MHC
+  Boolean region_HG002_GIAB_highconfidence
+}
+    
+    
 struct FunctionalRegions {
   Boolean region_GRCh38_notinrefseq_cds
   Boolean region_GRCh38_refseq_cds
@@ -128,7 +137,6 @@ struct OtherDifficult {
   Boolean region_GRCh38_contigs_lt500kb
   Boolean region_GRCh38_gaps_slop15kb
   Boolean region_GRCh38_L1H_gt500
-  Boolean region_GRCh38_MHC
   Boolean region_GRCh38_VDJ
 }
 
@@ -145,7 +153,6 @@ struct SegmentalDuplications {
 }
 
 struct Union {
-  Boolean region_GRCh38_alldifficultregions
   Boolean region_GRCh38_alllowmapandsegdupregions
   Boolean region_GRCh38_notinalldifficultregions
   Boolean region_GRCh38_notinalllowmapandsegdupregions

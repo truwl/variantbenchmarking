@@ -250,7 +250,8 @@ workflow GermlineVariantCallBenchmark {
       "region_GRCh38_notinalldifficultregions" : false,
       "region_GRCh38_notinalllowmapandsegdupregions" : false,
     }
-    #
+    
+#
 #     FunctionalRegions fcRegions = {
 #   'region_GRCh38_notinrefseq_cds':false,
 #   'region_GRCh38_refseq_cds':false,
