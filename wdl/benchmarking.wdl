@@ -1,6 +1,6 @@
 version 1.0
 
-#import "boolmaps.wdl" as compoundbools
+import "compoundbools.wdl"
 import "bcftools.wdl" as bcftools
 import "indel.wdl" as indel
 import "happy.wdl" as happy
@@ -281,25 +281,86 @@ workflow GermlineVariantCallBenchmark {
   'region_GRCh38_gclt30orgt55_slop50':false
 }
 
-    GenomeSpecific gsRegions = {
-  'region_GRCh38_HG001_GIABv322_compoundhet_slop50':false,
-  'region_GRCh38_HG001_GIABv322_varswithin50bp':false,
-  'region_GRCh38_HG001_GIABv332_comphetindel10bp_slop50':false,
-  'region_GRCh38_HG001_GIABv332_comphetsnp10bp_slop50':false,
-  'region_GRCh38_HG001_GIABv332_complexandSVs':false,
-  'region_GRCh38_HG001_GIABv332_complexindel10bp_slop50':false,
-  'region_GRCh38_HG001_GIABv332_RTG_PG_v332_SVs_alldifficultregions':false,
-  'region_GRCh38_HG001_GIABv332_RTG_PG_v332_SVs_notin_alldifficultregions':false,
-  'region_GRCh38_HG001_GIABv332_snpswithin10bp_slop50':false,
-  'region_GRCh38_HG001_PacBio_MetaSV':false,
-  'region_GRCh38_HG001_PG2016_10_comphetindel10bp_slop50':false,
-  'region_GRCh38_HG001_PG2016_10_comphetsnp10bp_slop50':false,
-  'region_GRCh38_HG001_PG2016_10_complexindel10bp_slop50':false,
-  'region_GRCh38_HG001_PG2016_10_snpswithin10bp_slop50':false,
-  'region_GRCh38_HG001_RTG_3773_comphetindel10bp_slop50':false,
-  'region_GRCh38_HG001_RTG_3773_comphetsnp10bp_slop50':false,
-  'region_GRCh38_HG001_RTG_3773_complexindel10bp_slop50':false,
-  'region_GRCh38_HG001_RTG_3773_snpswithin10bp_slop50':false,
+
+    # Map[String, Boolean] gsRegionsSon = {
+    #   "region_GRCh38_HG002_GIABv41_CNV_CCSandONT_elliptical_outlier" : false,
+    #   "region_GRCh38_HG002_GIABv41_CNV_mrcanavarIllumina_CCShighcov_ONThighcov_intersection" : false,
+    #   "region_GRCh38_HG002_expanded_150__Tier1plusTier2_v061" : false,
+    #   "region_GRCh38_HG002_GIABv322_compoundhet_slop50" : false,
+    #   "region_GRCh38_HG002_GIABv322_varswithin50bp" : false,
+    #   "region_GRCh38_HG002_GIABv332_comphetindel10bp_slop50" : false,
+    #   "region_GRCh38_HG002_GIABv332_comphetsnp10bp_slop50" : false,
+    #   "region_GRCh38_HG002_GIABv332_complexandSVs" : false,
+    #   "region_GRCh38_HG002_GIABv332_complexandSVs_alldifficultregions" : false,
+    #   "region_GRCh38_HG002_GIABv332_complexindel10bp_slop50" : false,
+    #   "region_GRCh38_HG002_GIABv332_notin_complexandSVs_alldifficultregions" : false,
+    #   "region_GRCh38_HG002_GIABv332_snpswithin10bp_slop50" : false,
+    #   "region_GRCh38_HG002_GIABv41_CNVsandSVs" : false,
+    #   "region_GRCh38_HG002_GIABv41_comphetindel10bp_slop50" : false,
+    #   "region_GRCh38_HG002_GIABv41_comphetsnp10bp_slop50" : false,
+    #   "region_GRCh38_HG002_GIABv41_complexandSVs" : false,
+    #   "region_GRCh38_HG002_GIABv41_complexandSVs_alldifficultregions" : false,
+    #   "region_GRCh38_HG002_GIABv41_complexindel10bp_slop50" : false,
+    #   "region_GRCh38_HG002_GIABv41_notin_complexandSVs_alldifficultregions" : false,
+    #   "region_GRCh38_HG002_GIABv41_othercomplexwithin10bp_slop50" : false,
+    #   "region_GRCh38_HG002_GIABv41_snpswithin10bp_slop50" : false,
+    #   "region_GRCh38_HG002_GIABv41_CNV_gt2assemblycontigs_ONTCanu_ONTFlye_CCSCanu" : false,
+    #   "region_GRCh38_HG002_GIABv41_inversions_slop25percent" : false,
+    #   "region_GRCh38_HG002_Tier1plusTier2_v061" : false
+    # }
+    #
+    # Map[String, Boolean] gsRegionsMom = {
+    #   "region_GRCh38_HG004_GIABv332_comphetindel10bp_slop50" : false,
+    #   "region_GRCh38_HG004_GIABv332_comphetsnp10bp_slop50" : false,
+    #   "region_GRCh38_HG004_GIABv332_complexandSVs" : false,
+    #   "region_GRCh38_HG004_GIABv332_complexandSVs_alldifficultregions" : false,
+    #   "region_GRCh38_HG004_GIABv332_complexindel10bp_slop50" : false,
+    #   "region_GRCh38_HG004_GIABv332_notin_complexandSVs_alldifficultregions" : false,
+    #   "region_GRCh38_HG004_GIABv332_snpswithin10bp_slop50" : false
+    # }
+    #
+    # Map[String, Boolean] gsRegionsDad = {
+    #   "region_GRCh38_HG003_GIABv332_comphetindel10bp_slop50" : false,
+    #   "region_GRCh38_HG003_GIABv332_comphetsnp10bp_slop50" : false,
+    #   "region_GRCh38_HG003_GIABv332_complexandSVs" : false,
+    #   "region_GRCh38_HG003_GIABv332_complexandSVs_alldifficultregions" : false,
+    #   "region_GRCh38_HG003_GIABv332_complexindel10bp_slop50" : false,
+    #   "region_GRCh38_HG003_GIABv332_notin_complexandSVs_alldifficultregions" : false,
+    #   "region_GRCh38_HG003_GIABv332_snpswithin10bp_slop50" : false
+    # }
+    #
+    # Map[String, Boolean] gsRegionsOther = {
+    #   "region_GRCh38_HG001_GIABv322_compoundhet_slop50" : false,
+    #   "region_GRCh38_HG001_GIABv322_varswithin50bp" : false,
+    #   "region_GRCh38_HG001_GIABv332_comphetindel10bp_slop50" : false,
+    #   "region_GRCh38_HG001_GIABv332_comphetsnp10bp_slop50" : false,
+    #   "region_GRCh38_HG001_GIABv332_complexandSVs" : false,
+    #   "region_GRCh38_HG001_GIABv332_complexindel10bp_slop50" : false,
+    #   "region_GRCh38_HG001_GIABv332_RTG_PG_v332_SVs_alldifficultregions" : false,
+    #   "region_GRCh38_HG001_GIABv332_RTG_PG_v332_SVs_notin_alldifficultregions" : false,
+    #   "region_GRCh38_HG001_GIABv332_snpswithin10bp_slop50" : false,
+    #   "region_GRCh38_HG001_PacBio_MetaSV" : false,
+    #   "region_GRCh38_HG001_PG2016_10_comphetindel10bp_slop50" : false,
+    #   "region_GRCh38_HG001_PG2016_10_comphetsnp10bp_slop50" : false,
+    #   "region_GRCh38_HG001_PG2016_10_complexindel10bp_slop50" : false,
+    #   "region_GRCh38_HG001_PG2016_10_snpswithin10bp_slop50" : false,
+    #   "region_GRCh38_HG001_RTG_3773_comphetindel10bp_slop50" : false,
+    #   "region_GRCh38_HG001_RTG_3773_comphetsnp10bp_slop50" : false,
+    #   "region_GRCh38_HG001_RTG_3773_complexindel10bp_slop50" : false,
+    #   "region_GRCh38_HG001_RTG_3773_snpswithin10bp_slop50" : false,
+    #   "region_GRCh38_HG002_HG003_HG004_allsvs" : false,
+    #   "region_GRCh38_HG005_GIABv332_comphetindel10bp_slop50" : false,
+    #   "region_GRCh38_HG005_GIABv332_comphetsnp10bp_slop50" : false,
+    #   "region_GRCh38_HG005_GIABv332_complexandSVs" : false,
+    #   "region_GRCh38_HG005_GIABv332_complexandSVs_alldifficultregions" : false,
+    #   "region_GRCh38_HG005_GIABv332_complexindel10bp_slop50" : false,
+    #   "region_GRCh38_HG005_GIABv332_notin_complexandSVs_alldifficultregions" : false,
+    #   "region_GRCh38_HG005_GIABv332_snpswithin10bp_slop50" : false,
+    #   "region_GRCh38_HG005_HG006_HG007_MetaSV_allsvs" : false,
+    # }
+    
+    
+GenomeSpecificSon gsRegionsSon = {
   'region_GRCh38_HG002_GIABv41_CNV_CCSandONT_elliptical_outlier':false,
   'region_GRCh38_HG002_GIABv41_CNV_mrcanavarIllumina_CCShighcov_ONThighcov_intersection':false,
   'region_GRCh38_HG002_expanded_150__Tier1plusTier2_v061':false,
@@ -321,24 +382,52 @@ workflow GermlineVariantCallBenchmark {
   'region_GRCh38_HG002_GIABv41_notin_complexandSVs_alldifficultregions':false,
   'region_GRCh38_HG002_GIABv41_othercomplexwithin10bp_slop50':false,
   'region_GRCh38_HG002_GIABv41_snpswithin10bp_slop50':false,
-  'region_GRCh38_HG002_HG003_HG004_allsvs':false,
   'region_GRCh38_HG002_GIABv41_CNV_gt2assemblycontigs_ONTCanu_ONTFlye_CCSCanu':false,
   'region_GRCh38_HG002_GIABv41_inversions_slop25percent':false,
-  'region_GRCh38_HG002_Tier1plusTier2_v061':false,
+  'region_GRCh38_HG002_Tier1plusTier2_v061':false
+}
+  
+  
+GenomeSpecificDad gsRegionsDad = {
   'region_GRCh38_HG003_GIABv332_comphetindel10bp_slop50':false,
   'region_GRCh38_HG003_GIABv332_comphetsnp10bp_slop50':false,
   'region_GRCh38_HG003_GIABv332_complexandSVs':false,
   'region_GRCh38_HG003_GIABv332_complexandSVs_alldifficultregions':false,
   'region_GRCh38_HG003_GIABv332_complexindel10bp_slop50':false,
   'region_GRCh38_HG003_GIABv332_notin_complexandSVs_alldifficultregions':false,
-  'region_GRCh38_HG003_GIABv332_snpswithin10bp_slop50':false,
+  'region_GRCh38_HG003_GIABv332_snpswithin10bp_slop50':false
+}
+  
+GenomeSpecificMom gsRegionsMom = {
   'region_GRCh38_HG004_GIABv332_comphetindel10bp_slop50':false,
   'region_GRCh38_HG004_GIABv332_comphetsnp10bp_slop50':false,
   'region_GRCh38_HG004_GIABv332_complexandSVs':false,
   'region_GRCh38_HG004_GIABv332_complexandSVs_alldifficultregions':false,
   'region_GRCh38_HG004_GIABv332_complexindel10bp_slop50':false,
   'region_GRCh38_HG004_GIABv332_notin_complexandSVs_alldifficultregions':false,
-  'region_GRCh38_HG004_GIABv332_snpswithin10bp_slop50':false,
+  'region_GRCh38_HG004_GIABv332_snpswithin10bp_slop50':false
+}
+
+GenomeSpecificOther gsRegionsOther = {
+  'region_GRCh38_HG001_GIABv322_compoundhet_slop50':false,
+  'region_GRCh38_HG001_GIABv322_varswithin50bp':false,
+  'region_GRCh38_HG001_GIABv332_comphetindel10bp_slop50':false,
+  'region_GRCh38_HG001_GIABv332_comphetsnp10bp_slop50':false,
+  'region_GRCh38_HG001_GIABv332_complexandSVs':false,
+  'region_GRCh38_HG001_GIABv332_complexindel10bp_slop50':false,
+  'region_GRCh38_HG001_GIABv332_RTG_PG_v332_SVs_alldifficultregions':false,
+  'region_GRCh38_HG001_GIABv332_RTG_PG_v332_SVs_notin_alldifficultregions':false,
+  'region_GRCh38_HG001_GIABv332_snpswithin10bp_slop50':false,
+  'region_GRCh38_HG001_PacBio_MetaSV':false,
+  'region_GRCh38_HG001_PG2016_10_comphetindel10bp_slop50':false,
+  'region_GRCh38_HG001_PG2016_10_comphetsnp10bp_slop50':false,
+  'region_GRCh38_HG001_PG2016_10_complexindel10bp_slop50':false,
+  'region_GRCh38_HG001_PG2016_10_snpswithin10bp_slop50':false,
+  'region_GRCh38_HG001_RTG_3773_comphetindel10bp_slop50':false,
+  'region_GRCh38_HG001_RTG_3773_comphetsnp10bp_slop50':false,
+  'region_GRCh38_HG001_RTG_3773_complexindel10bp_slop50':false,
+  'region_GRCh38_HG001_RTG_3773_snpswithin10bp_slop50':false,
+  'region_GRCh38_HG002_HG003_HG004_allsvs':false,
   'region_GRCh38_HG005_GIABv332_comphetindel10bp_slop50':false,
   'region_GRCh38_HG005_GIABv332_comphetsnp10bp_slop50':false,
   'region_GRCh38_HG005_GIABv332_complexandSVs':false,
@@ -349,7 +438,7 @@ workflow GermlineVariantCallBenchmark {
   'region_GRCh38_HG005_HG006_HG007_MetaSV_allsvs':false
 }
 
-    LowComplexity lcRegions = {
+LowComplexity lcRegions = {
   'region_GRCh38_AllHomopolymers_gt6bp_imperfectgt10bp_slop5':false,
   'region_GRCh38_AllTandemRepeats_201to10000bp_slop5':false,
   'region_GRCh38_AllTandemRepeats_51to200bp_slop5':false,
