@@ -98,6 +98,7 @@
     "region_GRCh38_HG001_GIABv332_RTG_PG_v332_SVs_alldifficultregions": "Boolean",
     "region_GRCh38_HG001_GIABv332_RTG_PG_v332_SVs_notin_alldifficultregions": "Boolean",
     "region_GRCh38_HG005_HG006_HG007_MetaSV_allsvs": "Boolean",
+    "region_GRCh38_HG001_PG2016_10_snpswithin10bp_slop50": "Boolean",
     "region_GRCh38_HG001_GIABv322_varswithin50bp": "Boolean",
     "region_GRCh38_HG001_GIABv322_compoundhet_slop50": "Boolean",
     "region_GRCh38_HG005_GIABv332_complexandSVs": "Boolean",
@@ -112,7 +113,6 @@
     "region_GRCh38_HG001_GIABv332_complexandSVs": "Boolean",
     "region_GRCh38_HG005_GIABv332_complexandSVs_alldifficultregions": "Boolean",
     "region_GRCh38_HG005_GIABv332_comphetindel10bp_slop50": "Boolean",
-    "region_GRCh38_HG001_PG2016_10_snpswithin10blop50": "Boolean",
     "region_GRCh38_HG001_GIABv332_comphetindel10bp_slop50": "Boolean",
     "region_GRCh38_HG001_RTG_3773_comphetsnp10bp_slop50": "Boolean"
   },
