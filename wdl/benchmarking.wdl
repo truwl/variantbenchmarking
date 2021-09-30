@@ -496,7 +496,7 @@ LowComplexity lcRegions = {
     String job_id
     String workflow_instance_identifier
     String workflow_identifier
-  }
+} #end input
   
   parameter_meta {
     subject: {

@@ -93,7 +93,7 @@ struct GenomeSpecificOther {
   Boolean region_GRCh38_HG001_PG2016_10_comphetindel10bp_slop50
   Boolean region_GRCh38_HG001_PG2016_10_comphetsnp10bp_slop50
   Boolean region_GRCh38_HG001_PG2016_10_complexindel10bp_slop50
-  Boolean region_GRCh38_HG001_PG2016_10_snpswithin10blop50
+  Boolean region_GRCh38_HG001_PG2016_10_snpswithin10_slop50
   Boolean region_GRCh38_HG001_RTG_3773_comphetindel10bp_slop50
   Boolean region_GRCh38_HG001_RTG_3773_comphetsnp10bp_slop50
   Boolean region_GRCh38_HG001_RTG_3773_complexindel10bp_slop50
