@@ -1,14 +1,12 @@
 version 1.0
 
-
 struct PopularRegions {
   Boolean Twist_Exome_Target_hg38
   Boolean region_GRCh38_alldifficultregions
   Boolean region_GRCh38_MHC
   Boolean region_HG002_GIAB_highconfidence
 }
-    
-    
+
 struct FunctionalRegions {
   Boolean region_GRCh38_notinrefseq_cds
   Boolean region_GRCh38_refseq_cds
@@ -60,13 +58,13 @@ struct GenomeSpecificSon {
 }
 
 struct GenomeSpecificDad {
-    Boolean region_GRCh38_HG003_GIABv332_comphetindel10bp_slop50
-    Boolean region_GRCh38_HG003_GIABv332_comphetsnp10bp_slop50
-    Boolean region_GRCh38_HG003_GIABv332_complexandSVs
-    Boolean region_GRCh38_HG003_GIABv332_complexandSVs_alldifficultregions
-    Boolean region_GRCh38_HG003_GIABv332_complexindel10bp_slop50
-    Boolean region_GRCh38_HG003_GIABv332_notin_complexandSVs_alldifficultregions
-    Boolean region_GRCh38_HG003_GIABv332_snpswithin10bp_slop50
+  Boolean region_GRCh38_HG003_GIABv332_comphetindel10bp_slop50
+  Boolean region_GRCh38_HG003_GIABv332_comphetsnp10bp_slop50
+  Boolean region_GRCh38_HG003_GIABv332_complexandSVs
+  Boolean region_GRCh38_HG003_GIABv332_complexandSVs_alldifficultregions
+  Boolean region_GRCh38_HG003_GIABv332_complexindel10bp_slop50
+  Boolean region_GRCh38_HG003_GIABv332_notin_complexandSVs_alldifficultregions
+  Boolean region_GRCh38_HG003_GIABv332_snpswithin10bp_slop50
 }
 
 struct GenomeSpecificMom {
@@ -108,8 +106,7 @@ struct GenomeSpecificOther {
   Boolean region_GRCh38_HG005_GIABv332_snpswithin10bp_slop50
   Boolean region_GRCh38_HG005_HG006_HG007_MetaSV_allsvs
 }
-  
-  
+
 struct LowComplexity {
   Boolean region_GRCh38_AllHomopolymers_gt6bp_imperfectgt10bp_slop5
   Boolean region_GRCh38_AllTandemRepeats_201to10000bp_slop5
