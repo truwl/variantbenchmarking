@@ -1,5 +1,12 @@
 version 1.0
 
+struct PopularRegions {
+  Boolean Twist_Exome_Target_hg38
+  Boolean region_GRCh38_alldifficultregions
+  Boolean region_GRCh38_MHC
+  Boolean region_HG002_GIAB_highconfidence
+}
+
 struct FunctionalRegions {
   Boolean region_GRCh38_notinrefseq_cds
   Boolean region_GRCh38_refseq_cds
@@ -23,25 +30,7 @@ struct GCcontent {
   Boolean region_GRCh38_gclt30orgt55_slop50
 }
 
-struct GenomeSpecific {
-  Boolean region_GRCh38_HG001_GIABv322_compoundhet_slop50
-  Boolean region_GRCh38_HG001_GIABv322_varswithin50bp
-  Boolean region_GRCh38_HG001_GIABv332_comphetindel10bp_slop50
-  Boolean region_GRCh38_HG001_GIABv332_comphetsnp10bp_slop50
-  Boolean region_GRCh38_HG001_GIABv332_complexandSVs
-  Boolean region_GRCh38_HG001_GIABv332_complexindel10bp_slop50
-  Boolean region_GRCh38_HG001_GIABv332_RTG_PG_v332_SVs_alldifficultregions
-  Boolean region_GRCh38_HG001_GIABv332_RTG_PG_v332_SVs_notin_alldifficultregions
-  Boolean region_GRCh38_HG001_GIABv332_snpswithin10bp_slop50
-  Boolean region_GRCh38_HG001_PacBio_MetaSV
-  Boolean region_GRCh38_HG001_PG2016_10_comphetindel10bp_slop50
-  Boolean region_GRCh38_HG001_PG2016_10_comphetsnp10bp_slop50
-  Boolean region_GRCh38_HG001_PG2016_10_complexindel10bp_slop50
-  Boolean region_GRCh38_HG001_PG2016_10_snpswithin10bp_slop50
-  Boolean region_GRCh38_HG001_RTG_3773_comphetindel10bp_slop50
-  Boolean region_GRCh38_HG001_RTG_3773_comphetsnp10bp_slop50
-  Boolean region_GRCh38_HG001_RTG_3773_complexindel10bp_slop50
-  Boolean region_GRCh38_HG001_RTG_3773_snpswithin10bp_slop50
+struct GenomeSpecificSon {
   Boolean region_GRCh38_HG002_GIABv41_CNV_CCSandONT_elliptical_outlier
   Boolean region_GRCh38_HG002_GIABv41_CNV_mrcanavarIllumina_CCShighcov_ONThighcov_intersection
   Boolean region_GRCh38_HG002_expanded_150__Tier1plusTier2_v061
@@ -63,10 +52,12 @@ struct GenomeSpecific {
   Boolean region_GRCh38_HG002_GIABv41_notin_complexandSVs_alldifficultregions
   Boolean region_GRCh38_HG002_GIABv41_othercomplexwithin10bp_slop50
   Boolean region_GRCh38_HG002_GIABv41_snpswithin10bp_slop50
-  Boolean region_GRCh38_HG002_HG003_HG004_allsvs
   Boolean region_GRCh38_HG002_GIABv41_CNV_gt2assemblycontigs_ONTCanu_ONTFlye_CCSCanu
   Boolean region_GRCh38_HG002_GIABv41_inversions_slop25percent
   Boolean region_GRCh38_HG002_Tier1plusTier2_v061
+}
+
+struct GenomeSpecificDad {
   Boolean region_GRCh38_HG003_GIABv332_comphetindel10bp_slop50
   Boolean region_GRCh38_HG003_GIABv332_comphetsnp10bp_slop50
   Boolean region_GRCh38_HG003_GIABv332_complexandSVs
@@ -74,6 +65,9 @@ struct GenomeSpecific {
   Boolean region_GRCh38_HG003_GIABv332_complexindel10bp_slop50
   Boolean region_GRCh38_HG003_GIABv332_notin_complexandSVs_alldifficultregions
   Boolean region_GRCh38_HG003_GIABv332_snpswithin10bp_slop50
+}
+
+struct GenomeSpecificMom {
   Boolean region_GRCh38_HG004_GIABv332_comphetindel10bp_slop50
   Boolean region_GRCh38_HG004_GIABv332_comphetsnp10bp_slop50
   Boolean region_GRCh38_HG004_GIABv332_complexandSVs
@@ -81,6 +75,28 @@ struct GenomeSpecific {
   Boolean region_GRCh38_HG004_GIABv332_complexindel10bp_slop50
   Boolean region_GRCh38_HG004_GIABv332_notin_complexandSVs_alldifficultregions
   Boolean region_GRCh38_HG004_GIABv332_snpswithin10bp_slop50
+}
+
+struct GenomeSpecificOther {
+  Boolean region_GRCh38_HG001_GIABv322_compoundhet_slop50
+  Boolean region_GRCh38_HG001_GIABv322_varswithin50bp
+  Boolean region_GRCh38_HG001_GIABv332_comphetindel10bp_slop50
+  Boolean region_GRCh38_HG001_GIABv332_comphetsnp10bp_slop50
+  Boolean region_GRCh38_HG001_GIABv332_complexandSVs
+  Boolean region_GRCh38_HG001_GIABv332_complexindel10bp_slop50
+  Boolean region_GRCh38_HG001_GIABv332_RTG_PG_v332_SVs_alldifficultregions
+  Boolean region_GRCh38_HG001_GIABv332_RTG_PG_v332_SVs_notin_alldifficultregions
+  Boolean region_GRCh38_HG001_GIABv332_snpswithin10bp_slop50
+  Boolean region_GRCh38_HG001_PacBio_MetaSV
+  Boolean region_GRCh38_HG001_PG2016_10_comphetindel10bp_slop50
+  Boolean region_GRCh38_HG001_PG2016_10_comphetsnp10bp_slop50
+  Boolean region_GRCh38_HG001_PG2016_10_complexindel10bp_slop50
+  Boolean region_GRCh38_HG001_PG2016_10_snpswithin10bp_slop50
+  Boolean region_GRCh38_HG001_RTG_3773_comphetindel10bp_slop50
+  Boolean region_GRCh38_HG001_RTG_3773_comphetsnp10bp_slop50
+  Boolean region_GRCh38_HG001_RTG_3773_complexindel10bp_slop50
+  Boolean region_GRCh38_HG001_RTG_3773_snpswithin10bp_slop50
+  Boolean region_GRCh38_HG002_HG003_HG004_allsvs
   Boolean region_GRCh38_HG005_GIABv332_comphetindel10bp_slop50
   Boolean region_GRCh38_HG005_GIABv332_comphetsnp10bp_slop50
   Boolean region_GRCh38_HG005_GIABv332_complexandSVs
@@ -128,7 +144,6 @@ struct OtherDifficult {
   Boolean region_GRCh38_contigs_lt500kb
   Boolean region_GRCh38_gaps_slop15kb
   Boolean region_GRCh38_L1H_gt500
-  Boolean region_GRCh38_MHC
   Boolean region_GRCh38_VDJ
 }
 
@@ -145,7 +160,6 @@ struct SegmentalDuplications {
 }
 
 struct Union {
-  Boolean region_GRCh38_alldifficultregions
   Boolean region_GRCh38_alllowmapandsegdupregions
   Boolean region_GRCh38_notinalldifficultregions
   Boolean region_GRCh38_notinalllowmapandsegdupregions

@@ -1,6 +1,7 @@
 version 1.0
 
 ## Generating the Indel distribution for WholeExome using bcftools, USE TRUTH VCF ! (not Happy's annotated VCF)
+
 task indelDistribution_CodingExons_HappyResults {
   input {
     String outputFile_commonPrefix

@@ -2,12 +2,12 @@ version 1.0
 
 task melt {
   input {
-      String job_id
-      String workflow_instance_identifier
-      String workflow_identifier
-      File codingExons_summary_csv
-      File WholeExome_summary_csv
-      File Rscript_aggregate
+    String job_id
+    String workflow_instance_identifier
+    String workflow_identifier
+    File codingExons_summary_csv
+    File WholeExome_summary_csv
+    File Rscript_aggregate
   }
   output {
     File talltable = "truwlbenchmarks.txt"

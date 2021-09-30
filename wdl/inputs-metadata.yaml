@@ -9,7 +9,7 @@ parameter_meta:
     name: queryVCF
     upload:
       accept: [".vcf",".vcf.gz",".vcf.bgz"]
-      maxSize: 150000000
+      maxSize: 200000000
   GermlineVariantCallBenchmark.subject:
     group: Query
     description: Member of Ashkenazi trio used in the query VCF (HG002, HG003, or HG004)
@@ -18,7 +18,7 @@ parameter_meta:
   GermlineVariantCallBenchmark.freeze:
     group: Query
     description: Genome freeze
-    choices: ['hg38', 'hg37']
+    choices: ['hg38'] #, 'hg37']
     example: 'Genome freeze. hg37 is no-chr'
     
   GermlineVariantCallBenchmark.chrRemovedVCF_fileSuffix:
@@ -205,34 +205,34 @@ parameter_group:
     display: true
   FunctionalRegions:
     title: Functional Regions
-    display: true
+    display: false
   GCcontentRegions:
     title: GC Content Regions
-    display: true
+    display: false
   GenomeSpecificRegionsSon:
     title: HG002/Son Regions
-    display: true
+    display: false
   GenomeSpecificRegionsMom:
     title: HG004/Mom Regions
-    display: true
+    display: false
   GenomeSpecificRegionsDad:
     title: HG003/Dad Regions
-    display: true 
+    display: false 
   GenomeSpecificRegionsOther:
     title: Other GS Regions
-    display: true
+    display: false
   LowComplexityRegions:
     title: Low Complexity Regions
-    display: true
+    display: false
   MappabilityRegions:
     title: Mappability Regions
-    display: true
+    display: false
   OtherDifficultRegions:
     title: Difficult Regions
-    display: true
+    display: false
   UnionRegions:
     title: Union Regions
-    display: true
+    display: false
   SegmentalDuplicationRegions:
     title: Segmental Duplication Regions
-    display: true
+    display: false
