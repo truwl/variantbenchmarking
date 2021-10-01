@@ -18,7 +18,6 @@ parameter_meta:
   GermlineVariantCallBenchmark.freeze:
     group: Query
     description: Genome freeze
-    choices: ['hg38'] #, 'hg37']
     example: 'Genome freeze. hg37 is no-chr'
     
   GermlineVariantCallBenchmark.chrRemovedVCF_fileSuffix:
