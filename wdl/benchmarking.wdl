@@ -15,9 +15,9 @@ workflow GermlineVariantCallBenchmark {
 
   input {
     File queryVCF
-    String freeze
+    String freeze ="hg38"
     #HG002 (child), HG003 (dad), HG004 (mom)
-    String subject
+    String subject = "HG002"
 
     Map[String,Map[String,File]] truthVCF = {
                                               "HG002": {
@@ -90,7 +90,7 @@ workflow GermlineVariantCallBenchmark {
     #MHC is           4,970,557 bp
     #difficult      628,689,391 bp
     PopularRegions popRegions = {
-                                  'region_GRCh38_alldifficultregions':false,
+                                  'region_GRCh38_alldifficultregions':true,
                                   'region_GRCh38_MHC':false,
                                   'Twist_Exome_Target_hg38':false,
                                   'region_HG002_GIAB_highconfidence':false
