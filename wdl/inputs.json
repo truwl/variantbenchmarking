@@ -170,7 +170,7 @@
   "GermlineVariantCallBenchmark.codingExonsPrefix": "String (optional, default = \"cds\")",
   "GermlineVariantCallBenchmark.sdRegionsPath": "String (optional, default = \"gs://truwl-giab/genome-stratifications/v2.0/GRCh38/SegmentalDuplications/\")",
   "GermlineVariantCallBenchmark.includeIA789": "Boolean (optional, default = true)",
-  "GermlineVariantCallBenchmark.subject": "String",
+  "GermlineVariantCallBenchmark.subject": "String (optional, default = \"HG002\")",
   "GermlineVariantCallBenchmark.indelDistributionSuffix": "String (optional, default = \"_indelDistribution_Frombcftools.txt\")",
   "GermlineVariantCallBenchmark.workflow_identifier": "String",
   "GermlineVariantCallBenchmark.includeB1S5A": "Boolean (optional, default = true)",
@@ -190,7 +190,7 @@
   },
   "GermlineVariantCallBenchmark.indelSizeDistributionPlotSuffix": "String (optional, default = \"_indelSizeDistributionPlot.png\")",
   "GermlineVariantCallBenchmark.outputFile_commonPrefix": "String (optional, default = \"results\")",
-  "GermlineVariantCallBenchmark.freeze": "String",
+  "GermlineVariantCallBenchmark.freeze": "String (optional, default = \"hg38\")",
   "GermlineVariantCallBenchmark.gsRegionsPath": "String (optional, default = \"gs://truwl-giab/genome-stratifications/v2.0/GRCh38/GenomeSpecific/\")",
   "GermlineVariantCallBenchmark.happyPrefix": "String (optional, default = \"hap\")",
   "GermlineVariantCallBenchmark.includeEIUT6": "Boolean (optional, default = true)"
