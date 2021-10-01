@@ -172,8 +172,8 @@ parameter_meta:
     group: Paths
   GermlineVariantCallBenchmark.unRegionsPath:
     group: Paths
-
-  
+  GermlineVariantCallBenchmark.competitors:
+    group: CachedMetrics
       
 parameter_group:
   Query:
@@ -181,6 +181,9 @@ parameter_group:
     display: true
   Truth:
     title: Truth sets
+    display: false
+  CachedMetrics:
+    title: Cached metrics
     display: false
   Affixes:
     title: Prefixes/Suffixes

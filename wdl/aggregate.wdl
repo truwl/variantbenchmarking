@@ -14,7 +14,7 @@ task melt {
   command <<<
     Rscript ~{Rscript_aggregate} ~{job_id} ~{workflow_instance_identifier} ~{workflow_identifier} ~{extended_csv} allmetrics.txt
     #filter out non-numeric output
-    head -n 1 allmetrics >  truwlbenchmarks.txt
+    head -n 1 allmetrics > truwlbenchmarks.txt
     cat allmetrics.txt | perl -ne 'm/[0-9]$/ && print' >> truwlbenchmarks.txt
   >>>
   runtime {
