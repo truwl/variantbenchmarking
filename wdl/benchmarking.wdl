@@ -85,6 +85,10 @@ workflow GermlineVariantCallBenchmark {
     String sdRegionsPath = "gs://truwl-giab/genome-stratifications/v2.0/GRCh38/SegmentalDuplications/"
     String unRegionsPath = "gs://truwl-giab/genome-stratifications/v2.0/GRCh38/union/"
 
+    #Twist is        33,167,129 bp
+    #high conf is 2,542,242,843 bp
+    #MHC is           4,970,557 bp
+    #difficult      628,689,391 bp
     PopularRegions popRegions = {
                                   'region_GRCh38_alldifficultregions':false,
                                   'region_GRCh38_MHC':false,

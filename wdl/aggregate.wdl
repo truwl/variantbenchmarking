@@ -39,7 +39,7 @@ task precRecall {
     Rscript ~{Rscript_precrecall} ~{samplename} ~{truwlbenchmarks} ~{staticcompetitors} ~{outputplotname}
   >>>
   runtime {
-    docker: "rocker/tidyverse:4.1.0"
+    docker: "truwl/precrecall:latest"
     memory: "1 GB"
     cpu: 1
   }

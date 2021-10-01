@@ -10,9 +10,6 @@ if (length(args)<4) {
 library(ggplot2)
 library(dplyr)
 library(RColorBrewer)
-
-install.packages("reshape2",quiet = TRUE,repos = "https://cran.rstudio.com")
-install.packages("ggforce",quiet = TRUE,repos = "https://cran.rstudio.com")
 library(ggforce)
 
 samplename <- args[1] 
@@ -43,7 +40,7 @@ read.csv(competitors) %>%
   # reshape2::melt() %>%
   # dplyr::rename(metric=variable) -> melted
 
-rbind(comps,samplemetrics) %>% filter(Region %in% samplemetrics$Region) -> all
+rbind(comps,samplemetrics) %>% dplyr::filter(Region %in% samplemetrics$Region) -> all
 all$value<-as.numeric(all$value)
 p<-ggplot(all)+geom_bar(aes(group=Sample,x=metric,y=value,fill=Sample),stat="identity",position = "dodge")+facet_wrap_paginate(~Type+Filter+Region)+scale_fill_brewer(palette="Paired")
 

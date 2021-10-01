@@ -131,6 +131,7 @@ parameter_meta:
 
   GermlineVariantCallBenchmark.popRegions:
     group: PopularRegions
+    description: Twist exome is 33,167,129 bp and 192,264 regions, HG002_GIAB_highconfidence is 2,542,242,843bp and 481,622 regions, MHC is 4,970,557 bp and 1 region, Difficult 628,689,391 bp and 4,830,678 regions
   GermlineVariantCallBenchmark.gsRegionsSon:
     group: GenomeSpecificRegionsSon
   GermlineVariantCallBenchmark.gsRegionsMom:
