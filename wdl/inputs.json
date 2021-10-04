@@ -117,10 +117,10 @@
     "region_GRCh38_HG001_RTG_3773_comphetsnp10bp_slop50": "Boolean"
   },
   "GermlineVariantCallBenchmark.popRegions": {
-    "Twist_Exome_Target_hg38": "Boolean",
-    "region_GRCh38_alldifficultregions": "Boolean",
-    "region_GRCh38_MHC": "Boolean",
-    "region_HG002_GIAB_highconfidence": "Boolean"
+    "Twist_Exome_Target_hg38": "Boolean (optional, default = false)",
+    "region_GRCh38_alldifficultregions": "Boolean (optional, default = true)",
+    "region_GRCh38_MHC": "Boolean (optional, default = false)",
+    "region_HG002_GIAB_highconfidence": "Boolean (optional, default = false)"
   },
   "GermlineVariantCallBenchmark.Rscript_aggregate": "File (optional, default = \"gs://benchmarking-datasets/aggregateExtended.R\")",
   "GermlineVariantCallBenchmark.chrRemovedVCF_fileSuffix": "String (optional, default = \"_chrRemoved.vcf.gz\")",
