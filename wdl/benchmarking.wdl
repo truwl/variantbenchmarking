@@ -92,7 +92,7 @@ workflow GermlineVariantCallBenchmark {
     PopularRegions popRegions = {
                                   'region_GRCh38_alldifficultregions':true,
                                   'region_GRCh38_MHC':false,
-                                  'Twist_Exome_Target_hg38':false,
+                                  'region_twist_exome_target_hg38':false,
                                   'region_HG002_GIAB_highconfidence':false
                                 }
 
