@@ -21,6 +21,8 @@ read.csv(wes,header=TRUE) %>% dplyr::mutate(WorkflowId=workflow_id,
                                             WorkflowInstanceID=workflow_inst,
                                             JobRunID=job_id) %>%
                                             dplyr::rename(Region=Subset) %>%
+                                            dplyr::filter(Subtype=='*') %>%
+                                            dplyr::filter(Genotype=='*') %>%
   gather(key = "variable", value="value", -WorkflowInstanceID, -WorkflowId, -JobRunID, -Type, -Filter, -Region, -Subtype, -Genotype) %>%
   write.table(row.names=FALSE,sep="\t",file=outputfile,quote=FALSE)
 

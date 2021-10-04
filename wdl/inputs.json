@@ -117,10 +117,10 @@
     "region_GRCh38_HG001_RTG_3773_comphetsnp10bp_slop50": "Boolean"
   },
   "GermlineVariantCallBenchmark.popRegions": {
-    "Twist_Exome_Target_hg38": "Boolean",
-    "region_GRCh38_alldifficultregions": "Boolean",
-    "region_GRCh38_MHC": "Boolean",
-    "region_HG002_GIAB_highconfidence": "Boolean"
+    "Twist_Exome_Target_hg38": "Boolean (optional, default = false)",
+    "region_GRCh38_alldifficultregions": "Boolean (optional, default = true)",
+    "region_GRCh38_MHC": "Boolean (optional, default = false)",
+    "region_HG002_GIAB_highconfidence": "Boolean (optional, default = false)"
   },
   "GermlineVariantCallBenchmark.Rscript_aggregate": "File (optional, default = \"gs://benchmarking-datasets/aggregateExtended.R\")",
   "GermlineVariantCallBenchmark.chrRemovedVCF_fileSuffix": "String (optional, default = \"_chrRemoved.vcf.gz\")",
@@ -170,7 +170,7 @@
   "GermlineVariantCallBenchmark.codingExonsPrefix": "String (optional, default = \"cds\")",
   "GermlineVariantCallBenchmark.sdRegionsPath": "String (optional, default = \"gs://truwl-giab/genome-stratifications/v2.0/GRCh38/SegmentalDuplications/\")",
   "GermlineVariantCallBenchmark.includeIA789": "Boolean (optional, default = true)",
-  "GermlineVariantCallBenchmark.subject": "String",
+  "GermlineVariantCallBenchmark.subject": "String (optional, default = \"HG002\")",
   "GermlineVariantCallBenchmark.indelDistributionSuffix": "String (optional, default = \"_indelDistribution_Frombcftools.txt\")",
   "GermlineVariantCallBenchmark.workflow_identifier": "String",
   "GermlineVariantCallBenchmark.includeB1S5A": "Boolean (optional, default = true)",
@@ -190,7 +190,7 @@
   },
   "GermlineVariantCallBenchmark.indelSizeDistributionPlotSuffix": "String (optional, default = \"_indelSizeDistributionPlot.png\")",
   "GermlineVariantCallBenchmark.outputFile_commonPrefix": "String (optional, default = \"results\")",
-  "GermlineVariantCallBenchmark.freeze": "String",
+  "GermlineVariantCallBenchmark.freeze": "String (optional, default = \"hg38\")",
   "GermlineVariantCallBenchmark.gsRegionsPath": "String (optional, default = \"gs://truwl-giab/genome-stratifications/v2.0/GRCh38/GenomeSpecific/\")",
   "GermlineVariantCallBenchmark.happyPrefix": "String (optional, default = \"hap\")",
   "GermlineVariantCallBenchmark.includeEIUT6": "Boolean (optional, default = true)"
