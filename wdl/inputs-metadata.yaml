@@ -1,10 +1,23 @@
 workflow_name: Variant Benchmarking
-workflow_description: This repository contains the benchmarking workflow that can be used to assess performance of germline variant calling pipelines based on testing with GIAB samples
+workflow_description: >
+  <!-- markdown=true -->
+
+  This benchmarking workflow can be used to assess performance of germline variant calling pipelines run on Genome in a bottle (GIAB) samples HGOO2, HG003, and HG004 (https://truwl.com/files/library/FC_ac361c.1).
+  It is an implementation of the [GA4GH best practices](https://doi.org/10.1038/s41587-019-0054-x) that uses vcfeval as the comparison engine and 'genotype match' to calculate true positive, false positives, and false negatives.
+  Additional statistics are generated for partial matches.
+
+  The workflow allows for selection of 'competitors' and 'regions'.
+  Competitor selection allows you to compare your VCF against the winning VCF submissions for the [PrecisionFDA Truth Challenge V2](https://www.biorxiv.org/content/10.1101/2020.11.13.380741v4).
+  Region selection allows you to specify which genomic regions are used for the comparison.
+
+  The workflow generates two html reports: a multiQC report generated using Bcftools and a notebook that contains upset plots, precision recall metrics, and indell size distribution plots generated using papermill.
+
+  Metrics from each benchmarking run are also loaded into the Truwl Performance Metrics table which enables you to compare metrics across multiple benchmarking runs.
 parameter_meta:
   
   GermlineVariantCallBenchmark.queryVCF:
     group: Query
-    description:
+    description: VCF to benchmark. Specify VCF (".vcf",".vcf.gz",".vcf.bgz") using any publicly accessible uri.
     example: "gs://benchmarking-datasets/HG002run1_S1.genome.vcf"
     name: queryVCF
     upload:
@@ -12,7 +25,7 @@ parameter_meta:
       maxSize: 200000000
   GermlineVariantCallBenchmark.subject:
     group: Query
-    description: Member of Ashkenazi trio used in the query VCF (HG002, HG003, or HG004)
+    description: Member of Ashkenazi trio used to genrate the query VCF (HG002, HG003, or HG004)
     choices: ['HG002', 'HG003', 'HG004']
     example: 'HG002'
   GermlineVariantCallBenchmark.freeze:
@@ -61,28 +74,61 @@ parameter_meta:
     example: "gs://benchmarking-datasets/GRCh37-lite.fa"
   GermlineVariantCallBenchmark.includeB1S5A:
     group: Competitors 
-    description: Include B1S5A All Benchmark Regions B1S5A The Genomics Team in Google Health DeepVariant PacBio
+    description: |
+      Submission name: DeepVariant PacBio
+      Participant: The Genomics Team in Google Health
+      Category: All Benchmark Regions
+      Technology: PacBio
   GermlineVariantCallBenchmark.includeCZA1Y:
     group: Competitors
-    description: MHC CZA1Y Sentieon "Combination of Illumina, PacBio HIFI, and Oxford Nanopore submission Model2"
+    description: |
+      Submission name: Combination of Illumina, PacBio HIFI, and Oxford Nanopore submission Model2
+      Participant: Sentieon
+      Category: MHC
+      Technology: Multi
   GermlineVariantCallBenchmark.includeEIUT6:
     group: Competitors
-    description: MHC, Difficult-to-Map Regions" EIUT6 Sentieon PacBio HIFI only submission
+    description: |
+      Submission name: PacBio HIFI only submission
+      Participant: Sentieon
+      Technology: PacBio
+      Category: MHC/Difficult-to-Map Regions
   GermlineVariantCallBenchmark.includeIA789:
     group: Competitors
-    description: Include B1S5A PACBIO All Benchmark Regions B1S5A The Genomics Team in Google Health DeepVariant PacBio
+    description: |
+      Submission name: RN-Illumina-PacBio-ONT
+      Participant: Roche Sequencing Solutions
+      Technology: Multi
+      Category: Difficult-to-Map Regions
   GermlineVariantCallBenchmark.includeW607K:
     group: Competitors
-    description: Include B1S5A PACBIO All Benchmark Regions B1S5A The Genomics Team in Google Health DeepVariant PacBio
+    description: |
+      Submission name: DRAGEN Experimental Extension into Difficult Regions
+      Participant: DRAGEN
+      Technology: Illumina
+      Category: All Benchmark Regions/Difficult-to-Map Regions
   GermlineVariantCallBenchmark.includeWX8VK:
     group: Competitors
-    description: All Benchmark Regions, MHC WX8VK Sentieon Combination of Illumina, PacBio HIFI, and Oxford Nanopore submission
+    description: |
+      Submission name: Combination of Illumina, PacBio HIFI, and Oxford Nanopore submission
+      Participant: Sentieon
+      Technology: Multi
+      Category: All Benchmark Regions/MHC
   GermlineVariantCallBenchmark.includeXC97E:
     group: Competitors
-    description: Include B1S5A PACBIO All Benchmark Regions B1S5A The Genomics Team in Google Health DeepVariant PacBio
+    description: |
+      Submission name: DeepVariant PacBio
+      Participant: The Genomics Team in Google Health
+      Technology: PacBio
+      Category: All Benchmark Regions
+
   GermlineVariantCallBenchmark.includeXV7ZN:
     group: Competitors
-    description: Include B1S5A PACBIO All Benchmark Regions B1S5A The Genomics Team in Google Health DeepVariant PacBio
+    description: |
+      Submission name: ONT NanoCaller Clair Medaka Ensemble
+      Participant: Wang Genomics Lab
+      Technology: ONT
+      Category: MHC
   GermlineVariantCallBenchmark.outputFile_commonPrefix:
     group: Affixes
     description:
@@ -179,6 +225,7 @@ parameter_group:
   Query:
     title: Query
     display: true
+    description: Specify your VCF, the subject dataset that your VCF was generated from (HG002, HG003, HG004) and the reference assembly version--only hg38 is currently supported.
   Truth:
     title: Truth sets
     display: false
@@ -200,12 +247,14 @@ parameter_group:
   Competitors:
     title: Competitors
     display: true
+    description: Choose variant call files that you want to compare against. The below options are the winning submissions from the PrecisionFDA Truth Challenge V2. The most appropriate comparisons are those that used the same technology (Illumina, PacBio, ONT, multi) that you used to generate your VCF .
   Builtin:
     title: Built-in parameters
     display: false
   PopularRegions:
     title: Popular Regions
     display: true
+    description: Choose the regions to compare your variants against the reference set.
   FunctionalRegions:
     title: Functional Regions
     display: false

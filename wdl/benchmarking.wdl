@@ -89,17 +89,61 @@ workflow GermlineVariantCallBenchmark {
     #high conf is 2,542,242,843 bp
     #MHC is           4,970,557 bp
     #difficult      628,689,391 bp
-    Map[String, Boolean] popRegions = {
-                                        'region_GRCh38_alldifficultregions':true,
-                                        'region_GRCh38_MHC':false,
-                                        'Twist_Exome_Target_hg38':false,
-                                        'region_HG002_GIAB_highconfidence':false
-                                      }
+    PopularRegions popRegions = {
+                                  'region_GRCh38_alldifficultregions':true,
+                                  'region_GRCh38_MHC':false,
+                                  'region_twist_exome_target_hg38':false,
+                                  'region_HG002_GIAB_highconfidence':false
+                                }
 
-    Map[String, Boolean] fcRegions = {
-                                       "region_GRCh38_notinrefseq_cds" : false,
-                                       "region_GRCh38_refseq_cds" : false,
-                                       "region_GRCh38_BadPromoters" : false,
+    FunctionalRegions fcRegions = {
+                                    'region_GRCh38_notinrefseq_cds':false,
+                                    'region_GRCh38_refseq_cds':false,
+                                    'region_GRCh38_BadPromoters':false
+                                  }
+
+    GCcontent gcRegions = {
+                            'region_GRCh38_gc15_slop50':false,
+                            'region_GRCh38_gc15to20_slop50':false,
+                            'region_GRCh38_gc20to25_slop50':false,
+                            'region_GRCh38_gc25to30_slop50':false,
+                            'region_GRCh38_gc30to55_slop50':false,
+                            'region_GRCh38_gc55to60_slop50':false,
+                            'region_GRCh38_gc60to65_slop50':false,
+                            'region_GRCh38_gc65to70_slop50':false,
+                            'region_GRCh38_gc70to75_slop50':false,
+                            'region_GRCh38_gc75to80_slop50':false,
+                            'region_GRCh38_gc80to85_slop50':false,
+                            'region_GRCh38_gc85_slop50':false,
+                            'region_GRCh38_gclt25orgt65_slop50':false,
+                            'region_GRCh38_gclt30orgt55_slop50':false
+                          }
+
+    GenomeSpecificSon gsRegionsSon = {
+                                       'region_GRCh38_HG002_GIABv41_CNV_CCSandONT_elliptical_outlier':false,
+                                       'region_GRCh38_HG002_GIABv41_CNV_mrcanavarIllumina_CCShighcov_ONThighcov_intersection':false,
+                                       'region_GRCh38_HG002_expanded_150__Tier1plusTier2_v061':false,
+                                       'region_GRCh38_HG002_GIABv322_compoundhet_slop50':false,
+                                       'region_GRCh38_HG002_GIABv322_varswithin50bp':false,
+                                       'region_GRCh38_HG002_GIABv332_comphetindel10bp_slop50':false,
+                                       'region_GRCh38_HG002_GIABv332_comphetsnp10bp_slop50':false,
+                                       'region_GRCh38_HG002_GIABv332_complexandSVs':false,
+                                       'region_GRCh38_HG002_GIABv332_complexandSVs_alldifficultregions':false,
+                                       'region_GRCh38_HG002_GIABv332_complexindel10bp_slop50':false,
+                                       'region_GRCh38_HG002_GIABv332_notin_complexandSVs_alldifficultregions':false,
+                                       'region_GRCh38_HG002_GIABv332_snpswithin10bp_slop50':false,
+                                       'region_GRCh38_HG002_GIABv41_CNVsandSVs':false,
+                                       'region_GRCh38_HG002_GIABv41_comphetindel10bp_slop50':false,
+                                       'region_GRCh38_HG002_GIABv41_comphetsnp10bp_slop50':false,
+                                       'region_GRCh38_HG002_GIABv41_complexandSVs':false,
+                                       'region_GRCh38_HG002_GIABv41_complexandSVs_alldifficultregions':false,
+                                       'region_GRCh38_HG002_GIABv41_complexindel10bp_slop50':false,
+                                       'region_GRCh38_HG002_GIABv41_notin_complexandSVs_alldifficultregions':false,
+                                       'region_GRCh38_HG002_GIABv41_othercomplexwithin10bp_slop50':false,
+                                       'region_GRCh38_HG002_GIABv41_snpswithin10bp_slop50':false,
+                                       'region_GRCh38_HG002_GIABv41_CNV_gt2assemblycontigs_ONTCanu_ONTFlye_CCSCanu':false,
+                                       'region_GRCh38_HG002_GIABv41_inversions_slop25percent':false,
+                                       'region_GRCh38_HG002_Tier1plusTier2_v061':false
                                      }
 
     Map[String, Boolean] gcRegions = {

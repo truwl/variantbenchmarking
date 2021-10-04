@@ -1,7 +1,7 @@
 version 1.0
 
 struct PopularRegions {
-  Boolean Twist_Exome_Target_hg38
+  Boolean region_twist_exome_target_hg38
   Boolean region_GRCh38_alldifficultregions
   Boolean region_GRCh38_MHC
   Boolean region_HG002_GIAB_highconfidence
