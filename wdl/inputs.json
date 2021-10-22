@@ -117,8 +117,8 @@
     "region_GRCh38_HG001_RTG_3773_comphetsnp10bp_slop50": "Boolean (optional, default = false)"
   },
   "GermlineVariantCallBenchmark.popRegions": {
-    "region_twist_exome_target_hg38": "Boolean (optional, default = true)",
-    "region_GRCh38_alldifficultregions": "Boolean (optional, default = false)",
+    "region_twist_exome_target_hg38": "Boolean (optional, default = false)",
+    "region_GRCh38_alldifficultregions": "Boolean (optional, default = true)",
     "region_GRCh38_MHC": "Boolean (optional, default = false)",
     "region_HG002_GIAB_highconfidence": "Boolean (optional, default = false)"
   },
@@ -190,7 +190,7 @@
   },
   "GermlineVariantCallBenchmark.indelSizeDistributionPlotSuffix": "String (optional, default = \"_indelSizeDistributionPlot.png\")",
   "GermlineVariantCallBenchmark.outputFile_commonPrefix": "String (optional, default = \"results\")",
-  "GermlineVariantCallBenchmark.freeze": "String (optional, default = \"hg38\")",
+  "GermlineVariantCallBenchmark.freeze": "String (default = \"hg38\")",
   "GermlineVariantCallBenchmark.gsRegionsPath": "String (optional, default = \"gs://truwl-giab/genome-stratifications/v2.0/GRCh38/GenomeSpecific/\")",
   "GermlineVariantCallBenchmark.happyPrefix": "String (optional, default = \"hap\")",
   "GermlineVariantCallBenchmark.includeEIUT6": "Boolean (optional, default = true)"
