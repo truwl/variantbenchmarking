@@ -18,20 +18,31 @@ workflow GermlineVariantCallBenchmark {
     String freeze = "hg38"
     #HG002 (child), HG003 (dad), HG004 (mom)
     String subject = "HG002"
+    String truthVersion = "v4.2.1"
 
-    Map[String,Map[String,File]] truthVCF = {
+    Map[String,Map[String,Map[String,File]]] truthVCF = {'v4.2.0':{
                                               "HG002": {
-                                                         "hg37": "gs://truwl-giab/AshkenazimTrio/HG002_NA24385_son/NISTv4.2.1/GRCh37/HG002_GRCh37_1_22_v4.2.1_benchmark.vcf.gz",
-                                                         "hg38": "gs://truwl-giab/AshkenazimTrio/HG002_NA24385_son/NISTv4.2.1/GRCh38/HG002_GRCh38_1_22_v4.2.1_benchmark.vcf.gz"
+                                                         "hg38": "gs://truwl-giab/AshkenazimTrio/HG002_NA24385_son/NISTv4.2.0/GRCh38/HG002_GRCh38_1_22_v4.2_benchmark.vcf.gz"
                                                        },
                                               "HG003": {
-                                                         "hg37": "gs://truwl-giab/AshkenazimTrio/HG003_NA24159_father/NISTv4.2.1/GRCh37/HG003_GRCh37_1_22_v4.2.1_benchmark.vcf.gz",
-                                                         "hg38": "gs://truwl-giab/AshkenazimTrio/HG003_NA24159_father/NISTv4.2.1/GRCh38/HG003_GRCh38_1_22_v4.2.1_benchmark.vcf.gz"
+                                                         "hg38": "gs://truwl-giab/AshkenazimTrio/HG003_NA24159_father/NISTv4.2.0/GRCh38/HG003_GRCh38_1_22_v4.2_benchmark.vcf.gz"
                                                        },
                                               "HG004": {
-                                                         "hg37": "gs://truwl-giab/AshkenazimTrio/HG004_NA24143_mother/NISTv4.2.1/GRCh37/HG004_GRCh37_1_22_v4.2.1_benchmark.vcf.gz",
-                                                         "hg38": "gs://truwl-giab/AshkenazimTrio/HG004_NA24143_mother/NISTv4.2.1/GRCh38/HG004_GRCh38_1_22_v4.2.1_benchmark.vcf.gz"
-                                                       }
+                                                         "hg38": "gs://truwl-giab/AshkenazimTrio/HG004_NA24143_mother/NISTv4.2.0/GRCh38/HG004_GRCh38_1_22_v4.2_benchmark.vcf.gz"
+                                                       }},
+                                              'v4.2.1':{
+                                                "HG002": {
+                                                           "hg37": "gs://truwl-giab/AshkenazimTrio/HG002_NA24385_son/NISTv4.2.1/GRCh37/HG002_GRCh37_1_22_v4.2.1_benchmark.vcf.gz",
+                                                           "hg38": "gs://truwl-giab/AshkenazimTrio/HG002_NA24385_son/NISTv4.2.1/GRCh38/HG002_GRCh38_1_22_v4.2.1_benchmark.vcf.gz"
+                                                         },
+                                                "HG003": {
+                                                           "hg37": "gs://truwl-giab/AshkenazimTrio/HG003_NA24159_father/NISTv4.2.1/GRCh37/HG003_GRCh37_1_22_v4.2.1_benchmark.vcf.gz",
+                                                           "hg38": "gs://truwl-giab/AshkenazimTrio/HG003_NA24159_father/NISTv4.2.1/GRCh38/HG003_GRCh38_1_22_v4.2.1_benchmark.vcf.gz"
+                                                         },
+                                                "HG004": {
+                                                           "hg37": "gs://truwl-giab/AshkenazimTrio/HG004_NA24143_mother/NISTv4.2.1/GRCh37/HG004_GRCh37_1_22_v4.2.1_benchmark.vcf.gz",
+                                                           "hg38": "gs://truwl-giab/AshkenazimTrio/HG004_NA24143_mother/NISTv4.2.1/GRCh38/HG004_GRCh38_1_22_v4.2.1_benchmark.vcf.gz"
+                                                         }}
                                             }
 
     Map[String,File] truthCodingExonsBED = {
@@ -101,50 +112,6 @@ workflow GermlineVariantCallBenchmark {
                                     'region_GRCh38_refseq_cds':false,
                                     'region_GRCh38_BadPromoters':false
                                   }
-
-    GCcontent gcRegions = {
-                            'region_GRCh38_gc15_slop50':false,
-                            'region_GRCh38_gc15to20_slop50':false,
-                            'region_GRCh38_gc20to25_slop50':false,
-                            'region_GRCh38_gc25to30_slop50':false,
-                            'region_GRCh38_gc30to55_slop50':false,
-                            'region_GRCh38_gc55to60_slop50':false,
-                            'region_GRCh38_gc60to65_slop50':false,
-                            'region_GRCh38_gc65to70_slop50':false,
-                            'region_GRCh38_gc70to75_slop50':false,
-                            'region_GRCh38_gc75to80_slop50':false,
-                            'region_GRCh38_gc80to85_slop50':false,
-                            'region_GRCh38_gc85_slop50':false,
-                            'region_GRCh38_gclt25orgt65_slop50':false,
-                            'region_GRCh38_gclt30orgt55_slop50':false
-                          }
-
-    GenomeSpecificSon gsRegionsSon = {
-                                       'region_GRCh38_HG002_GIABv41_CNV_CCSandONT_elliptical_outlier':false,
-                                       'region_GRCh38_HG002_GIABv41_CNV_mrcanavarIllumina_CCShighcov_ONThighcov_intersection':false,
-                                       'region_GRCh38_HG002_expanded_150__Tier1plusTier2_v061':false,
-                                       'region_GRCh38_HG002_GIABv322_compoundhet_slop50':false,
-                                       'region_GRCh38_HG002_GIABv322_varswithin50bp':false,
-                                       'region_GRCh38_HG002_GIABv332_comphetindel10bp_slop50':false,
-                                       'region_GRCh38_HG002_GIABv332_comphetsnp10bp_slop50':false,
-                                       'region_GRCh38_HG002_GIABv332_complexandSVs':false,
-                                       'region_GRCh38_HG002_GIABv332_complexandSVs_alldifficultregions':false,
-                                       'region_GRCh38_HG002_GIABv332_complexindel10bp_slop50':false,
-                                       'region_GRCh38_HG002_GIABv332_notin_complexandSVs_alldifficultregions':false,
-                                       'region_GRCh38_HG002_GIABv332_snpswithin10bp_slop50':false,
-                                       'region_GRCh38_HG002_GIABv41_CNVsandSVs':false,
-                                       'region_GRCh38_HG002_GIABv41_comphetindel10bp_slop50':false,
-                                       'region_GRCh38_HG002_GIABv41_comphetsnp10bp_slop50':false,
-                                       'region_GRCh38_HG002_GIABv41_complexandSVs':false,
-                                       'region_GRCh38_HG002_GIABv41_complexandSVs_alldifficultregions':false,
-                                       'region_GRCh38_HG002_GIABv41_complexindel10bp_slop50':false,
-                                       'region_GRCh38_HG002_GIABv41_notin_complexandSVs_alldifficultregions':false,
-                                       'region_GRCh38_HG002_GIABv41_othercomplexwithin10bp_slop50':false,
-                                       'region_GRCh38_HG002_GIABv41_snpswithin10bp_slop50':false,
-                                       'region_GRCh38_HG002_GIABv41_CNV_gt2assemblycontigs_ONTCanu_ONTFlye_CCSCanu':false,
-                                       'region_GRCh38_HG002_GIABv41_inversions_slop25percent':false,
-                                       'region_GRCh38_HG002_Tier1plusTier2_v061':false
-                                     }
 
     Map[String, Boolean] gcRegions = {
                                        "region_GRCh38_gc15_slop50" : false,
@@ -429,7 +396,7 @@ workflow GermlineVariantCallBenchmark {
   call happy.happyStratify as happystrat {
     input:
       queryVCF = queryVCF,
-      truthVCF = truthVCF[subject][freeze],
+      truthVCF = truthVCF[truthVersion][subject][freeze],
 
       referenceFasta = referenceFasta[freeze],
       referenceFasta_indexed = referenceFasta_indexed[freeze],
