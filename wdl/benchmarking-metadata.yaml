@@ -3,9 +3,9 @@ identifier: WF_b1de71.e9
 description: >
   This repository contains the benchmarking workflow that can be used to assess performance of germline variant calling pipelines based on testing with GIAB samples
 softwareVersion:
-  versionName: 0.2
+  versionName: 0.2.x
   includedVersions:
-    - 0.2
+    - 0.2.1
 metadataStatus: Released
 workflowStatus: Released
 workflowLanguage: wdl
