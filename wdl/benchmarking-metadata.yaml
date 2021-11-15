@@ -1,17 +1,17 @@
 name: Variant Benchmarking
-identifier: WF_b1de71.e9
+identifier: WF_6f6c41.3d
 description: >
   This repository contains the benchmarking workflow that can be used to assess performance of germline variant calling pipelines based on testing with GIAB samples
 softwareVersion:
   versionName: 0.2.x
   includedVersions:
-    - 0.2.1
+    - 0.2.2
 metadataStatus: Released
 workflowStatus: Released
 workflowLanguage: wdl
 workflowFile: wdl/benchmarking.wdl
 repoName: variantbenchmarking
-gitTag: truthversion
+gitTag: highconf
 inputsTemplate: inputs.json
 executable: true
 current: true

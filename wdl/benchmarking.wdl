@@ -45,6 +45,32 @@ workflow GermlineVariantCallBenchmark {
                                                          }}
                                             }
 
+    Map[String,Map[String,Map[String,File]]] highconfBed = {'v4.2.0':{
+                                              "HG002": {
+                                                         "hg38": "gs://truwl-giab/AshkenazimTrio/HG002_NA24385_son/NISTv4.2.0/GRCh38/HG002_GRCh38_1_22_v4.2_benchmark.bed"
+                                                       },
+                                              "HG003": {
+                                                         "hg38": "gs://truwl-giab/AshkenazimTrio/HG003_NA24159_father/NISTv4.2.0/GRCh38/HG003_GRCh38_1_22_v4.2_benchmark.bed"
+                                                       },
+                                              "HG004": {
+                                                         "hg38": "gs://truwl-giab/AshkenazimTrio/HG004_NA24143_mother/NISTv4.2.0/GRCh38/HG004_GRCh38_1_22_v4.2_benchmark.bed"
+                                                       }},
+                                              'v4.2.1':{
+                                                "HG002": {
+                                                           "hg37": "gs://truwl-giab/AshkenazimTrio/HG002_NA24385_son/NISTv4.2.1/GRCh37/HG002_GRCh37_1_22_v4.2.1_benchmark_noinconsistent.bed",
+                                                           "hg38": "gs://truwl-giab/AshkenazimTrio/HG002_NA24385_son/NISTv4.2.1/GRCh38/HG002_GRCh38_1_22_v4.2.1_benchmark_noinconsistent.bed"
+                                                         },
+                                                "HG003": {
+                                                           "hg37": "gs://truwl-giab/AshkenazimTrio/HG003_NA24159_father/NISTv4.2.1/GRCh37/HG003_GRCh37_1_22_v4.2.1_benchmark_noinconsistent.bed",
+                                                           "hg38": "gs://truwl-giab/AshkenazimTrio/HG003_NA24159_father/NISTv4.2.1/GRCh38/HG003_GRCh38_1_22_v4.2.1_benchmark_noinconsistent.bed"
+                                                         },
+                                                "HG004": {
+                                                           "hg37": "gs://truwl-giab/AshkenazimTrio/HG004_NA24143_mother/NISTv4.2.1/GRCh37/HG004_GRCh37_1_22_v4.2.1_benchmark_noinconsistent.bed",
+                                                           "hg38": "gs://truwl-giab/AshkenazimTrio/HG004_NA24143_mother/NISTv4.2.1/GRCh38/HG004_GRCh38_1_22_v4.2.1_benchmark_noinconsistent.bed"
+                                                         }}
+                                            }
+                                            
+                                            
     Map[String,File] truthCodingExonsBED = {
                                              "hg37":"gs://benchmarking-datasets/codingexons.nochr.bed","hg38":"gs://truwl-giab/genome-stratifications/v2.0/GRCh38/FunctionalRegions/GRCh38_refseq_cds.bed.gz"
                                            }
@@ -397,7 +423,7 @@ workflow GermlineVariantCallBenchmark {
     input:
       queryVCF = queryVCF,
       truthVCF = truthVCF[truthVersion][subject][freeze],
-
+      highconfBed = highconfBed[truthVersion][subject][freeze],
       referenceFasta = referenceFasta[freeze],
       referenceFasta_indexed = referenceFasta_indexed[freeze],
 

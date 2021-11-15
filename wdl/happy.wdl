@@ -28,6 +28,7 @@ task happyStratify {
   input {
     File queryVCF
     File truthVCF
+    File highconfBed
 
     File referenceFasta
     File referenceFasta_indexed
@@ -63,7 +64,9 @@ task happyStratify {
     export HGREF=ref.fa
     /opt/hap.py/bin/hap.py --write-counts \
     -V ~{truthVCF} ~{queryVCF} \
-    --engine=vcfeval --stratification ~{stratTable} \
+    --false-positives ~{highconfBed} \
+    --engine=vcfeval \
+    --stratification ~{stratTable} \
     --threads 8 \
     -r ref.fa -o ~{outputFile_commonPrefix}~{happyPrefix} > ~{outputFile_commonPrefix}~{happyPrefix}~{consoleOutputPartialFilename}
   >>>
