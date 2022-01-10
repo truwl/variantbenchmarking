@@ -5,6 +5,8 @@ struct PopularRegions {
   Boolean region_GRCh38_alldifficultregions
   Boolean region_GRCh38_MHC
   Boolean region_HG002_GIAB_highconfidence
+  Boolean region_HG003_GIAB_highconfidence
+  Boolean region_HG004_GIAB_highconfidence
 }
 
 struct FunctionalRegions {

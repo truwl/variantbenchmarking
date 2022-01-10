@@ -5,10 +5,12 @@ version 1.0
 #MHC is           4,970,557 bp
 #difficult      628,689,391 bp
 Map[String, Boolean] popRegions = {
-  'region_GRCh38_alldifficultregions':true,
-  'region_GRCh38_MHC':false,
-  'region_twist_exome_target_hg38':false,
-  'region_HG002_GIAB_highconfidence':false
+  "region_GRCh38_alldifficultregions": true,
+  "region_GRCh38_MHC": false,
+  "region_twist_exome_target_hg38": false,
+  "region_HG002_GIAB_highconfidence": false,
+  "region_HG003_GIAB_highconfidence": false,
+  "region_HG004_GIAB_highconfidence": false,
 }
 
 Map[String, Boolean] fcRegions = {

@@ -68,9 +68,8 @@ workflow GermlineVariantCallBenchmark {
                                                            "hg37": "gs://truwl-giab/AshkenazimTrio/HG004_NA24143_mother/NISTv4.2.1/GRCh37/HG004_GRCh37_1_22_v4.2.1_benchmark_noinconsistent.bed",
                                                            "hg38": "gs://truwl-giab/AshkenazimTrio/HG004_NA24143_mother/NISTv4.2.1/GRCh38/HG004_GRCh38_1_22_v4.2.1_benchmark_noinconsistent.bed"
                                                          }}
-                                            }
-                                            
-                                            
+                                            }                              
+    #deprecated
     Map[String,File] truthCodingExonsBED = {
                                              "hg37":"gs://benchmarking-datasets/codingexons.nochr.bed","hg38":"gs://truwl-giab/genome-stratifications/v2.0/GRCh38/FunctionalRegions/GRCh38_refseq_cds.bed.gz"
                                            }
@@ -130,7 +129,9 @@ workflow GermlineVariantCallBenchmark {
                                   'region_GRCh38_alldifficultregions':true,
                                   'region_GRCh38_MHC':false,
                                   'region_twist_exome_target_hg38':false,
-                                  'region_HG002_GIAB_highconfidence':false
+                                  'region_HG002_GIAB_highconfidence':false,
+                                  'region_HG003_GIAB_highconfidence':false,
+                                  'region_HG004_GIAB_highconfidence':false
                                 }
 
     FunctionalRegions fcRegions = {
@@ -428,7 +429,6 @@ workflow GermlineVariantCallBenchmark {
       referenceFasta_indexed = referenceFasta_indexed[freeze],
 
       stratTable = aggAllStrats.strattable,
-      regions = removeEmpty.noEmptyLines,
       happyPrefix =  happyPrefix,
       outputFile_commonPrefix = outputFile_commonPrefix,
       consoleOutputPartialFilename = consoleOutputPartialFilename
