@@ -224,7 +224,7 @@ parameter_meta:
       
 parameter_group:
   Query:
-    title: Query
+    title: Truth
     display: true
     description: Specify your VCF, the subject dataset that your VCF was generated from (HG002, HG003, HG004) and the reference assembly version--only hg38 is currently supported.
   Truth:

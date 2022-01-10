@@ -34,7 +34,7 @@ task happyStratify {
     File referenceFasta_indexed
 
     File stratTable
-    Array[File?] regions
+    #Array[File?] regions
     String outputFile_commonPrefix
     String happyPrefix
     String consoleOutputPartialFilename
