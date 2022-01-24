@@ -106,6 +106,7 @@ task finalReport {
     Array[File] upset_plots
     File prec_recall_plot
     File jupyter_notebook
+    Array[String] regions
   }
   output {
     File annoreport = "finalReport.ipynb"
@@ -118,7 +119,7 @@ task finalReport {
   }
   command <<<
     mkdir -p /home/jovyan/.cache/black/21.7b0/
-    papermill ~{jupyter_notebook} -p queryVCF ~{queryVCF} -p freeze ~{freeze} -p subject ~{subject} -p upset_plot ~{sep=',' upset_plots} -p prec_recall_plot ~{prec_recall_plot} finalReport.ipynb
+    papermill ~{jupyter_notebook} -p queryVCF ~{queryVCF} -p freeze ~{freeze} -p subject ~{subject} -p upset_plot ~{sep=',' upset_plots} -p regions ~{sep=',' regions} -p prec_recall_plot ~{prec_recall_plot} finalReport.ipynb
     jupyter nbconvert finalReport.ipynb --to html --output finalReport.html
   >>>
 }

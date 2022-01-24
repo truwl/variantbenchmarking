@@ -482,7 +482,8 @@ workflow GermlineVariantCallBenchmark {
       subject = subject,
       jupyter_notebook = Jupyter_report,
       upset_plots = select_all(myintervene.upsetplot),
-      prec_recall_plot = aggprecRecall.precrecallplot
+      prec_recall_plot = aggprecRecall.precrecallplot,
+      regions = removeEmpty.noEmptyLines
   }
 
   output {
