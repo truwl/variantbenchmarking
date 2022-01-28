@@ -131,7 +131,8 @@ workflow GermlineVariantCallBenchmark {
                                   'region_twist_exome_target_hg38':false,
                                   'region_HG002_GIAB_highconfidence':false,
                                   'region_HG003_GIAB_highconfidence':false,
-                                  'region_HG004_GIAB_highconfidence':false
+                                  'region_HG004_GIAB_highconfidence':false,
+                                  'region_GRCh38_Chr20':false
                                 }
 
     FunctionalRegions fcRegions = {

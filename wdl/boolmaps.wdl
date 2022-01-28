@@ -11,6 +11,7 @@ Map[String, Boolean] popRegions = {
   "region_HG002_GIAB_highconfidence": false,
   "region_HG003_GIAB_highconfidence": false,
   "region_HG004_GIAB_highconfidence": false,
+  "region_GRCh38_Chr20": false,
 }
 
 Map[String, Boolean] fcRegions = {

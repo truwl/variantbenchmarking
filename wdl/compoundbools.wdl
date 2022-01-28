@@ -4,6 +4,7 @@ struct PopularRegions {
   Boolean region_twist_exome_target_hg38
   Boolean region_GRCh38_alldifficultregions
   Boolean region_GRCh38_MHC
+  Boolean region_GRCh38_Chr20
   Boolean region_HG002_GIAB_highconfidence
   Boolean region_HG003_GIAB_highconfidence
   Boolean region_HG004_GIAB_highconfidence
