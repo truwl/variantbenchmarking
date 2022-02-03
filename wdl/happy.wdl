@@ -72,7 +72,7 @@ task happyStratify {
   >>>
   runtime {
     docker: "paramost/hap.py"
-    memory: "32 GB"
+    memory: "64 GB"
     cpu: 8
     disks: "local-disk 100 HDD"
   }
